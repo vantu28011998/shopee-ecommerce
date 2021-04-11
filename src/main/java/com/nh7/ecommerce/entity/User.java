@@ -44,5 +44,7 @@ public class User extends BaseEntity{
     private String username;
     @Column
     private String password;
+    @Column
+    private String emailAddress;
 
 }

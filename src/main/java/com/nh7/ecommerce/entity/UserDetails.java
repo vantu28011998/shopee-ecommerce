@@ -20,9 +20,6 @@ public class UserDetails extends BaseEntity{
     private User user;
 
     @Column
-    private String gmail;
-
-    @Column
     private String phoneNumber;
 
     @Column
