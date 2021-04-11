@@ -13,7 +13,6 @@ public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    @Column(name = "id")
     private Long id;
     @Column(name = "quantity")
     private int quantity;
@@ -23,11 +22,10 @@ public class Product extends BaseEntity {
     private String productThumbnail;
     @Column(name = "product_Price")
     private Double productPrice;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_category")
     private Category category;
     @OneToOne(mappedBy = "product")
     private Item item;
-    @OneToOne(mappedBy = "product")
-    private Product product;
+
 }

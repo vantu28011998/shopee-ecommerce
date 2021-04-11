@@ -17,9 +17,14 @@ public class User extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     private UserDetails userDetails;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private Cart cart;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Shop shop;
@@ -27,8 +32,7 @@ public class User extends BaseEntity{
     private List<Comment> commentList;
     @OneToMany(mappedBy = "user")
     private List<Post> post;
-    @OneToOne(mappedBy = "user")
-    private Cart cart;
+
     @ManyToMany
     @JoinTable(name="user_role",
             joinColumns = @JoinColumn(name="user_id"),

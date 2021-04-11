@@ -18,25 +18,22 @@ import java.time.LocalDateTime;
 @Setter
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @CreatedBy
-    @Column(nullable = false)
+    @Column
     private String createdBy;
 
     @CreatedDate
-    @Column(nullable = false)
+    @Column
     private LocalDateTime createdAt;
 
     @CreatedBy
-    @Column(nullable = false)
+    @Column
     private String updateBy;
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column
     private LocalDateTime modifiedAt;
 
-    @Column(nullable=false)
+    @Column
     private Boolean enable;
 }

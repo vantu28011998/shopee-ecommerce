@@ -14,7 +14,6 @@ public class Post extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    @Column(name = "id")
     private Long id;
     @Column(name = "post_title")
     private String postTitle;

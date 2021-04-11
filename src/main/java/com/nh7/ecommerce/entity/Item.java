@@ -13,7 +13,6 @@ public class Item extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    @Column(name = "id")
     private Long id;
     @Column(name = "item_quantity")
     private int quantity;
@@ -25,7 +24,7 @@ public class Item extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
-    @ManyToOne
-    @JoinColumn(name = "order_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_order")
     private Order order;
 }
