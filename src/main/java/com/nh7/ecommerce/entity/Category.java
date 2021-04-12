@@ -20,11 +20,7 @@ public class Category extends BaseEntity {
     private String categoryName;
     @Column(name = "category_thumbnail  ")
     private String categoryThumbnail;
-<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL)
-=======
-    @OneToMany(mappedBy = "category")
->>>>>>> 736d7b8ec0d885ce77570eeff41e7733b8d014fb
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private List<Product> productList;
 }
