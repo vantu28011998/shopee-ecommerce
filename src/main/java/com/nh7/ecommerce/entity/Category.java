@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -19,8 +18,9 @@ public class Category extends BaseEntity {
     private Long id;
     @Column(name = "category_name")
     private String categoryName;
-    @Column(name = "category_thumbnail")
+    @Column(name = "category_thumbnail  ")
     private String categoryThumbnail;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private List<Product> productList;
 }

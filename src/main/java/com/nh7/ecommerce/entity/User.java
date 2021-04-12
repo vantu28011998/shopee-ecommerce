@@ -28,7 +28,8 @@ public class User extends BaseEntity{
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Shop shop;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "comment_id", referencedColumnName = "id")
     private List<Comment> commentList;
     @OneToMany(mappedBy = "user")
     private List<Post> post;
