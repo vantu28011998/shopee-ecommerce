@@ -22,5 +22,6 @@ public class Category extends BaseEntity {
     @Column(name = "category_thumbnail")
     private String categoryThumbnail;
     @OneToMany(mappedBy = "category")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private List<Product> productList;
 }

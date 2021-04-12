@@ -24,9 +24,7 @@ public class Post extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "produdct_id")
     private Product product;
-    @OneToMany(mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
     private List<Comment> commentList;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 }

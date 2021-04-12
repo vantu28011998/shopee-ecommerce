@@ -19,9 +19,7 @@ public class Order extends BaseEntity {
     private Long id;
     @Column(name = "order_price")
     private Double orderPrice;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private List<Item> itemList=new ArrayList<>();
 }

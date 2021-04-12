@@ -18,10 +18,4 @@ public class Comment extends BaseEntity{
     private String content;
     @Column
     private Integer evalute;
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 }

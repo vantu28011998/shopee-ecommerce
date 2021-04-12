@@ -22,9 +22,6 @@ public class Product extends BaseEntity {
     private String productThumbnail;
     @Column(name = "product_Price")
     private Double productPrice;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_category")
-    private Category category;
     @OneToOne(mappedBy = "product")
     private Item item;
 
