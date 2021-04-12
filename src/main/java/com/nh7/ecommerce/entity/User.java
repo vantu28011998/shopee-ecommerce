@@ -27,17 +27,13 @@ public class User extends BaseEntity{
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private Order order;
+    private List<Order> orderList;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Shop shop;
     @OneToMany(cascade = CascadeType.ALL)
-<<<<<<< HEAD
-    @JoinColumn(name = "comment_id", referencedColumnName = "id")
-=======
     @JoinColumn(name = "user_id", referencedColumnName = "id")
->>>>>>> 736d7b8ec0d885ce77570eeff41e7733b8d014fb
     private List<Comment> commentList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
