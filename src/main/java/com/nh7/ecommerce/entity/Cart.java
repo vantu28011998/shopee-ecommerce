@@ -15,7 +15,8 @@ public class Cart extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id;
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private List<Item> itemList;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

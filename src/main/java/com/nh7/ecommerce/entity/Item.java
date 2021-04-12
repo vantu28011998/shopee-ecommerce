@@ -21,10 +21,4 @@ public class Item extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_order")
-    private Order order;
 }
