@@ -11,7 +11,6 @@ import java.util.List;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category,Long> {
-    @Query(value = "select  distinct *  from category c",nativeQuery = true)
     List<Category> findAll();
     Category findById(long id);
     @Query(value = "select * from category c where c.category_name like %:name%", nativeQuery = true)

@@ -12,10 +12,12 @@ public class MailService {
     @Autowired
     private JavaMailSender javaMailSender;
     public void sendEmail(String emailAddress) throws MailException {
+        String title="This is title";
+        String content="This is content mail";
         SimpleMailMessage mail=new SimpleMailMessage();
         mail.setTo(emailAddress);
-        mail.setSubject("Testing Mail Api");
-        mail.setText("Hurray! You have done that due...");
+        mail.setSubject(title);
+        mail.setText(content);
         javaMailSender.send(mail);
     }
 
