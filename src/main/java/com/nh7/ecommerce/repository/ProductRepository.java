@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.repository;
 
 import com.nh7.ecommerce.entity.Product;
+import com.nh7.ecommerce.model.ProductCardModel;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -23,6 +24,5 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
             "join item it on it.product_id = pr.id\n" +
             "where pr.id = :id\n" +
             "group by uo.id", nativeQuery = true)
-    Object findProductCardByCategoryId(@Param("id") long id);
-
+    List<ProductCardModel> findProductCardByCategoryId(@Param("id") long id);
 }
