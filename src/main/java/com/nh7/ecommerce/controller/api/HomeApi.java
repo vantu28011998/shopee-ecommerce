@@ -29,7 +29,7 @@ public class HomeApi {
     public List<Category> getCategoriesByName(@PathVariable(value="name")String name){
         return categoryService.findByName(name);
     }
-    @GetMapping("/product/{category_name}")
+    @GetMapping("/products/{category_name}")
     public List<Product> getProductsByCategoryName(@PathVariable(value="category_name")String categoryName){
         return productService.getProductByCategoryName(categoryName);
     }

@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table
-public class Order extends BaseEntity {
+public class UserOrder extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -19,6 +19,8 @@ public class Order extends BaseEntity {
     private Long id;
     @Column(name = "order_price")
     private Double orderPrice;
+    @Column(name = "status")
+    private String orderStatus;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private List<Item> itemList=new ArrayList<>();

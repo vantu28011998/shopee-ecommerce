@@ -24,5 +24,6 @@ public class Product extends BaseEntity {
     private Double productPrice;
     @OneToOne(mappedBy = "product")
     private Item item;
-
+    @OneToOne(mappedBy = "product")
+    private Post post;
 }

@@ -1,10 +1,10 @@
 package com.nh7.ecommerce.repository;
 
-import com.nh7.ecommerce.entity.Order;
+import com.nh7.ecommerce.entity.UserOrder;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends CrudRepository<Order, Integer> {
-    Order findById(int id);
+public interface OrderRepository extends CrudRepository<UserOrder, Integer> {
+    UserOrder findById(int id);
 }

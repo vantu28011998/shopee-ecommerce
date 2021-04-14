@@ -22,7 +22,7 @@ public class Post extends BaseEntity {
     @Column(name = "avg_evalute")
     private Double avgEvalute;
     @OneToOne
-    @JoinColumn(name = "produdct_id")
+    @JoinColumn(name = "product_id")
     private Product product;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", referencedColumnName = "id")
