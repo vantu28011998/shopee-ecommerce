@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/home")
 @ControllerAdvice
+@CrossOrigin(origins = {"http://192.168.31.52:3000","http://localhost:3000"})
 public class HomeApi {
     @Autowired
     private CategoryService categoryService;
