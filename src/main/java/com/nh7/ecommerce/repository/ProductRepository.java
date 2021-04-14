@@ -14,7 +14,15 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Query(value = "select * from product p join category c on\n" +
             "p.category_id = c.id where c.category_name like %:name%", nativeQuery = true)
     List<Product> findByCategoryName(@Param("name")String name);
-    @Query(value = "select * from product where category_id = :id", nativeQuery = true)
-    List<Product> findByCategoryId(@Param("id") long id);
+
+    @Query(value = "select distinct pr.id,pr.product_thumbnail,pr.product_price,po.post_title,sh.address,SUM(it.item_quantity) as sold_quantity from product pr\n" +
+            "join post po on pr.id = po.product_id\n" +
+            "join user us on po.user_id = us.id\n" +
+            "join user_order uo on uo.user_id = us.id\n" +
+            "join shop sh on sh.user_id = us.id\n" +
+            "join item it on it.product_id = pr.id\n" +
+            "where pr.id = :id\n" +
+            "group by uo.id", nativeQuery = true)
+    Object findProductCardByCategoryId(@Param("id") long id);
 
 }

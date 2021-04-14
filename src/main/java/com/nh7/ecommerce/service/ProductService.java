@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
-    public List<Product> getProductByCategoryName(String name){
-        return productRepository.findByCategoryName(name);
+    public List<Product> getProductCardByCategoryId(Long id){
+        return null;
     }
 }
