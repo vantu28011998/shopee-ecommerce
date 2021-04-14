@@ -27,7 +27,7 @@ public class User extends BaseEntity{
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private List<Order> orderList;
+    private List<UserOrder> userOrderList;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

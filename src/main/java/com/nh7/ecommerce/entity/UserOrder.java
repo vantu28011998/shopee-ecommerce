@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table
-public class Order extends BaseEntity {
+public class UserOrder extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter

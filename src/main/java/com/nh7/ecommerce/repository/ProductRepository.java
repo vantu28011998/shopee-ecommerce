@@ -14,4 +14,6 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Query(value = "select * from product p join category c on\n" +
             "p.category_id = c.id where c.category_name like %:name%", nativeQuery = true)
     List<Product> findByCategoryName(@Param("name")String name);
+    @Query(value = "")
+    List<Product> findByCategoryId(@Param("id") long id);
 }
