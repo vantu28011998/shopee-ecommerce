@@ -17,7 +17,7 @@ public class UserDetails extends BaseEntity{
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private Account account;
+    private User user;
 
     @Column
     private String phoneNumber;

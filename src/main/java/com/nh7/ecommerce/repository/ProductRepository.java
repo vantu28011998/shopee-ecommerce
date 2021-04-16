@@ -18,7 +18,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     @Query(value = "select distinct pr.id,pr.product_thumbnail,pr.product_price,po.post_title,sh.address,SUM(it.item_quantity) as sold_quantity from product pr\n" +
             "join post po on pr.id = po.product_id\n" +
-            "join user us on po.user_id = us.id\n" +
+            "join u us on po.user_id = us.id\n" +
             "join user_order uo on uo.user_id = us.id\n" +
             "join shop sh on sh.user_id = us.id\n" +
             "join item it on it.product_id = pr.id\n" +

@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.service;
 
-import com.nh7.ecommerce.entity.Account;
+
+import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,9 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    Account getUserById(int id){return userRepository.findById(id);}
-    List<Account> getAllUser(){
-        return (List<Account>) userRepository.findAll();
+    User getUserById(int id){return userRepository.findById(id);}
+    List<User> getAllUser(){
+        return (List<User>) userRepository.findAll();
     }
     boolean deleteUser(int id){
         try{
@@ -23,7 +24,7 @@ public class UserService {
             return false;
         }
     }
-    boolean saveUser(Account user){
+    boolean saveUser(User user){
         try {
             userRepository.save(user);
             return true;

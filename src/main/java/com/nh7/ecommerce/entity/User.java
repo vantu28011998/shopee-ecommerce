@@ -9,17 +9,13 @@ import java.util.List;
 
 
 @Entity
-@Table(name="account")
+@Table(name="u")
 @Getter
 @Setter
-public class Account extends BaseEntity{
+public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private Cart cart;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

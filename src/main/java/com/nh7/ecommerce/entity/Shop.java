@@ -23,5 +23,5 @@ public class Shop extends BaseEntity{
     private String logo;
     @OneToOne(mappedBy = "shop", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
-    private Account account;
+    private User user;
 }
