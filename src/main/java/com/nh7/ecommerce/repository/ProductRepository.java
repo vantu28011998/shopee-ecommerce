@@ -22,7 +22,8 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
             "join user_order uo on uo.user_id = us.id\n" +
             "join shop sh on sh.user_id = us.id\n" +
             "join item it on it.product_id = pr.id\n" +
-            "where pr.id = :id\n" +
+            "join category ct on ct.id = pr.category_id\n" +
+            "where ct.id = :id\n" +
             "group by uo.id", nativeQuery = true)
     List<ProductCardModel> findProductCardByCategoryId(@Param("id") long id);
 }

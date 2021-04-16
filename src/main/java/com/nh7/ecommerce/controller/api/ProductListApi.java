@@ -19,7 +19,7 @@ public class ProductListApi{
     private ProductService productService;
     @GetMapping("/{category_id}/products")
     public ResponseEntity<List<ProductCardDto>> getProducts(@PathVariable(name = "category_id") Long id){
-        return new ResponseEntity(productService.getProductCardByCategoryId(id), HttpStatus.OK);
+        return new ResponseEntity<>(productService.getProductCardByCategoryId(id), HttpStatus.OK);
     }
 
 }
