@@ -31,6 +31,7 @@ public class HomeApi {
     }
     @GetMapping("/products/{category_name}")
     public List<Product> getProductsByCategoryName(@PathVariable(value="category_name")String categoryName){
-        return productService.getProductByCategoryName(categoryName);
+        //productService.getProductByCategoryName(categoryName)
+        return null;
     }
 }
