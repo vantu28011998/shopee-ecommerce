@@ -24,5 +24,5 @@ public class Role extends BaseEntity {
     )
     private List<Permission> permissions=new ArrayList<>();
     @ManyToMany(mappedBy = "roles")
-    private List<User> users=new ArrayList<>();
+    private List<Account> users=new ArrayList<>();
 }

@@ -1,5 +1,10 @@
 package com.nh7.ecommerce.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ProductCardModel {
     //product
     private Long id;

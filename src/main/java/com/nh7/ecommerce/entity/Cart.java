@@ -20,5 +20,5 @@ public class Cart extends BaseEntity {
     private List<Item> itemList;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private Account account;
 }

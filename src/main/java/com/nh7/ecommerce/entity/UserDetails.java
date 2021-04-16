@@ -17,7 +17,7 @@ public class UserDetails extends BaseEntity{
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private Account account;
 
     @Column
     private String phoneNumber;
@@ -33,7 +33,6 @@ public class UserDetails extends BaseEntity{
 
     @Column
     private String gender;
-
 
 
 }

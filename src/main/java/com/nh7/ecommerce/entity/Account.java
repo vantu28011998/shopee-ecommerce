@@ -9,19 +9,15 @@ import java.util.List;
 
 
 @Entity
-@Table(name="user")
+@Table(name="account")
 @Getter
 @Setter
-public class User extends BaseEntity{
+public class Account extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private UserDetails userDetails;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
     private Cart cart;
 

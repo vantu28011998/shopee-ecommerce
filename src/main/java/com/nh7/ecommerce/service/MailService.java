@@ -1,6 +1,6 @@
 package com.nh7.ecommerce.service;
 
-import com.nh7.ecommerce.entity.User;
+import com.nh7.ecommerce.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;

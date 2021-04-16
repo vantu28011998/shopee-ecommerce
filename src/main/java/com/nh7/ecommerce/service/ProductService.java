@@ -18,6 +18,9 @@ public class ProductService {
     private ModelMapperUtil modelMapperUtil;
     public List<ProductCardDto> getProductCardByCategoryId(Long id){
         List<ProductCardModel> productCardModels = productRepository.findProductCardByCategoryId(id);
+        for(ProductCardModel productCard : productCardModels){
+            productCard.getPostTitle();
+        }
         return modelMapperUtil.mapList(productCardModels,ProductCardDto.class);
     }
 }
