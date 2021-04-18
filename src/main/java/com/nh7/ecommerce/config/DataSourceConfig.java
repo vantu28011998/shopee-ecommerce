@@ -2,6 +2,9 @@ package com.nh7.ecommerce.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +31,8 @@ public class DataSourceConfig {
         hikariConfig.setUsername(username);
         hikariConfig.setPassword(password);
         //Config connection pool
-        hikariConfig.setMaximumPoolSize(20);
+
+        hikariConfig.setMaximumPoolSize(5);
         hikariConfig.setConnectionTestQuery("SELECT 1");
         hikariConfig.setPoolName("springHikariCP");
         //
