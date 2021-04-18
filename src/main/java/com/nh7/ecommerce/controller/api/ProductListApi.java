@@ -18,7 +18,7 @@ import java.util.List;
 public class ProductListApi{
     @Autowired
     private ProductService productService;
-    @GetMapping("/{category_id}/products")
+    @GetMapping({"/{category_id}/products","/{category_id}/"})
     public ResponseEntity<List<ProductCardModel>> getProducts(@PathVariable(name = "category_id") Long id){
         return new ResponseEntity<>(productService.getProductCardByCategoryId(id),HttpStatus.OK);
     }

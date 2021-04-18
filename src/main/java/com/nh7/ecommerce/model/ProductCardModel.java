@@ -16,8 +16,6 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCardModel {
-    @Autowired
-    private ProductRepository productRepository;
 
     //product
     private Long id;
@@ -30,12 +28,4 @@ public class ProductCardModel {
     //order
     private int soldQuantity;
 
-    public ProductCardModel(Long id, String productThumbnail, Double productPrice, String postTitle, String address, int soldQuantity) {
-        this.id = id;
-        this.productThumbnail = productThumbnail;
-        this.productPrice = productPrice;
-        this.postTitle = postTitle;
-        this.address = address;
-        this.soldQuantity = soldQuantity;
-    }
 }
