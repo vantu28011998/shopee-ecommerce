@@ -2,7 +2,6 @@ package com.nh7.ecommerce.repository;
 
 import com.nh7.ecommerce.model.ProductCardModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;

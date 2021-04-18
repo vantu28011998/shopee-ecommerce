@@ -26,7 +26,7 @@ public class ProductCardModel {
     //order
     private int soldQuantity;
 
-    public ProductCardModel(Long id, String productThumbnail, Double productPrice, String postTitle, String address, int soldQuantity) {
+    public ProductCardModel() {
         this.id = id;
         this.productThumbnail = productThumbnail;
         this.productPrice = productPrice;
