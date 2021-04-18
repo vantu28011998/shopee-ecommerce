@@ -26,7 +26,7 @@ public class DataSourceConfig {
         hikariConfig.setUsername(username);
         hikariConfig.setPassword(password);
         //Config connection pool
-        hikariConfig.setMaximumPoolSize(5);
+        hikariConfig.setMaximumPoolSize(20);
         hikariConfig.setConnectionTestQuery("SELECT 1");
         hikariConfig.setPoolName("springHikariCP");
         //
