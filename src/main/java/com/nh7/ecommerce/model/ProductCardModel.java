@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
 @Getter
 @Setter
 public class ProductCardModel {
