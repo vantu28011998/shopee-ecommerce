@@ -26,4 +26,7 @@ public class Product extends BaseEntity {
     private Item item;
     @OneToOne(mappedBy = "product")
     private Post post;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 }
