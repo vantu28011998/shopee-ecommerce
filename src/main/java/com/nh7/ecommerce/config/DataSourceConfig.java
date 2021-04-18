@@ -29,6 +29,7 @@ public class DataSourceConfig {
         hikariConfig.setUsername(username);
         hikariConfig.setPassword(password);
         //Config connection pool
+
         hikariConfig.setMaximumPoolSize(5);
         hikariConfig.setConnectionTestQuery("SELECT 1");
         hikariConfig.setPoolName("springHikariCP");
@@ -37,7 +38,7 @@ public class DataSourceConfig {
         hikariConfig.addDataSourceProperty("dataSource.prepStmtCacheSize", "250");
         hikariConfig.addDataSourceProperty("dataSource.prepStmtCacheSqlLimit", "2048");
         hikariConfig.addDataSourceProperty("dataSource.useServerPrepStmts", "true");
-        return new HikariDataSource(hikariConfig);
 
+        return new HikariDataSource(hikariConfig);
     }
 }
