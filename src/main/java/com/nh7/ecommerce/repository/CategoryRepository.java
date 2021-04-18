@@ -15,5 +15,4 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     Category findById(long id);
     @Query(value = "select * from category c where c.category_name like %:name%", nativeQuery = true)
     List<Category> findByCategoryName(@Param("name") String name);
-
 }

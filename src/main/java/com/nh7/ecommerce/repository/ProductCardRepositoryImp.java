@@ -28,6 +28,7 @@ public class ProductCardRepositoryImp implements ProductCardRepository{
                 "join category ca on ca.id=pr.category_id\n" +
                 "where ca.id="+id;
         List<ProductCardModel> productCardModels=null;
+
         try{
             Connection conn=dataSource.getConnection();
             PreparedStatement preStm=conn.prepareStatement(querry);
@@ -44,7 +45,7 @@ public class ProductCardRepositoryImp implements ProductCardRepository{
 
                 productCardModels.add(productCardModel);
             }
-            System.out.println("Size"+productCardModels.size());
+            conn.close();
             return productCardModels;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

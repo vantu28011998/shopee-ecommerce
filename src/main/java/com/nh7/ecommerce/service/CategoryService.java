@@ -23,4 +23,7 @@ public class CategoryService {
         return modelMapperUtil.mapList(categoryList,CategoryDto.class);
     }
     public List<Category> findByName(String var){return categoryRepository.findByCategoryName(var);}
+    public Category saveAndFlush(Category category){
+        return categoryRepository.saveAndFlush(category);
+    }
 }

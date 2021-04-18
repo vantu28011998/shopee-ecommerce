@@ -16,7 +16,6 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCardModel {
-
     //product
     private Long id;
     private String productThumbnail;
