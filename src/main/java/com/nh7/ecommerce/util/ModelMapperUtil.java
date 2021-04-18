@@ -10,6 +10,7 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 public class ModelMapperUtil<E,D> extends ModelMapper {
+
     public List<D> mapList(List<E> entityList, Class<D> dtoClassType){
         List<D> dtoList=new ArrayList<>();
         if(entityList==null) return null;
