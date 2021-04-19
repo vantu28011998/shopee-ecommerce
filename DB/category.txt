@@ -1,6 +1,6 @@
 [
     {
-        "categoryName": "Thời Trang Nam̃",
+        "categoryName": "Thời Trang Nam",
         "categoryThumbnail": "https://cf.shopee.vn/file/687f3967b7c2fe6a134a2c11894eea4b_tn"
     },
     {
