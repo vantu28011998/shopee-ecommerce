@@ -23,6 +23,8 @@ public class Product extends BaseEntity {
     private String productThumbnail;
     @Column(name = "product_Price")
     private Double productPrice;
+    @Column(name = "child_category")
+    private String childCategory;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Item> itemList;
     @OneToOne(mappedBy = "product")
@@ -31,4 +33,7 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "category_id")
     @Setter
     private Category category;
+    @OneToOne
+    @JoinColumn(name = "sub_category_id")
+    private SubCategory subCategory;
 }

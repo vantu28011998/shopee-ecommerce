@@ -21,8 +21,6 @@ public class UserOrder extends BaseEntity {
     private Double orderPrice;
     @Column(name = "status")
     private String orderStatus;
-    @Column(name = "child_category")
-    private String childCategory;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
     private List<Item> itemList=new ArrayList<>();
     @ManyToOne
