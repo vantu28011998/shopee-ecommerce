@@ -1,5 +1,4 @@
 package com.nh7.ecommerce.controller.api;
-
 import com.nh7.ecommerce.dto.CategoryDto;
 import com.nh7.ecommerce.entity.Category;
 import com.nh7.ecommerce.entity.Product;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.sql.DataSource;
 import java.util.List;
 
 @RestController
@@ -37,8 +34,30 @@ public class HomeApi {
         return null;
     }
     //---------POST METHOD----------//
+    //Post 1 category
     @PostMapping("/categories")
-    public Category createCategory(@RequestBody Category category){
-          return categoryService.saveAndFlush(category);
+    public ResponseEntity<Object> createCategory(@RequestBody Category category){
+        categoryService.save(category);
+        return new ResponseEntity<>("Category is created successfully",HttpStatus.CREATED);
     }
+    //Post 1 list category
+    @PostMapping("/category-list")
+    public ResponseEntity<Object> createCategory(@RequestBody List<Category> categoryList){
+        categoryService.saveAll(categoryList);
+        return new ResponseEntity<>("Category is created successfully",HttpStatus.CREATED);
+    }
+    //---------PUT METHOD----------//
+    //---------DELETE METHOD----------//
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<Object> deleteCategory(@PathVariable Long id){
+        categoryService.deleteCategory(id);
+        return new ResponseEntity<>("Category is deleted successsfully",HttpStatus.OK);
+    }
+    @DeleteMapping("/category-list")
+    public ResponseEntity<Object> deleteAllCategory(){
+        categoryService.deleteAllCategory();
+        return new ResponseEntity<>("All Categories is deleted successfully",HttpStatus.OK);
+    }
+
+
 }

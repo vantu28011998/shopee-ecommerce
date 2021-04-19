@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 public class Comment extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
     private String content;

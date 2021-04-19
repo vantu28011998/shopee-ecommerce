@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 public class User extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

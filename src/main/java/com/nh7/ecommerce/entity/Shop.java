@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 public class Shop extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
     private String address;

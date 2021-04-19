@@ -13,7 +13,7 @@ import java.util.List;
 @Table
 public class UserOrder extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Column(name = "id")
     private Long id;
