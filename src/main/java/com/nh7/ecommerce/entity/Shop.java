@@ -14,12 +14,14 @@ public class Shop extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
+    private String name;
+    @Column
     private String address;
     @Column
     private String phoneNumber;
     @Column
     private String logo;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 }
