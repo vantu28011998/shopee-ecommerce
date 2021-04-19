@@ -20,7 +20,10 @@ import java.util.List;
 public class ProductListApi{
     @Autowired
     private ProductService productService;
+<<<<<<< HEAD
     //---------GET METHOD----------//
+=======
+>>>>>>> 076b7b8d284c7b3a10774eb151e22322644d54b5
     @GetMapping("/{category_id}/products")
     public ResponseEntity<List<ProductCardModel>> getProducts(@PathVariable(name = "category_id") Long id){
         return new ResponseEntity<>(productService.getProductCardByCateId(id),HttpStatus.OK);

@@ -22,7 +22,9 @@ public class CategoryService {
         List<Category> categoryList= categoryRepository.findAll();
         return modelMapperUtil.mapList(categoryList,CategoryDto.class);
     }
+    // No use
     public List<Category> findByName(String var){return categoryRepository.findByCategoryName(var);}
+    //
     public Category save(Category category){
         return categoryRepository.save(category);
     }
