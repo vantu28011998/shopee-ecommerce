@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCardModel {
-
     //product
     private Long id;
     private String productThumbnail;

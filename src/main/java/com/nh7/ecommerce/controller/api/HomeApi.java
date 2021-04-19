@@ -22,6 +22,7 @@ public class HomeApi {
     private CategoryService categoryService;
     @Autowired
     private ProductService productService;
+    //---------GET METHOD----------//
     @GetMapping("/categories")
     public ResponseEntity<List<CategoryDto>> getCategories(){
         return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
@@ -34,5 +35,10 @@ public class HomeApi {
     public List<Product> getProductsByCategoryName(@PathVariable(value="category_name")String categoryName){
         //productService.getProductByCategoryName(categoryName)
         return null;
+    }
+    //---------POST METHOD----------//
+    @PostMapping("/categories")
+    public Category createCategory(@RequestBody Category category){
+          return categoryService.saveAndFlush(category);
     }
 }
