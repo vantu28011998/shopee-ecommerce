@@ -20,7 +20,6 @@ public class Category extends BaseEntity {
     private String categoryName;
     @Column(name = "category_thumbnail  ")
     private String categoryThumbnail;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> productList;
 }

@@ -1,23 +1,15 @@
 package com.nh7.ecommerce.model;
 
-import com.nh7.ecommerce.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-
-import javax.persistence.Entity;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCardModel {
-    @Autowired
-    private ProductRepository productRepository;
 
     //product
     private Long id;
@@ -30,12 +22,4 @@ public class ProductCardModel {
     //order
     private int soldQuantity;
 
-    public ProductCardModel() {
-        this.id = id;
-        this.productThumbnail = productThumbnail;
-        this.productPrice = productPrice;
-        this.postTitle = postTitle;
-        this.address = address;
-        this.soldQuantity = soldQuantity;
-    }
 }

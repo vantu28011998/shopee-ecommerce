@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,8 +23,12 @@ public class Product extends BaseEntity {
     private String productThumbnail;
     @Column(name = "product_Price")
     private Double productPrice;
-    @OneToOne(mappedBy = "product")
-    private Item item;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Item> itemList;
     @OneToOne(mappedBy = "product")
     private Post post;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @Setter
+    private Category category;
 }

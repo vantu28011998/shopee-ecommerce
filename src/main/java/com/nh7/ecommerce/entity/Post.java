@@ -21,10 +21,14 @@ public class Post extends BaseEntity {
     private String postDecription;
     @Column(name = "avg_evalute")
     private Double avgEvalute;
+    @Column(name = "sold_quantity", columnDefinition = "integer default 0")
+    private int soldQuantity;
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL,  mappedBy = "post", fetch = FetchType.LAZY)
     private List<Comment> commentList;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
