@@ -13,4 +13,7 @@ public class PostService {
     private PostRepository postRepository;
     Post getPostById(int id) {return postRepository.findById(id);}
     List<Post> getAllPost(){return (List<Post>) postRepository.findAll();}
+    // CODE BY HUY
+    void create(Post post){postRepository.save(post);}
+    //
 }
