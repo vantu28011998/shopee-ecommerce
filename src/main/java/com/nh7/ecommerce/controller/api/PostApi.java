@@ -1,13 +1,8 @@
 package com.nh7.ecommerce.controller.api;
 
 import com.nh7.ecommerce.dto.PostDto;
-import com.nh7.ecommerce.dto.ShopDto;
 import com.nh7.ecommerce.entity.Post;
-import com.nh7.ecommerce.entity.Shop;
-import com.nh7.ecommerce.model.ProductCardModel;
 import com.nh7.ecommerce.service.PostService;
-import com.nh7.ecommerce.service.ShopService;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
