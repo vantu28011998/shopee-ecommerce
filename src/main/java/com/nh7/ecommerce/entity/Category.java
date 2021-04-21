@@ -18,10 +18,8 @@ public class Category extends BaseEntity {
     private Long id;
     @Column(name = "category_name")
     private String categoryName;
-    @Column(name = "category_thumbnail  ")
+    @Column(name = "category_thumbnail")
     private String categoryThumbnail;
-    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Product> productList;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SubCategory> subCategoryList;
 }

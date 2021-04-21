@@ -19,21 +19,19 @@ public class Product extends BaseEntity {
     private int quantity;
     @Column(name="product_name")
     private String productName;
+    @Column(name = "avg_evalute")
+    private Double avgEvalute;
     @Column(name="product_thumbnail")
     private String productThumbnail;
-    @Column(name = "product_Price")
+    @Column(name = "product_Price",precision=10, scale=2)
     private Double productPrice;
-    @Column(name = "child_category")
-    private String childCategory;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Item> itemList;
     @OneToOne(mappedBy = "product")
     private Post post;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    @Setter
-    private Category category;
     @OneToOne
-    @JoinColumn(name = "sub_category_id")
+    @JoinColumn(name = "subcategory_id")
     private SubCategory subCategory;
+    @Column
+    private int discount;
 }

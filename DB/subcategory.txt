@@ -1,0 +1,11 @@
+POST /api/home/categories/1/subcategories
+[
+    { "subCategoryName":"Áo thun"
+    },
+    { "subCategoryName":"Áo sơ mi"
+    },
+    { "subCategoryName":"Áo khoác & vét"
+    },
+    { "subCategoryName":"Áo nỉ/áo len"
+    }
+]

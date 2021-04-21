@@ -15,31 +15,48 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    @Autowired
-    private ProductCardRepositoryImp productCardRepository;
+
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private ModelMapperUtil modelMapperUtil;
-    public List<ProductCardModel> getProductCardByCategoryId(Long id){
-        List<ProductCardModel> productCardModels = productCardRepository.findProductCardByCategoryId(id);
-        return productCardModels;
-    }
+
     // CODE BY HUY
-    public List<ProductCardModel> getProductCardByCateId(Long id){
-        List<ProductCardModel> productCardModelList = new ArrayList<>();
-        List<Product> productList = productRepository.findByCategoryId(id);
-        for (Product pr : productList){
-            ProductCardModel productCardModel = new ProductCardModel();
-            productCardModel.setId(pr.getId());
-            productCardModel.setProductPrice(pr.getProductPrice());
-            productCardModel.setProductThumbnail(pr.getProductThumbnail());
-            productCardModel.setAddress(pr.getPost().getUser().getShop().getAddress());
-            productCardModel.setPostTitle(pr.getPost().getPostTitle());
-            productCardModel.setSoldQuantity(pr.getPost().getSoldQuantity());
-            productCardModelList.add(productCardModel);
+    //MODIFIED BY VAN TU AT 4:44 P.M 21/04/2021
+    //NOTE: DATABASE HAVE A NEW SUBCATEGORY TABLE
+    public List<ProductCardDto> getProductCardByCategoryId(Long id){
+        List<ProductCardDto> productCardDtos = new ArrayList<>();
+        List<Product> products = productRepository.findByCategoryId(id);
+        for (Product pr : products){
+            ProductCardDto productCardDto = new ProductCardDto();
+            productCardDto.setId(pr.getId());
+            productCardDto.setProductPrice(pr.getProductPrice());
+            productCardDto.setProductThumbnail(pr.getProductThumbnail());
+            productCardDto.setAddress(pr.getPost().getUser().getShop().getAddress());
+            productCardDto.setPostTitle(pr.getPost().getPostTitle());
+            productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
+            productCardDto.setDiscount(pr.getDiscount());
+            productCardDtos.add(productCardDto);
         }
-        return productCardModelList;
+        return productCardDtos;
     }
     // END
+    public void deleteAll(){
+        productRepository.deleteAll();
+    }
+    public void delete(Long id){
+        productRepository.deleteById(id);
+    }
+    public void saveAllBySuper(Long id,List<Product> items){
+        for(Product item:items){
+            saveBySuper(id,item);
+        }
+    }
+    public void saveBySuper(Long id,Product item){
+        productRepository.saveBySuper(id,item.getAvgEvalute(),item.getDiscount(),item.getProductName(),item.getProductPrice(),item.getProductThumbnail(),item.getQuantity());
+    }
+    public Product save(Product product){
+        return productRepository.save(product);
+    }
+    public List<Product> saveAll(List<Product> products){
+        return (List<Product>) productRepository.saveAll(products);
+    }
 }
