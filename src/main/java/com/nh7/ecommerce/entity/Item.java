@@ -12,7 +12,7 @@ import javax.persistence.criteria.Order;
 @Table
 public class Item extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id;
     @Column(name = "item_quantity")

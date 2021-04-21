@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class Permission extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String permissionName;

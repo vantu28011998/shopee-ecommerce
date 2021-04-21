@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name="cart")
 public class Cart extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart", fetch = FetchType.LAZY)
