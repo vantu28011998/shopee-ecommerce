@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository extends CrudRepository<User, Long> {
     boolean existsByUsernameAndPassword(String var1, String var2);
     User findById(long id);
     List<User> findAll();

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-public interface PostRepository extends CrudRepository<Post, Integer> {
+public interface PostRepository extends CrudRepository<Post, Long> {
     Post findById(long id);
     @Modifying
     @Query(value = "DELETE FROM post WHERE post.id=:id",nativeQuery = true)

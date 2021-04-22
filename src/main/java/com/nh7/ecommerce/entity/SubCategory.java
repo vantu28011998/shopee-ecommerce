@@ -5,12 +5,12 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
 @Getter
 @Setter
-@Service
 public class SubCategory extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,6 @@ public class SubCategory extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @OneToOne(mappedBy = "subCategory")
-    private Product product;
+    @OneToMany(mappedBy = "subCategory", fetch = FetchType.LAZY)
+    private List<Product> productList;
 }

@@ -29,8 +29,13 @@ public class SubCategoryService {
         return modelMapperUtil.map(subCategory,SubCategoryDto.class);
     }
 
-    public List<SubCategory> saveAll(List<SubCategory> subCategories){
-        return (List<SubCategory>) subCategoryRepository.saveAll(subCategories);
+    public boolean saveAll(List<SubCategory> subCategories){
+        try {
+            subCategoryRepository.saveAll(subCategories);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
     public SubCategory save(SubCategory subCategory){

@@ -21,7 +21,7 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     @GetMapping(value = {"/products","/products/all","/product/"})
     @Override
     public ResponseEntity<List<ProductCardDto>> getAll() {
-        return null;
+        return new ResponseEntity<>(productService.getAll(),HttpStatus.OK);
     }
     @GetMapping("/products/{id}")
     @Override

@@ -29,7 +29,7 @@ public class Product extends BaseEntity {
     private List<Item> itemList;
     @OneToOne(mappedBy = "product")
     private Post post;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "subcategory_id")
     private SubCategory subCategory;
     @Column

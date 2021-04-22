@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-public interface ShopRepository extends CrudRepository<Shop, Integer> {
+public interface ShopRepository extends CrudRepository<Shop, Long> {
     Shop findById(long id);
 
     @Modifying

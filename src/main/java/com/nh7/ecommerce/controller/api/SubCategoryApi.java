@@ -39,8 +39,11 @@ public class SubCategoryApi implements ICrudApi<SubCategoryDto, SubCategory>{
     @PostMapping("/subcategories/all")
     @Override
     public ResponseEntity<Object> createAll(@RequestBody List<SubCategory> items) {
-        subCategoryService.saveAll(items);
-        return new ResponseEntity<>("Subcategories are created successfully",HttpStatus.CREATED);
+        if (subCategoryService.saveAll(items)){
+            return new ResponseEntity<>("Subcategories are created successfully",HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Subcategories didn't create", HttpStatus.OK);
+        }
     }
 
     @PostMapping(value = {"/subcategories","/subcategories/"})

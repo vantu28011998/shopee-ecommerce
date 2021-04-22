@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CommentRepository extends CrudRepository<Comment, Integer> {
+public interface CommentRepository extends CrudRepository<Comment, Long> {
     Comment findById(int id);
 }

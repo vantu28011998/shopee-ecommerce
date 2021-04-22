@@ -1,4 +1,4 @@
-// Dùng post all ấy , list post này tự map(add list product trước)
+
 [
     {
         "id": 1,

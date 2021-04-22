@@ -28,13 +28,7 @@ public class ProductService {
     //
     @Autowired
     private ModelMapperUtil modelMapperUtil;
-//    public List<ProductCardModel> getProductCardByCategoryId(Long id){
-//        List<ProductCardModel> productCardModels = productCardRepository.findProductCardByCategoryId(id);
-//        return productCardModels;
-//    }
-    // CODE BY HUY
-    //MODIFIED BY VAN TU AT 4:44 P.M 21/04/2021
-    //NOTE: DATABASE HAVE A NEW SUBCATEGORY TABLE
+
     public List<ProductCardDto> getProductCardByCategoryId(Long id){
         List<ProductCardDto> productCardDtos = new ArrayList<>();
         List<Product> products = productRepository.findByCategoryId(id);
@@ -51,7 +45,24 @@ public class ProductService {
         }
         return productCardDtos;
     }
-    // END
+
+    public List<ProductCardDto> getAll() {
+        List<ProductCardDto> productCardDtos = new ArrayList<>();
+        List<Product> products = (List<Product>) productRepository.findAll();
+        for (Product pr : products){
+            ProductCardDto productCardDto = new ProductCardDto();
+            productCardDto.setId(pr.getId());
+            productCardDto.setProductPrice(pr.getProductPrice());
+            productCardDto.setProductThumbnail(pr.getProductThumbnail());
+            productCardDto.setAddress(pr.getPost().getUser().getShop().getAddress());
+            productCardDto.setPostTitle(pr.getPost().getPostTitle());
+            productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
+            productCardDto.setDiscount(pr.getDiscount());
+            productCardDtos.add(productCardDto);
+        }
+        return productCardDtos;
+    }
+
     public void deleteAll(){
         productRepository.deleteAll();
     }

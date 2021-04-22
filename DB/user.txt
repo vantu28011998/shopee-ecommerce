@@ -12,7 +12,7 @@ POST /api/home/users/all
         "username": "lnhuy1912",
         "password": "huyngoc123",
         "emailAddress": "lnhuy1912@gmail.com"
-    }
+    },
     {
         "id": 3,
         "username":"vantu2801",
