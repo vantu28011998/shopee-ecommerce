@@ -29,6 +29,10 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
         return null;
     }
 
+    @GetMapping(value = {"/{id}/products","/{id}/products/all","/{id}/products/"})
+    public ResponseEntity<List<ProductCardDto>> getAllByCategoryId(@PathVariable Long id){
+        return new ResponseEntity<>(productService.getProductCardByCategoryId(id),HttpStatus.OK);
+    }
     //----------POST METHOD---------//
 
     @PostMapping("/products/all")

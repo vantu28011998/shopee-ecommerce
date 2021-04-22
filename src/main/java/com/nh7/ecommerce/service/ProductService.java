@@ -1,9 +1,7 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ProductCardDto;
-import com.nh7.ecommerce.entity.Post;
 import com.nh7.ecommerce.entity.Product;
-import com.nh7.ecommerce.model.ProductCardModel;
 import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +27,8 @@ public class ProductService {
     @Autowired
     private ModelMapperUtil modelMapperUtil;
 
-    public List<ProductCardDto> getProductCardByCategoryId(Long id){
+    private List<ProductCardDto> convert(List<Product> products){
         List<ProductCardDto> productCardDtos = new ArrayList<>();
-        List<Product> products = productRepository.findByCategoryId(id);
         for (Product pr : products){
             ProductCardDto productCardDto = new ProductCardDto();
             productCardDto.setId(pr.getId());
@@ -41,26 +38,19 @@ public class ProductService {
             productCardDto.setPostTitle(pr.getPost().getPostTitle());
             productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
             productCardDto.setDiscount(pr.getDiscount());
+            productCardDto.setSubCategoryId(pr.getSubCategory().getId());
             productCardDtos.add(productCardDto);
         }
         return productCardDtos;
     }
+    public List<ProductCardDto> getProductCardByCategoryId(Long id){
+        List<Product> products = productRepository.findByCategoryId(id);
+        return convert(products);
+    }
 
     public List<ProductCardDto> getAll() {
-        List<ProductCardDto> productCardDtos = new ArrayList<>();
         List<Product> products = (List<Product>) productRepository.findAll();
-        for (Product pr : products){
-            ProductCardDto productCardDto = new ProductCardDto();
-            productCardDto.setId(pr.getId());
-            productCardDto.setProductPrice(pr.getProductPrice());
-            productCardDto.setProductThumbnail(pr.getProductThumbnail());
-            productCardDto.setAddress(pr.getPost().getUser().getShop().getAddress());
-            productCardDto.setPostTitle(pr.getPost().getPostTitle());
-            productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
-            productCardDto.setDiscount(pr.getDiscount());
-            productCardDtos.add(productCardDto);
-        }
-        return productCardDtos;
+        return convert(products);
     }
 
     public void deleteAll(){
