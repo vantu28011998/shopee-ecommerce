@@ -14,8 +14,9 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
-    List<User> findAll();
+    boolean existsByUsernameAndPassword(String var1, String var2);
     User findById(long id);
+    List<User> findAll();
     @Modifying
     @Query(value = "DELETE FROM u WHERE u.id=:id",nativeQuery = true)
     @Transactional

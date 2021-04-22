@@ -23,6 +23,7 @@ public class ShopService {
         List<Shop> shops= (List<Shop>) shopRepository.findAll();
         return modelMapperUtil.mapList(shops,ShopDto.class);
     }
+
     public ShopDto findById(long id){
         Shop shop = shopRepository.findById(id);
         return modelMapperUtil.map(shop,ShopDto.class);

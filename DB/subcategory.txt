@@ -34,8 +34,6 @@ POST /api/home/categories/1/subcategories/all
 POST /api/home/categories/2/subcategories/all
 
 [
-    { "subCategoryName":"Áo thun"
-        },
         { "subCategoryName":"Áo"
         },
         { "subCategoryName":"Đầm"

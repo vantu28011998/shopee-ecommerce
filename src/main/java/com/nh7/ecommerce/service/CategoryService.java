@@ -28,12 +28,15 @@ public class CategoryService {
     public Category save(Category category){
         return categoryRepository.save(category);
     }
+
     public List<Category> saveAll(List<Category> categories){
         return categoryRepository.saveAll(categories);
     }
+
     public void deleteCategory(Long id){
         categoryRepository.deleteById(id);
     }
+
     public void deleteAllCategories(){
         categoryRepository.deleteAll();
     }

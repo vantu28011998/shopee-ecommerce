@@ -1,11 +1,10 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ProductCardDto;
+import com.nh7.ecommerce.entity.Post;
 import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.model.ProductCardModel;
-import com.nh7.ecommerce.repository.ProductCardRepository;
-import com.nh7.ecommerce.repository.ProductCardRepositoryImp;
-import com.nh7.ecommerce.repository.ProductRepository;
+import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,20 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    // CODE BY HUY
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PostService postService;
+    //
+    @Autowired
+    private ModelMapperUtil modelMapperUtil;
+//    public List<ProductCardModel> getProductCardByCategoryId(Long id){
+//        List<ProductCardModel> productCardModels = productCardRepository.findProductCardByCategoryId(id);
+//        return productCardModels;
+//    }
     // CODE BY HUY
     //MODIFIED BY VAN TU AT 4:44 P.M 21/04/2021
     //NOTE: DATABASE HAVE A NEW SUBCATEGORY TABLE
@@ -42,12 +55,15 @@ public class ProductService {
     public void deleteAll(){
         productRepository.deleteAll();
     }
+
     public void delete(Long id){
         productRepository.deleteById(id);
     }
+
     public Product save(Product product){
         return productRepository.save(product);
     }
+
     public List<Product> saveAll(List<Product> products){
         return (List<Product>) productRepository.saveAll(products);
     }

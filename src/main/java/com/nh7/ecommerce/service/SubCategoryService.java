@@ -23,6 +23,7 @@ public class SubCategoryService {
         List<SubCategory> categories = (List<SubCategory>)subCategoryRepository.findAll();
         return modelMapperUtil.mapList(categories,SubCategoryDto.class);
     }
+
     public SubCategoryDto findById(long id){
         SubCategory subCategory = subCategoryRepository.findById(id);
         return modelMapperUtil.map(subCategory,SubCategoryDto.class);

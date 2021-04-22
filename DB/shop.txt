@@ -1,6 +1,27 @@
 POST /api/home/users/1/shops/all
 [
     {
+        "id": 1,
+        "name": "yinxxx",
+        "logo": "https://cf.shopee.vn/file/512a2314532674a9694175f72780d0b5_tn",
+        "address": "TP. Hồ Chí Minh",
+        "phoneNumber": "0928279504",
+        "user": {
+            "id": 1
+        }
+    },
+    {
+        "id": 2,
+        "name": "feaer_store",
+        "logo": "https://cf.shopee.vn/file/4ca74bfdaeb61e0aa43f84cb2dd7dfc7_tn",
+        "address": "Hà Nội",
+        "phoneNumber": "0585438879",
+        "user": {
+            "id": 2
+        }
+    },
+    {
+        "id": 3,
         "address":"Đà Nẵng",
         "logo":"https://dcassetcdn.com/design_img/123675/17576/17576_1705628_123675_image.jpg",
         "name":"Shop Iphone uy tín nhất VN",
