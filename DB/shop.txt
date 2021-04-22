@@ -1,0 +1,10 @@
+POST /api/home/users/1/shops/all
+[
+    {
+        "address":"Đà Nẵng",
+        "logo":"https://dcassetcdn.com/design_img/123675/17576/17576_1705628_123675_image.jpg",
+        "name":"Shop Iphone uy tín nhất VN",
+        "phoneNumber":"0965031436"
+    }
+
+]

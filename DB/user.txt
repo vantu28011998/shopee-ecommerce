@@ -1,0 +1,9 @@
+POST /api/home/users/all
+
+[
+    {
+        "username":"vantu2801",
+        "password":"vantu2801",
+        "emailAddress":"nguyenvantu28011998it@gmail.com"
+    }
+]

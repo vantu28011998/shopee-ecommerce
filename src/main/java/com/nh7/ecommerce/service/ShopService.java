@@ -3,6 +3,7 @@ package com.nh7.ecommerce.service;
 import com.nh7.ecommerce.dto.ShopDto;
 import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.entity.Shop;
+import com.nh7.ecommerce.entity.SubCategory;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.repository.ShopRepository;
 import com.nh7.ecommerce.util.ModelMapperUtil;
@@ -33,6 +34,16 @@ public class ShopService {
 
     public Shop save(Shop shop){
         return shopRepository.save(shop);
+    }
+
+    public void saveBySuper(Long id, Shop shop){
+        shopRepository.saveBySuper(id,shop.getAddress(),shop.getLogo(),shop.getName(), shop.getPhoneNumber());
+    }
+
+    public void saveAllBySuper(Long id,List<Shop> shops){
+        for(Shop shop : shops){
+            saveBySuper(id,shop);
+        }
     }
 
     public void deleteAll(){

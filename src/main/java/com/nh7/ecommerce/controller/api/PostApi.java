@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/home/posts")
+@RequestMapping("/api/home")
 @ControllerAdvice
 @CrossOrigin
-public class PostApi implements ICrudApi<PostDto, Post> {
+public class PostApi implements ICrudApi<PostDto, Post>,IPostBySuperApi<Post> {
     @Autowired
     private PostService postService;
 
-    @GetMapping(value = {"/","","/all"})
+    @GetMapping(value = {"/posts/","/posts","/posts/all"})
     @Override
     public ResponseEntity<List<PostDto>> getAll() {
         return new ResponseEntity<>(postService.findAll(),HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/{id}"})
+    @GetMapping(value = {"/posts/{id}"})
     @Override
     public ResponseEntity<PostDto> get(@PathVariable Long id) {
         return new ResponseEntity<>(postService.findById(id),HttpStatus.OK);
@@ -32,19 +32,28 @@ public class PostApi implements ICrudApi<PostDto, Post> {
 
     //----------POST METHOD---------//
 
-    @PostMapping("/all")
+    @PostMapping("/posts/all")
     @Override
     public ResponseEntity<Object> createAll(@RequestBody List<Post> items) {
         postService.saveAll(items);
         return new ResponseEntity<>("Posts are created successfully",HttpStatus.CREATED);
     }
 
-    @PostMapping(value = {"","/"})
+    @PostMapping(value = {"/posts","/posts/"})
     @Override
     public ResponseEntity<Object> create(@RequestBody Post item) {
         return new ResponseEntity<>("Post is created successfully",HttpStatus.CREATED);
     }
-
+    @PostMapping("/users/{id}/posts")
+    @Override
+    public ResponseEntity<Object> postBySuper(@PathVariable Long id,@RequestBody Post item) {
+        return null;
+    }
+    @PostMapping("/users/{id}/posts/all")
+    @Override
+    public ResponseEntity<Object> postAllBySuper(@PathVariable Long id,@RequestBody List<Post> items) {
+        return null;
+    }
 
 
     //----------PUT METHOD---------//
@@ -57,16 +66,18 @@ public class PostApi implements ICrudApi<PostDto, Post> {
 
     //----------DELETE METHOD---------//
 
-    @DeleteMapping("/all")
+    @DeleteMapping("/posts/all")
     @Override
     public ResponseEntity<Object> deleteAll() {
         postService.deleteAll();
         return new ResponseEntity<>("Posts are deleted successfully",HttpStatus.OK);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/posts/{id}")
     @Override
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         postService.delete(id);
         return new ResponseEntity<>("Post is deleted successfully",HttpStatus.OK);
     }
+
+
 }
