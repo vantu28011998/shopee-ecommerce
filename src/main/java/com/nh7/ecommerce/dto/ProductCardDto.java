@@ -16,4 +16,6 @@ public class ProductCardDto {
     private String address;
     //order
     private int soldQuantity;
+    //discount
+    private int discount;
 }

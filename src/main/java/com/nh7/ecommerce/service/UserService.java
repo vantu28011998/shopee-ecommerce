@@ -1,8 +1,12 @@
 package com.nh7.ecommerce.service;
 
 
+import com.nh7.ecommerce.dto.SubCategoryDto;
+import com.nh7.ecommerce.dto.UserDto;
+import com.nh7.ecommerce.entity.SubCategory;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.repository.UserRepository;
+import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +16,32 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    User getUserById(int id){return userRepository.findById(id);}
-    List<User> getAllUser(){
-        return (List<User>) userRepository.findAll();
+
+    @Autowired
+    private ModelMapperUtil modelMapperUtil;
+
+    public List<UserDto> findAll(){
+        List<User> users= (List<User>) userRepository.findAll();
+        return modelMapperUtil.mapList(users,UserDto.class);
     }
-    boolean deleteUser(int id){
-        try{
-            userRepository.deleteById(id);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+    public UserDto findById(long id){
+        User user = userRepository.findById(id);
+        return modelMapperUtil.map(user,UserDto.class);
     }
-    boolean saveUser(User user){
-        try {
-            userRepository.save(user);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
+
+    public List<User> saveAll(List<User> users){
+        return (List<User>) userRepository.saveAll(users);
+    }
+
+    public User save(User user){
+        return userRepository.save(user);
+    }
+
+    public void deleteAll(){
+        userRepository.deleteAll();
+    }
+
+    public void delete(Long id){
+        userRepository.deleteById(id);
     }
 }

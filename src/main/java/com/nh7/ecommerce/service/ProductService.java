@@ -14,10 +14,10 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    @Autowired
-    private ProductCardRepositoryImp productCardRepository;
+
     @Autowired
     private ProductRepository productRepository;
+
     // CODE BY HUY
     @Autowired
     private CategoryRepository categoryRepository;
@@ -28,45 +28,52 @@ public class ProductService {
     //
     @Autowired
     private ModelMapperUtil modelMapperUtil;
-    public List<ProductCardModel> getProductCardByCategoryId(Long id){
-        List<ProductCardModel> productCardModels = productCardRepository.findProductCardByCategoryId(id);
-        return productCardModels;
-    }
+//    public List<ProductCardModel> getProductCardByCategoryId(Long id){
+//        List<ProductCardModel> productCardModels = productCardRepository.findProductCardByCategoryId(id);
+//        return productCardModels;
+//    }
     // CODE BY HUY
-    public List<ProductCardModel> getProductCardByCateId(Long id){
-        List<ProductCardModel> productCardModelList = new ArrayList<>();
-        List<Product> productList = productRepository.findByCategoryId(id);
-        for (Product pr : productList){
-            ProductCardModel productCardModel = new ProductCardModel();
-            productCardModel.setId(pr.getId());
-            productCardModel.setProductPrice(pr.getProductPrice());
-            productCardModel.setProductThumbnail(pr.getProductThumbnail());
-            productCardModel.setAddress(pr.getPost().getUser().getShop().getAddress());
-            productCardModel.setPostTitle(pr.getPost().getPostTitle());
-            productCardModel.setSoldQuantity(pr.getPost().getSoldQuantity());
-            productCardModelList.add(productCardModel);
+    //MODIFIED BY VAN TU AT 4:44 P.M 21/04/2021
+    //NOTE: DATABASE HAVE A NEW SUBCATEGORY TABLE
+    public List<ProductCardDto> getProductCardByCategoryId(Long id){
+        List<ProductCardDto> productCardDtos = new ArrayList<>();
+        List<Product> products = productRepository.findByCategoryId(id);
+        for (Product pr : products){
+            ProductCardDto productCardDto = new ProductCardDto();
+            productCardDto.setId(pr.getId());
+            productCardDto.setProductPrice(pr.getProductPrice());
+            productCardDto.setProductThumbnail(pr.getProductThumbnail());
+            productCardDto.setAddress(pr.getPost().getUser().getShop().getAddress());
+            productCardDto.setPostTitle(pr.getPost().getPostTitle());
+            productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
+            productCardDto.setDiscount(pr.getDiscount());
+            productCardDtos.add(productCardDto);
         }
-        return productCardModelList;
-    }
-    public void creatProductCard(){
-        Product pr = new Product();
-        Post po = new Post();
-        pr.setCategory(categoryRepository.findById(1));
-        pr.setProductName("Áo dài");
-        pr.setProductPrice(5.7);
-        pr.setProductThumbnail("abcjd");
-        pr.setQuantity(1900);
-        po.setPostTitle("\uD83C\uDF53\uD83C\uDF53Áo Croptop dây đắp chéo siêu sexy\uD83C\uDF35Kèm hình thật [hình feedback]\uD83C\uDF35 vải mềm, vải đẹp");
-        po.setUser(userRepository.findById(1));
-        po.setPostDecription("Áo Croptop dây đắp chéo hot hit, vải đẹp giá rẻ\n" +
-                "\n" +
-                "\uD83C\uDF4CChất thun gân mềm mịn\n" +
-                "\uD83C\uDF4CFreesize <55kg\n" +
-                "\uD83C\uDF4Cđiều chỉnh dây theo sở thích \n" +
-                "\uD83C\uDF4Crất dễ phối với quần Short Jean hoặc chân váy\n");
-        postService.create(po);
-        pr.setPost(po);
-        productRepository.save(pr);
+        return productCardDtos;
     }
     // END
+    public void deleteAll(){
+        productRepository.deleteAll();
+    }
+
+    public void delete(Long id){
+        productRepository.deleteById(id);
+    }
+
+    public void saveAllBySuper(Long id,List<Product> items){
+        for(Product item:items){
+            saveBySuper(id,item);
+        }
+    }
+    public void saveBySuper(Long id,Product item){
+        productRepository.saveBySuper(id,item.getAvgEvalute(),item.getDiscount(),item.getProductName(),item.getProductPrice(),item.getProductThumbnail(),item.getQuantity());
+    }
+
+    public Product save(Product product){
+        return productRepository.save(product);
+    }
+
+    public List<Product> saveAll(List<Product> products){
+        return (List<Product>) productRepository.saveAll(products);
+    }
 }

@@ -11,6 +11,8 @@ import java.util.List;
 public class CartService {
     @Autowired
     private CartRepository cartRepository;
+
     public List<Cart> getAllCarts() {return (List<Cart>) cartRepository.findAll();}
+
     public Cart getCartId(int id){return cartRepository.findById(id);}
 }

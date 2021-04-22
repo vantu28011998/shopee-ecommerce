@@ -22,8 +22,8 @@ public class ProductListApi{
     private ProductService productService;
     //---------GET METHOD----------//
     @GetMapping("/{category_id}/products")
-    public ResponseEntity<List<ProductCardModel>> getProducts(@PathVariable(name = "category_id") Long id){
-        return new ResponseEntity<>(productService.getProductCardByCateId(id),HttpStatus.OK);
+    public ResponseEntity<List<ProductCardDto>> getProducts(@PathVariable(name = "category_id") Long id){
+        return new ResponseEntity<>(productService.getProductCardByCategoryId(id),HttpStatus.OK);
     }
     //---------POST METHOD----------//
     //Post 1 product
@@ -39,11 +39,4 @@ public class ProductListApi{
         return new ResponseEntity<>("Category is created successfully",HttpStatus.CREATED);
     }
 
-    // CODE BY HUY
-    @GetMapping("/products-demo")
-    public ResponseEntity<Object> createDemoDataProducts(){
-        productService.creatProductCard();
-        return new ResponseEntity<>("Added new product.",HttpStatus.CREATED);
-    }
-    //
 }

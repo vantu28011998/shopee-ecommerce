@@ -19,8 +19,6 @@ public class Post extends BaseEntity {
     private String postTitle;
     @Column(name = "post_decription")
     private String postDecription;
-    @Column(name = "avg_evalute")
-    private Double avgEvalute;
     @Column(name = "sold_quantity", columnDefinition = "integer default 0")
     private int soldQuantity;
     @OneToOne

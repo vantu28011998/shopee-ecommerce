@@ -16,6 +16,12 @@ public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column
+    private String username;
+    @Column
+    private String password;
+    @Column
+    private String emailAddress;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserOrder> userOrderList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
@@ -33,11 +39,5 @@ public class User extends BaseEntity{
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Shop shop;
 
-    @Column
-    private String username;
-    @Column
-    private String password;
-    @Column
-    private String emailAddress;
 
 }
