@@ -36,16 +36,6 @@ public class ShopService {
         return shopRepository.save(shop);
     }
 
-    public void saveBySuper(Long id, Shop shop){
-        shopRepository.saveBySuper(id,shop.getAddress(),shop.getLogo(),shop.getName(), shop.getPhoneNumber());
-    }
-
-    public void saveAllBySuper(Long id,List<Shop> shops){
-        for(Shop shop : shops){
-            saveBySuper(id,shop);
-        }
-    }
-
     public void deleteAll(){
         shopRepository.deleteAll();
     }

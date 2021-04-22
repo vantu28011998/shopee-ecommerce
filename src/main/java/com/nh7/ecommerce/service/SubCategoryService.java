@@ -36,16 +36,6 @@ public class SubCategoryService {
         return subCategoryRepository.save(subCategory);
     }
 
-    public void saveBySuper(Long id,SubCategory subCategory){
-        subCategoryRepository.saveBySuper(id,subCategory.getSubCategoryName());
-    }
-
-    public void saveAllBySuper(Long id,List<SubCategory> subCategories){
-        for(SubCategory subCategory: subCategories){
-           saveBySuper(id,subCategory);
-        }
-    }
-
     public void deleteAll(){
         subCategoryRepository.deleteAll();
     }

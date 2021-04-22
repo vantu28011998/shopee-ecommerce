@@ -12,9 +12,4 @@ import java.util.List;
 public interface SubCategoryRepository extends CrudRepository<SubCategory,Long> {
     List<SubCategory> findAll();
     SubCategory findById(long id);
-
-    @Modifying
-    @Query(value ="INSERT INTO sub_category(sub_category_name,category_id) VALUES (:item,:id)",nativeQuery = true)
-    @Transactional
-    void saveBySuper(@Param("id") long id,@Param("item")String subCategoryName);
 }

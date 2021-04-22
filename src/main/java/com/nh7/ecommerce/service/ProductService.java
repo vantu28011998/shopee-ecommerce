@@ -45,14 +45,6 @@ public class ProductService {
     public void delete(Long id){
         productRepository.deleteById(id);
     }
-    public void saveAllBySuper(Long id,List<Product> items){
-        for(Product item:items){
-            saveBySuper(id,item);
-        }
-    }
-    public void saveBySuper(Long id,Product item){
-        productRepository.saveBySuper(id,item.getAvgEvalute(),item.getDiscount(),item.getProductName(),item.getProductPrice(),item.getProductThumbnail(),item.getQuantity());
-    }
     public Product save(Product product){
         return productRepository.save(product);
     }

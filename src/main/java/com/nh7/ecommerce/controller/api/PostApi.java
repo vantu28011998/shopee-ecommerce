@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/home")
 @ControllerAdvice
 @CrossOrigin
-public class PostApi implements ICrudApi<PostDto, Post>,IPostBySuperApi<Post> {
+public class PostApi implements ICrudApi<PostDto, Post>{
     @Autowired
     private PostService postService;
 
@@ -44,17 +44,6 @@ public class PostApi implements ICrudApi<PostDto, Post>,IPostBySuperApi<Post> {
     public ResponseEntity<Object> create(@RequestBody Post item) {
         return new ResponseEntity<>("Post is created successfully",HttpStatus.CREATED);
     }
-    @PostMapping("/users/{id}/posts")
-    @Override
-    public ResponseEntity<Object> postBySuper(@PathVariable Long id,@RequestBody Post item) {
-        return null;
-    }
-    @PostMapping("/users/{id}/posts/all")
-    @Override
-    public ResponseEntity<Object> postAllBySuper(@PathVariable Long id,@RequestBody List<Post> items) {
-        return null;
-    }
-
 
     //----------PUT METHOD---------//
 

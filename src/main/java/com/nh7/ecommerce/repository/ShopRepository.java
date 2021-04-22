@@ -17,8 +17,4 @@ public interface ShopRepository extends CrudRepository<Shop, Integer> {
     @Query(value = "DELETE FROM shop WHERE shop.id=:id",nativeQuery = true)
     @Transactional
     void deleteById(long id);
-    @Modifying
-    @Query(value ="INSERT INTO shop(address,logo,name,phone_number,user_id) VALUES (:address,:logo,:name,:phone_number,:id)",nativeQuery = true)
-    @Transactional
-    void saveBySuper(@Param("id") long id,@Param("address") String address,@Param("logo")String logo,@Param("name") String name,@Param("phone_number") String phoneNumber);
 }

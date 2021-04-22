@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/home")
 @ControllerAdvice
 @CrossOrigin
-public class ShopApi implements ICrudApi<ShopDto,Shop>,IPostBySuperApi<Shop>{
+public class ShopApi implements ICrudApi<ShopDto,Shop>{
     @Autowired
     private ShopService shopService;
 
@@ -45,20 +45,6 @@ public class ShopApi implements ICrudApi<ShopDto,Shop>,IPostBySuperApi<Shop>{
         shopService.save(item);
         return new ResponseEntity<>("Shop is created successfully",HttpStatus.CREATED);
     }
-    @PostMapping("/users/{id}/shops")
-    @Override
-    public ResponseEntity<Object> postBySuper(@PathVariable Long id,@RequestBody Shop item) {
-        shopService.saveBySuper(id,item);
-        return new ResponseEntity<>("Shop is created successfully",HttpStatus.CREATED);
-    }
-    @PostMapping("/users/{id}/shops/all")
-    @Override
-    public ResponseEntity<Object> postAllBySuper(@PathVariable Long id,@RequestBody List<Shop> items) {
-        shopService.saveAllBySuper(id,items);
-        return new ResponseEntity<>("Shops are created successfully",HttpStatus.CREATED);
-    }
-
-
 
     //----------PUT METHOD---------//
 

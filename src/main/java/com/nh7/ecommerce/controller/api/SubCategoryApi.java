@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @ControllerAdvice
 @RequestMapping(value = "/api/home/categories")
-public class SubCategoryApi implements ICrudApi<SubCategoryDto, SubCategory>,IPostBySuperApi<SubCategory>{
+public class SubCategoryApi implements ICrudApi<SubCategoryDto, SubCategory>{
 
     @Autowired
     private SubCategoryService subCategoryService;
@@ -48,18 +48,6 @@ public class SubCategoryApi implements ICrudApi<SubCategoryDto, SubCategory>,IPo
     public ResponseEntity<Object> create(@RequestBody SubCategory item) {
         subCategoryService.save(item);
         return new ResponseEntity<>("Subcategory is created successfully",HttpStatus.CREATED);
-    }
-    @PostMapping("/{id}/subcategories")
-    @Override
-    public ResponseEntity<Object> postBySuper(@PathVariable Long id,@RequestBody SubCategory item) {
-        subCategoryService.saveBySuper(id,item);
-        return new ResponseEntity<>("Subcategory  is created by category have id "+id+" successfully",HttpStatus.CREATED);
-    }
-    @PostMapping("/{id}/subcategories/all")
-    @Override
-    public ResponseEntity<Object> postAllBySuper(@PathVariable Long id,@RequestBody List<SubCategory> items) {
-        subCategoryService.saveAllBySuper(id,items);
-        return new ResponseEntity<>("Subcategories  are created by category have id "+id+" successfully",HttpStatus.CREATED) ;
     }
 
     //----------PUT METHOD---------//

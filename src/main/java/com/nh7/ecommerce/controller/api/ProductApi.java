@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/home/categories")
 @ControllerAdvice
 @CrossOrigin
-public class ProductApi implements ICrudApi<ProductCardDto,Product>, IGetBySuperApi<ProductCardDto>,IPostBySuperApi<Product> {
+public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     @Autowired
     private ProductService productService;
 
@@ -25,17 +25,6 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>, IGetBySuper
     @GetMapping("/products/{id}")
     @Override
     public ResponseEntity<ProductCardDto> get(@PathVariable(name = "id") Long id) {
-        return null;
-    }
-    //GET ALL PRODUCTS BY CATEGORY ID
-    @GetMapping("/{super-id}/products")
-    @Override
-    public ResponseEntity<List<ProductCardDto>> getAllBySuper(@PathVariable(name = "super-id") Long superId) {
-        return new ResponseEntity<>(productService.getProductCardByCategoryId(superId), HttpStatus.OK);
-    }
-    @GetMapping("/{super-id}/products/{id}")
-    @Override
-    public ResponseEntity<ProductCardDto> getBySuper(@PathVariable(name = "super-id") Long superId,@PathVariable(name="id") Long id) {
         return null;
     }
 
@@ -53,19 +42,6 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>, IGetBySuper
     public ResponseEntity<Object> create(@RequestBody Product item) {
         productService.save(item);
         return new ResponseEntity<>("Product is created successfully",HttpStatus.CREATED);
-    }
-
-    @PostMapping("/subcategories/{id}/products")
-    @Override
-    public ResponseEntity<Object> postBySuper(@PathVariable Long id,@RequestBody Product item) {
-        productService.saveBySuper(id,item);
-        return new ResponseEntity<>("Products  are created by category have id "+id+" successfully",HttpStatus.CREATED);
-    }
-    @PostMapping("/subcategories/{id}/products/all")
-    @Override
-    public ResponseEntity<Object> postAllBySuper(@PathVariable Long id,@RequestBody List<Product> items) {
-        productService.saveAllBySuper(id,items);
-        return new ResponseEntity<>("Products  are created by category have id "+id+" successfully",HttpStatus.CREATED);
     }
 
     //----------PUT METHOD---------//

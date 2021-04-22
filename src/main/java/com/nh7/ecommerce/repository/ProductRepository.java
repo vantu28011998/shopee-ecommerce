@@ -25,8 +25,4 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Query(value = "DELETE FROM product WHERE product.id=:id",nativeQuery = true)
     @Transactional
     void deleteById(Long id);
-    @Modifying
-    @Query(value = "INSERT INTO product(avg_evalute,discount,product_name,product_price,product_thumbnail,quantity,subcategory_id) VALUES(:avg_evalute,:discount,:product_name,:product_price,:product_thumbnail,:quantity,:id)",nativeQuery = true)
-    @Transactional
-    void saveBySuper(@Param("id") long id,@Param("avg_evalute") Double avgEvalute,@Param("discount") int discount, @Param("product_name") String productName,@Param("product_price") Double productPrice,@Param("product_thumbnail") String productThumbnail,@Param("quantity") int quantity);
 }
