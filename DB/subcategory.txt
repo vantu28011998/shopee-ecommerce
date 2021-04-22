@@ -1,11 +1,157 @@
-POST /api/home/categories/1/subcategories
+POST /api/home/categories/1/subcategories/all
+
 [
     { "subCategoryName":"Áo thun"
     },
     { "subCategoryName":"Áo sơ mi"
     },
-    { "subCategoryName":"Áo khoác & vét"
+    { "subCategoryName":"Áo khoác & Áo vét"
     },
-    { "subCategoryName":"Áo nỉ/áo len"
+    { "subCategoryName":"Áo nỉ/Áo len"
+    },
+    { "subCategoryName":"Đồ bộ/Đồ mặc nhà"
+    },
+    { "subCategoryName":"Đồ đôi"
+    },
+    { "subCategoryName":"Quần"
+    },
+    { "subCategoryName":"Balo/Túi/Ví"
+    },
+    { "subCategoryName":"Mắt kính"
+    },
+    { "subCategoryName":"Phụ kiện nam"
+    },
+    { "subCategoryName":"Đồ trung niên"
+    },
+    { "subCategoryName":"Trang sức nam"
+    },
+    { "subCategoryName":"Thắt lưng"
+    },
+    { "subCategoryName":"Đồ lót"
     }
+]
+
+POST /api/home/categories/2/subcategories/all
+
+[
+    { "subCategoryName":"Áo thun"
+        },
+        { "subCategoryName":"Áo"
+        },
+        { "subCategoryName":"Đầm"
+        },
+        { "subCategoryName":"Chân váy"
+        },
+        { "subCategoryName":"Set trang phục & Jumpsuit"
+        },
+        { "subCategoryName":"Đồ đôi"
+        },
+        { "subCategoryName":"Đồ lót, Đồ ngủ & Đồ mặc nhà"
+        },
+        { "subCategoryName":"Đồ bơi"
+        },
+        { "subCategoryName":"Trang phục thể thao"
+        },
+        { "subCategoryName":"Phụ kiện may mặc"
+        },
+        { "subCategoryName":"Thời trang trung niên"
+        },
+        { "subCategoryName":"Áo khoát & Áo vét"
+        },
+        { "subCategoryName":"Trang phục đông"
+        },
+        { "subCategoryName":"Thời trang bầu và sau sinh"
+        }
+]
+
+POST /api/home/categories/3/subcategories/all
+
+[
+    { "subCategoryName":"Điện thoại"
+        },
+        { "subCategoryName":"Máy tính bảng"
+        },
+        { "subCategoryName":"Vỏ, Bao & Ốp lưng"
+        },
+        { "subCategoryName":"Miếng dán màn hình"
+        },
+        { "subCategoryName":"Pin sạc dự phòng"
+        },
+        { "subCategoryName":"Pin, Cáp & Bộ sạc"
+        },
+        { "subCategoryName":"Giá đỡ & Kẹp"
+        },
+        { "subCategoryName":"Gậy chụp hình"
+        },
+        { "subCategoryName":"Sim"
+        }
+]
+
+POST /api/home/categories/4/subcategories/all
+
+[
+    { "subCategoryName":"Đồ dùng cho bé"
+        },
+        { "subCategoryName":"Tã & bỉm"
+        },
+        { "subCategoryName":"Ghế, Nôi, Cũi, Xe đẩy & Địu"
+        },
+        { "subCategoryName":"Vitamin & Đồ dùng cho mẹ"
+        },
+        { "subCategoryName":"Công thức sữa 0-24 tháng tuổi"
+        },
+        { "subCategoryName":"Thực phẩm bổ sung cho trẻ dưới 6 tháng tuổi"
+        },
+        { "subCategoryName":"Sữa trên 24 tháng tuổi"
+        },
+        { "subCategoryName":"Thực phẩm cho bé từ 6 tháng tuổi"
+        },
+        { "subCategoryName":"Vitamin thực phẩm bổ sung và đồ dùng cho mẹ"
+        }
+]
+
+POST /api/home/categories/5/subcategories/all
+
+[
+    { "subCategoryName":"Thiết bị âm thanh"
+        },
+        { "subCategoryName":"Tai nghe"
+        },
+        { "subCategoryName":"Thiết bị đeo thông minh"
+        },
+        { "subCategoryName":"Android Tivi Box"
+        },
+        { "subCategoryName":"Tivi"
+        },
+        { "subCategoryName":"Phụ kiện tivi"
+        },
+        { "subCategoryName":"Tai nghe"
+        },
+        { "subCategoryName":"Phụ kiện & Thiết bị game"
+        }
+]
+
+POST /api/home/categories/6/subcategories/all
+
+[
+    { "subCategoryName":"Dụng cụ & Thiết bị tiện ích"
+        },
+        { "subCategoryName":"Đồ dùng nhà bếp & Phòng ăn"
+        },
+        { "subCategoryName":"Chăn, Ga, Gối & Nệm"
+        },
+        { "subCategoryName":"Tủ đựng & Hộp lưu trữ"
+        },
+        { "subCategoryName":"Trang trí nhà cửa"
+        },
+        { "subCategoryName":"Đồ dùng phòng tắm"
+        },
+        { "subCategoryName":"Đồ nội thất"
+        },
+        { "subCategoryName":"Đèn    "
+        },
+        { "subCategoryName":"Ngoài trời & Sân vườn"
+        },
+        { "subCategoryName":"Dụng cụ cầm tay"
+        }
 ]
