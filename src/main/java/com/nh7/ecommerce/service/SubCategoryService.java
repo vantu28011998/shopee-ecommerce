@@ -2,11 +2,13 @@ package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.SubCategoryDto;
 import com.nh7.ecommerce.entity.SubCategory;
+import com.nh7.ecommerce.repository.CategoryRepository;
 import com.nh7.ecommerce.repository.SubCategoryRepository;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +17,8 @@ public class SubCategoryService {
 
     @Autowired
     private SubCategoryRepository subCategoryRepository;
-
+    @Autowired
+    private CategoryRepository categoryRepository;
     @Autowired
     private ModelMapperUtil modelMapperUtil;
 
@@ -50,4 +53,20 @@ public class SubCategoryService {
         subCategoryRepository.deleteById(id);
     }
 
+    public List<SubCategoryDto> findAllByCategoryId(long id) {
+
+        List<SubCategoryDto> subCategoryDtos =new ArrayList<>();
+        List<SubCategory> subCategories= subCategoryRepository.findAllByCategoryId(id);
+
+        if(subCategories!=null){
+            for(SubCategory subCategory :subCategories){
+                SubCategoryDto subCategoryDto =new SubCategoryDto();
+                subCategoryDto.setId(subCategory.getId());
+                subCategoryDto.setSubCategoryName(subCategory.getSubCategoryName());
+                subCategoryDto.setCategoryId(subCategory.getCategory().getId());
+                subCategoryDtos.add(subCategoryDto);
+            }
+        }
+        return subCategoryDtos;
+    }
 }

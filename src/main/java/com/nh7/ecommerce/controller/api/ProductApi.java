@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("/api/home/categories")
 @ControllerAdvice
 @CrossOrigin
-
 public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     @Autowired
     private ProductService productService;

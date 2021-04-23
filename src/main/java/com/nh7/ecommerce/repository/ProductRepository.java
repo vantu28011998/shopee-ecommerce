@@ -24,5 +24,5 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Modifying
     @Query(value = "DELETE FROM product WHERE product.id=:id",nativeQuery = true)
     @Transactional
-    void deleteById(Long id);
+    void deleteById(long id);
 }

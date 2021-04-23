@@ -1,7 +1,5 @@
 package com.nh7.ecommerce.controller.api;
-
 import com.nh7.ecommerce.dto.SubCategoryDto;
-import com.nh7.ecommerce.entity.Category;
 import com.nh7.ecommerce.entity.SubCategory;
 import com.nh7.ecommerce.service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,10 @@ public class SubCategoryApi implements ICrudApi<SubCategoryDto, SubCategory>{
     @Override
     public ResponseEntity<SubCategoryDto> get(@PathVariable Long id) {
         return new ResponseEntity<>(subCategoryService.findById(id),HttpStatus.OK);
+    }
+    @GetMapping(value="/{id}/subcategories")
+    public ResponseEntity<List<SubCategoryDto>> getByCategoryId(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(subCategoryService.findAllByCategoryId(id),HttpStatus.OK);
     }
 
     //----------POST METHOD---------//
