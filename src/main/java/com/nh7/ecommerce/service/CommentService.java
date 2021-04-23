@@ -11,4 +11,14 @@ import java.util.List;
 public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
+
+    public boolean saveAll(List<Comment> commentList){
+        try {
+            commentRepository.saveAll(commentList);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
 }

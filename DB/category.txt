@@ -1,4 +1,4 @@
-POST /api/home/categories/all
+
 [
     {
         "categoryName": "Thời Trang Nam",

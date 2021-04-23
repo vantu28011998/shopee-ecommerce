@@ -25,4 +25,12 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Query(value = "DELETE FROM product WHERE product.id=:id",nativeQuery = true)
     @Transactional
     void deleteById(long id);
+
+
+    @Query(value = "select count(pr.id) from product pr\n" +
+            "join post po on pr.id = po.product_id\n" +
+            "join u on u.id = po.user_id\n" +
+            "join shop sh on sh.user_id = u.id\n" +
+            "where sh.id = :id", nativeQuery = true)
+    Integer countProductByPostUserShop(@Param("id") long id);
 }

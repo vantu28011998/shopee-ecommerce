@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.controller.api;
 import com.nh7.ecommerce.dto.ProductCardDto;
 import com.nh7.ecommerce.entity.Product;
+import com.nh7.ecommerce.service.ProductDetailsService;
 import com.nh7.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import java.util.List;
 public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductDetailsService productDetailsService;
 
     //---------GET METHOD----------//
     @GetMapping(value = {"/products","/products/all","/product/"})
@@ -31,6 +34,10 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     @GetMapping(value = {"/{id}/products","/{id}/products/all","/{id}/products/"})
     public ResponseEntity<List<ProductCardDto>> getAllByCategoryId(@PathVariable Long id){
         return new ResponseEntity<>(productService.getProductCardByCategoryId(id),HttpStatus.OK);
+    }
+    @GetMapping("/product-details/{id}")
+    public ResponseEntity<Object> getProductDetails(@PathVariable(name = "id") long id){
+        return new ResponseEntity<>(productDetailsService.getProductDetailByProductId(id), HttpStatus.OK);
     }
     //----------POST METHOD---------//
 
