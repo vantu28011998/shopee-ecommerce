@@ -3,13 +3,13 @@ package com.nh7.ecommerce.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
+import javax.persistence.Lob;
+
 @Getter
 @Setter
 public class PostDto {
     private Long id;
     private String postTitle;
     private String postDecription;
-    @Column(name = "sold_quantity", columnDefinition = "integer default 0")
     private int soldQuantity;
 }

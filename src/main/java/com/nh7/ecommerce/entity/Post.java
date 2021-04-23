@@ -17,7 +17,6 @@ public class Post extends BaseEntity {
     private Long id;
     @Column(name = "post_title")
     private String postTitle;
-    //@Lob
     @Column(name = "post_decription")
     private String postDecription;
     @Column(name = "sold_quantity", columnDefinition = "integer default 0")

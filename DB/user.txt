@@ -1,22 +1,30 @@
-POST /api/home/users/all
-
 [
     {
         "id": 1,
         "username": "yinxxxx",
         "password": "123456",
-        "emailAddress": "yinx456@gmail.com"
+        "emailAddress": "yinx456@gmail.com",
+        "avatar": "https://cf.shopee.vn/file/0e62414507479b7cbe588c743a4430d9_tn"
     },
     {
         "id": 2,
         "username": "lnhuy1912",
         "password": "huyngoc123",
-        "emailAddress": "lnhuy1912@gmail.com"
+        "emailAddress": "lnhuy1912@gmail.com",
+        "avatar": "https://cf.shopee.vn/file/f47d03c13f4b396189c4e6d52dee5a8c_tn"
     },
     {
         "id": 3,
-        "username":"vantu2801",
-        "password":"vantu2801",
-        "emailAddress":"nguyenvantu28011998it@gmail.com"
+        "username": "thu_xoan",
+        "password": "xoanthu12342523",
+        "emailAddress": "thuxoam123@gmail.com",
+        "avatar": "https://cf.shopee.vn/file/0e62414507479b7cbe588c743a4430d9_tn"
+    },
+    {
+        "id": 4,
+        "username": "trbaongc2810",
+        "password": "ngocbao1082",
+        "emailAddress": "truongngcbao@gmail.com",
+        "avatar": "https://cf.shopee.vn/file/f47d03c13f4b396189c4e6d52dee5a8c_tn"
     }
 ]

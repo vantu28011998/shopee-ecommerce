@@ -22,6 +22,8 @@ public class User extends BaseEntity{
     private String password;
     @Column
     private String emailAddress;
+    @Column
+    private String avatar;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserOrder> userOrderList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)

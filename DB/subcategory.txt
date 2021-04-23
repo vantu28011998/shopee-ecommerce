@@ -1,4 +1,4 @@
-POST /api/home/categories/1/subcategories/all
+
 
 [
     { "subCategoryName":"Áo thun"
