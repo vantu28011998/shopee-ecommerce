@@ -30,7 +30,7 @@ public class CommentApi implements ICrudApi<CommentCardDto, Comment> {
 
     @Override
     @PostMapping("/comments/all")
-    public ResponseEntity<Object> createAll(List<Comment> items) {
+    public ResponseEntity<Object> createAll(@RequestBody List<Comment> items) {
         if (commentService.saveAll(items)){
             return new ResponseEntity<>("Comment List create successfully", HttpStatus.CREATED);
         }else {
