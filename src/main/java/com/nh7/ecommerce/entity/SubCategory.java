@@ -18,7 +18,7 @@ public class SubCategory extends BaseEntity {
     private Long id;
     @Column
     private String subCategoryName;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
     @OneToMany(mappedBy = "subCategory", fetch = FetchType.LAZY)

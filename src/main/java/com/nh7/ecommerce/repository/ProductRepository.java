@@ -17,7 +17,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     Product findById(long id);
     @Query(value = "SELECT pr.* \n" +
             "FROM product pr\n" +
-            "JOIN SUB_CATEGORY sub_ca ON pr.sub_category_id=sub_ca.id\n" +
+            "JOIN SUB_CATEGORY sub_ca ON pr.subcategory_id=sub_ca.id\n" +
             "JOIN category ca ON ca.id=sub_ca.category_id\n" +
             "WHERE ca.id=:id", nativeQuery = true)
     List<Product> findByCategoryId(@Param("id") long id);

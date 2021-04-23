@@ -17,17 +17,17 @@ public class Post extends BaseEntity {
     private Long id;
     @Column(name = "post_title")
     private String postTitle;
-    @Lob
+    //@Lob
     @Column(name = "post_decription")
     private String postDecription;
     @Column(name = "sold_quantity", columnDefinition = "integer default 0")
     private int soldQuantity;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
     @OneToMany(cascade = CascadeType.ALL,  mappedBy = "post", fetch = FetchType.LAZY)
     private List<Comment> commentList;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }

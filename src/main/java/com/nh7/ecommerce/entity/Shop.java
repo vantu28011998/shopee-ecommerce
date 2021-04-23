@@ -21,7 +21,7 @@ public class Shop extends BaseEntity{
     private String phoneNumber;
     @Column
     private String logo;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }
