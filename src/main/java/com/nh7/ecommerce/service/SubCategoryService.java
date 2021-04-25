@@ -64,6 +64,7 @@ public class SubCategoryService {
                 subCategoryDto.setId(subCategory.getId());
                 subCategoryDto.setSubCategoryName(subCategory.getSubCategoryName());
                 subCategoryDto.setCategoryId(subCategory.getCategory().getId());
+                subCategoryDto.setCategoryName(subCategory.getCategory().getCategoryName());
                 subCategoryDtos.add(subCategoryDto);
             }
         }

@@ -8,4 +8,5 @@ public class SubCategoryDto {
     private Long id;
     private String subCategoryName;
     private Long categoryId;
+    private String categoryName;
 }
