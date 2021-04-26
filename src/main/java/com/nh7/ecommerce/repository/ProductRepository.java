@@ -24,14 +24,25 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
             "WHERE ca.id=:id", nativeQuery = true)
     List<Product> findByCategoryId(@Param("id") long id);
     Page<Product> findAll(Pageable pageable);
+
     @Query(value = "SELECT products.*\n" +
             "FROM(\n" +
             "\tSELECT pr.*\n" +
             "    FROM product pr JOIN sub_category sub ON sub.id = pr.subcategory_id\n" +
-            "    WHERE pr.subcategory_id=15\n" +
+            "    WHERE pr.subcategory_id=:id\n" +
             ") as products\n" +
-            "LIMIT 1 OFFSET 0;",nativeQuery = true)
+            "LIMIT :limit OFFSET :offset ;",nativeQuery = true)
     List<Product> findProductsBySubCategoryAndId(@Param("id") long id,@Param("limit") int limit,@Param("offset") int offset);
+
+    @Query(value = "SELECT products.*\n" +
+            "FROM(\n" +
+            "\tSELECT pr.*\n" +
+            "    FROM product pr JOIN sub_category sub ON sub.id = pr.subcategory_id\n" +
+            " JOIN category ca ON ca.id=sub.category_id"+
+            "    WHERE ca.id=:id\n" +
+            ") as products\n" +
+            "LIMIT :limit OFFSET :offset ;",nativeQuery = true)
+    List<Product> findProductsByCategoryAndId(@Param("id") long id,@Param("limit") int limit,@Param("offset") int offset);
     @Modifying
     @Query(value = "DELETE FROM product WHERE product.id=:id",nativeQuery = true)
     @Transactional

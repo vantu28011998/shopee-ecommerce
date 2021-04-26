@@ -63,21 +63,16 @@ public class ProductService {
     }
     public List<ProductCardDto> getPageableProductsByCategoryId(long id,Pageable pageable){
         Sort sort=Sort.by("product_name").ascending();
-        List<Product> products = productRepository.findAll(pageable).getContent();
+        int offset = (int) pageable.getOffset();
+        int limit= pageable.getPageSize();
+        List<Product> products = productRepository.findProductsByCategoryAndId(id,limit,offset);
         return convert(products);
     }
     public List<ProductCardDto> getPageableProductsBySubcategoryId(long id,Pageable pageable){
         Sort sort=Sort.by("product_name").ascending();
         int offset = (int) pageable.getOffset();
         int limit= pageable.getPageSize();
-        System.out.println("NO OK");
         List<Product> products = productRepository.findProductsBySubCategoryAndId(id,limit,offset);
-        System.out.println("SIZE "+ products.size());
-        for(Product product : products){
-            System.out.println(product.getProductName());
-        }
-        System.out.println("OK");
-        System.out.println(products.get(0).getProductName());
         return convert(products);
     }
 
