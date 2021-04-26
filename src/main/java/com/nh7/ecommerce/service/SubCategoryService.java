@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.service;
 
+import com.nh7.ecommerce.dto.CategoryDto;
 import com.nh7.ecommerce.dto.SubCategoryDto;
 import com.nh7.ecommerce.entity.SubCategory;
 import com.nh7.ecommerce.repository.CategoryRepository;
@@ -23,8 +24,17 @@ public class SubCategoryService {
     private ModelMapperUtil modelMapperUtil;
 
     public List<SubCategoryDto> findAll(){
-        List<SubCategory> categories = (List<SubCategory>)subCategoryRepository.findAll();
-        return modelMapperUtil.mapList(categories,SubCategoryDto.class);
+        List<SubCategory> subcategories = (List<SubCategory>)subCategoryRepository.findAll();
+        List<SubCategoryDto> subcategoryDtos = new ArrayList<>();
+        for(SubCategory subCategory : subcategories){
+            SubCategoryDto subcategoryDto = new SubCategoryDto();
+            subcategoryDto.setCategoryId(subCategory.getId());
+            subcategoryDto.setSubCategoryName(subCategory.getSubCategoryName());
+            subcategoryDto.setCategoryId(subCategory.getCategory().getId());
+            subcategoryDto.setCategoryName(subCategory.getCategory().getCategoryName());
+            subcategoryDtos.add(subcategoryDto);
+        }
+        return  subcategoryDtos;
     }
 
     public SubCategoryDto findById(long id){

@@ -4,6 +4,8 @@ import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.service.ProductDetailsService;
 import com.nh7.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,27 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     public ResponseEntity<List<ProductCardDto>> getAll() {
         return new ResponseEntity<>(productService.getAll(),HttpStatus.OK);
     }
+    //PAGEABLE ALL PRODUCT
+    @GetMapping(value = {"/pageable-products"})
+    public ResponseEntity<List<ProductCardDto>> getPageableProducts(@RequestParam("page") int page,@RequestParam("limit") int limit ) {
+        Pageable pageable = PageRequest.of(page,limit);
+        System.out.println("PAGE OFFSET "+  pageable.getOffset()+ "PAGE LIMIT"+  pageable.getPageSize());
+        return new ResponseEntity<>(productService.getPageableProducts(pageable),HttpStatus.OK);
+    }
+//    //PAGEABLE PRODUCT BY CATEGORY ID
+//    @GetMapping(value = {"/{id}/pageable-products"})
+//    public ResponseEntity<List<ProductCardDto>> getPageableProductsByCategoryId(@PathVariable Long id,@RequestParam int page,@RequestParam int limit){
+//        Pageable pageable = PageRequest.of(page,limit);
+//
+//        return new ResponseEntity<>(productService.getPageableProductsBySubcategoryId(id,pageable),HttpStatus.OK);
+//    }
+    //PAGEABLE PRODUCT BY SUBCATEGORY ID
+    @GetMapping(value = {"/subcategories/{id}/pageable-products"})
+    public ResponseEntity<List<ProductCardDto>> getPageableProductsBySubcategoryId(@PathVariable Long id,@RequestParam int page,@RequestParam int limit){
+        Pageable pageable = PageRequest.of(page,limit);
+        return new ResponseEntity<>(productService.getPageableProductsBySubcategoryId(id,pageable),HttpStatus.OK);
+    }
+
     @GetMapping("/products/{id}")
     @Override
     public ResponseEntity<ProductCardDto> get(@PathVariable(name = "id") Long id) {

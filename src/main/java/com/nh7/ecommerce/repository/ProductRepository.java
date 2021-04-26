@@ -2,6 +2,8 @@ package com.nh7.ecommerce.repository;
 
 import com.nh7.ecommerce.entity.*;
 import com.nh7.ecommerce.model.ProductCardModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +23,15 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
             "JOIN category ca ON ca.id=sub_ca.category_id\n" +
             "WHERE ca.id=:id", nativeQuery = true)
     List<Product> findByCategoryId(@Param("id") long id);
+    Page<Product> findAll(Pageable pageable);
+    @Query(value = "SELECT products.*\n" +
+            "FROM(\n" +
+            "\tSELECT pr.*\n" +
+            "    FROM product pr JOIN sub_category sub ON sub.id = pr.subcategory_id\n" +
+            "    WHERE pr.subcategory_id=15\n" +
+            ") as products\n" +
+            "LIMIT 1 OFFSET 0;",nativeQuery = true)
+    List<Product> findProductsBySubCategoryAndId(@Param("id") long id,@Param("limit") int limit,@Param("offset") int offset);
     @Modifying
     @Query(value = "DELETE FROM product WHERE product.id=:id",nativeQuery = true)
     @Transactional
@@ -33,4 +44,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
             "join shop sh on sh.user_id = u.id\n" +
             "where sh.id = :id", nativeQuery = true)
     Integer countProductByPostUserShop(@Param("id") long id);
+
+
+
 }

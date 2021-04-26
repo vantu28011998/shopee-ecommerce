@@ -5,6 +5,9 @@ import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -39,6 +42,7 @@ public class ProductService {
             productCardDto.setPostTitle(pr.getPost().getPostTitle());
             productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
             productCardDto.setDiscount(pr.getDiscount());
+            productCardDto.setSubcategoryId(pr.getSubCategory().getId());
             productCardDtos.add(productCardDto);
         }
         return productCardDtos;
@@ -52,6 +56,31 @@ public class ProductService {
         List<Product> products = (List<Product>) productRepository.findAll();
         return convert(products);
     }
+    public List<ProductCardDto> getPageableProducts(Pageable pageable){
+        Sort sort=Sort.by("product_name").ascending();
+        List<Product> products = productRepository.findAll(pageable).getContent();
+        return convert(products);
+    }
+    public List<ProductCardDto> getPageableProductsByCategoryId(long id,Pageable pageable){
+        Sort sort=Sort.by("product_name").ascending();
+        List<Product> products = productRepository.findAll(pageable).getContent();
+        return convert(products);
+    }
+    public List<ProductCardDto> getPageableProductsBySubcategoryId(long id,Pageable pageable){
+        Sort sort=Sort.by("product_name").ascending();
+        int offset = (int) pageable.getOffset();
+        int limit= pageable.getPageSize();
+        System.out.println("NO OK");
+        List<Product> products = productRepository.findProductsBySubCategoryAndId(id,limit,offset);
+        System.out.println("SIZE "+ products.size());
+        for(Product product : products){
+            System.out.println(product.getProductName());
+        }
+        System.out.println("OK");
+        System.out.println(products.get(0).getProductName());
+        return convert(products);
+    }
+
 
     public void deleteAll(){
         productRepository.deleteAll();

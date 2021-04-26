@@ -18,5 +18,8 @@ public class ProductCardDto {
     private int soldQuantity;
     //discount
     private int discount;
+    //TAM THOI
+    //subcategory id
+    private Long subcategoryId;
 
 }
