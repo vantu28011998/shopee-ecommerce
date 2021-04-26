@@ -48,7 +48,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Transactional
     void deleteById(long id);
 
-
     @Query(value = "select count(pr.id) from product pr\n" +
             "join post po on pr.id = po.product_id\n" +
             "join u on u.id = po.user_id\n" +
@@ -56,6 +55,16 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
             "where sh.id = :id", nativeQuery = true)
     Integer countProductByPostUserShop(@Param("id") long id);
 
+    @Query(value = "SELECT count(*) \n" +
+            "FROM product pr\n" +
+            "JOIN SUB_CATEGORY sub_ca ON pr.subcategory_id=sub_ca.id\n" +
+            "JOIN category ca ON ca.id=sub_ca.category_id\n" +
+            "WHERE ca.id=:id", nativeQuery = true)
+    int countProductsByCategoryId(@Param("id") long id);
 
-
+    @Query(value = "SELECT count(*) \n" +
+            "FROM product pr\n" +
+            "JOIN SUB_CATEGORY sub_ca ON pr.subcategory_id=sub_ca.id\n" +
+            "WHERE sub_ca.id=:id", nativeQuery = true)
+    int countProductsBySubCategoryId(@Param("id") long id);
 }

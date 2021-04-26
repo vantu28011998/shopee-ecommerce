@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ProductCardDto;
+import com.nh7.ecommerce.dto.pageable.ResponsePageable;
 import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
@@ -61,19 +62,35 @@ public class ProductService {
         List<Product> products = productRepository.findAll(pageable).getContent();
         return convert(products);
     }
-    public List<ProductCardDto> getPageableProductsByCategoryId(long id,Pageable pageable){
+    public ResponsePageable<ProductCardDto> getPageableProductsByCategoryId(long id,Pageable pageable){
         Sort sort=Sort.by("product_name").ascending();
         int offset = (int) pageable.getOffset();
         int limit= pageable.getPageSize();
+        int page = pageable.getPageNumber();
+        int totalRow = productRepository.countProductsByCategoryId(id);
         List<Product> products = productRepository.findProductsByCategoryAndId(id,limit,offset);
-        return convert(products);
+        List<ProductCardDto> productCardDtos = convert(products);
+        ResponsePageable<ProductCardDto> responsePageable = new ResponsePageable<>();
+        responsePageable.setItems(productCardDtos);
+        responsePageable.setLimit(limit);
+        responsePageable.setPage(page);
+        responsePageable.setTotalRow(totalRow);
+        return responsePageable;
     }
-    public List<ProductCardDto> getPageableProductsBySubcategoryId(long id,Pageable pageable){
+    public ResponsePageable<ProductCardDto> getPageableProductsBySubcategoryId(long id,Pageable pageable){
         Sort sort=Sort.by("product_name").ascending();
         int offset = (int) pageable.getOffset();
         int limit= pageable.getPageSize();
+        int page = pageable.getPageNumber();
+        int totalRow = productRepository.countProductsBySubCategoryId(id);
         List<Product> products = productRepository.findProductsBySubCategoryAndId(id,limit,offset);
-        return convert(products);
+        List<ProductCardDto> productCardDtos = convert(products);
+        ResponsePageable<ProductCardDto> responsePageable = new ResponsePageable<>();
+        responsePageable.setItems(productCardDtos);
+        responsePageable.setLimit(limit);
+        responsePageable.setPage(page);
+        responsePageable.setTotalRow(totalRow);
+        return responsePageable;
     }
 
 

@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.controller.api;
 import com.nh7.ecommerce.dto.ProductCardDto;
+import com.nh7.ecommerce.dto.pageable.ResponsePageable;
 import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.service.ProductDetailsService;
 import com.nh7.ecommerce.service.ProductService;
@@ -36,13 +37,13 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     }
   //PAGEABLE PRODUCT BY CATEGORY ID
     @GetMapping(value = {"/{id}/pageable-products"})
-    public ResponseEntity<List<ProductCardDto>> getPageableProductsByCategoryId(@PathVariable Long id,@RequestParam int page,@RequestParam int limit){
+    public ResponseEntity<ResponsePageable<ProductCardDto>> getPageableProductsByCategoryId(@PathVariable Long id, @RequestParam int page, @RequestParam int limit){
         Pageable pageable = PageRequest.of(page,limit);
         return new ResponseEntity<>(productService.getPageableProductsByCategoryId(id,pageable),HttpStatus.OK);
     }
     //PAGEABLE PRODUCT BY SUBCATEGORY ID
     @GetMapping(value = {"/subcategories/{id}/pageable-products"})
-    public ResponseEntity<List<ProductCardDto>> getPageableProductsBySubcategoryId(@PathVariable Long id,@RequestParam int page,@RequestParam int limit){
+    public ResponseEntity<ResponsePageable<ProductCardDto>> getPageableProductsBySubcategoryId(@PathVariable Long id,@RequestParam int page,@RequestParam int limit){
         Pageable pageable = PageRequest.of(page,limit);
         return new ResponseEntity<>(productService.getPageableProductsBySubcategoryId(id,pageable),HttpStatus.OK);
     }

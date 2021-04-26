@@ -8,6 +8,7 @@ import java.util.List;
 @Setter
 public class ResponsePageable<T>{
     private int page;
-    private int totalPage;
+    private int limit;
+    private int totalRow;
     private List<T> items;
 }
