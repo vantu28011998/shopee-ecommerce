@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ProductCardDto;
+import com.nh7.ecommerce.dto.pageable.Pagination;
 import com.nh7.ecommerce.dto.pageable.ResponsePageable;
 import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.repository.*;
@@ -72,9 +73,11 @@ public class ProductService {
         List<ProductCardDto> productCardDtos = convert(products);
         ResponsePageable<ProductCardDto> responsePageable = new ResponsePageable<>();
         responsePageable.setItems(productCardDtos);
-        responsePageable.setLimit(limit);
-        responsePageable.setPage(page);
-        responsePageable.setTotalRow(totalRow);
+        Pagination pagination = new Pagination();
+        pagination.setLimit(limit);
+        pagination.setPage(page);
+        pagination.setTotalRow(totalRow);
+        responsePageable.setPagination(pagination);
         return responsePageable;
     }
     public ResponsePageable<ProductCardDto> getPageableProductsBySubcategoryId(long id,Pageable pageable){
@@ -87,9 +90,11 @@ public class ProductService {
         List<ProductCardDto> productCardDtos = convert(products);
         ResponsePageable<ProductCardDto> responsePageable = new ResponsePageable<>();
         responsePageable.setItems(productCardDtos);
-        responsePageable.setLimit(limit);
-        responsePageable.setPage(page);
-        responsePageable.setTotalRow(totalRow);
+        Pagination pagination = new Pagination();
+        pagination.setLimit(limit);
+        pagination.setPage(page);
+        pagination.setTotalRow(totalRow);
+        responsePageable.setPagination(pagination);
         return responsePageable;
     }
 
