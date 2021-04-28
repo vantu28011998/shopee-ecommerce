@@ -12,7 +12,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @ControllerAdvice
-@RequestMapping(value = "/api/home/categories")
+@RequestMapping(value = "/api/home")
 public class SubCategoryApi implements ICrudApi<SubCategoryDto, SubCategory>{
 
     @Autowired

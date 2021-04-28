@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/api/home/categories")
+@RequestMapping("/api/home")
 @ControllerAdvice
 @CrossOrigin
 public class ProductApi implements ICrudApi<ProductCardDto,Product>{
