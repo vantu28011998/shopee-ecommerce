@@ -30,6 +30,8 @@ public class User extends BaseEntity{
     private List<Comment> commentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Post> post;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Rating> ratings;
 
     @ManyToMany
     @JoinTable(name="user_role",
@@ -37,7 +39,6 @@ public class User extends BaseEntity{
             inverseJoinColumns = @JoinColumn(name="role_id")
     )
     private List<Role> roles=new ArrayList<>();
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Shop shop;
 

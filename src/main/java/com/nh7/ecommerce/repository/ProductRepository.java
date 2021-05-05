@@ -17,6 +17,8 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
     Product findById(long id);
+    @Query(value = "SELECT pr.id FROM product pr",nativeQuery = true)
+    List<Long> findAllId();
     @Query(value = "SELECT pr.* \n" +
             "FROM product pr\n" +
             "JOIN SUB_CATEGORY sub_ca ON pr.subcategory_id=sub_ca.id\n" +

@@ -32,7 +32,6 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     @GetMapping(value = {"/pageable-products"})
     public ResponseEntity<List<ProductCardDto>> getPageableProducts(@RequestParam("page") int page,@RequestParam("limit") int limit ) {
         Pageable pageable = PageRequest.of(page,limit);
-        System.out.println("PAGE OFFSET "+  pageable.getOffset()+ "PAGE LIMIT"+  pageable.getPageSize());
         return new ResponseEntity<>(productService.getPageableProducts(pageable),HttpStatus.OK);
     }
   //PAGEABLE PRODUCT BY CATEGORY ID

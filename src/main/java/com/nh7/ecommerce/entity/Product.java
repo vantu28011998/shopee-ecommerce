@@ -34,4 +34,6 @@ public class Product extends BaseEntity {
     private SubCategory subCategory;
     @Column
     private int discount;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Rating> ratings;
 }
