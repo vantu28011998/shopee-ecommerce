@@ -7,5 +7,6 @@ import lombok.Setter;
 public class SubCategoryDto {
     private Long id;
     private String subCategoryName;
-    private String categoryId;
+    private Long categoryId;
+    private String categoryName;
 }

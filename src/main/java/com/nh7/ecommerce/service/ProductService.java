@@ -1,11 +1,17 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ProductCardDto;
+import com.nh7.ecommerce.dto.pageable.Pagination;
+import com.nh7.ecommerce.dto.pageable.ResponsePageable;
 import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +44,8 @@ public class ProductService {
             productCardDto.setPostTitle(pr.getPost().getPostTitle());
             productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
             productCardDto.setDiscount(pr.getDiscount());
-            productCardDto.setSubCategoryId(pr.getSubCategory().getId());
+            productCardDto.setSubcategoryId(pr.getSubCategory().getId());
+            productCardDto.setAvgEvalute(pr.getAvgEvalute());
             productCardDtos.add(productCardDto);
         }
         return productCardDtos;
@@ -52,6 +59,46 @@ public class ProductService {
         List<Product> products = (List<Product>) productRepository.findAll();
         return convert(products);
     }
+    public List<ProductCardDto> getPageableProducts(Pageable pageable){
+        Sort sort=Sort.by("product_name").ascending();
+        List<Product> products = productRepository.findAll(pageable).getContent();
+        return convert(products);
+    }
+    public ResponsePageable<ProductCardDto> getPageableProductsByCategoryId(long id,Pageable pageable){
+        Sort sort=Sort.by("product_name").ascending();
+        int offset = (int) pageable.getOffset();
+        int limit= pageable.getPageSize();
+        int page = pageable.getPageNumber();
+        int totalRow = productRepository.countProductsByCategoryId(id);
+        List<Product> products = productRepository.findProductsByCategoryAndId(id,limit,offset);
+        List<ProductCardDto> productCardDtos = convert(products);
+        ResponsePageable<ProductCardDto> responsePageable = new ResponsePageable<>();
+        responsePageable.setItems(productCardDtos);
+        Pagination pagination = new Pagination();
+        pagination.setLimit(limit);
+        pagination.setPage(page);
+        pagination.setTotalRow(totalRow);
+        responsePageable.setPagination(pagination);
+        return responsePageable;
+    }
+    public ResponsePageable<ProductCardDto> getPageableProductsBySubcategoryId(long id,Pageable pageable){
+        Sort sort=Sort.by("product_name").ascending();
+        int offset = (int) pageable.getOffset();
+        int limit= pageable.getPageSize();
+        int page = pageable.getPageNumber();
+        int totalRow = productRepository.countProductsBySubCategoryId(id);
+        List<Product> products = productRepository.findProductsBySubCategoryAndId(id,limit,offset);
+        List<ProductCardDto> productCardDtos = convert(products);
+        ResponsePageable<ProductCardDto> responsePageable = new ResponsePageable<>();
+        responsePageable.setItems(productCardDtos);
+        Pagination pagination = new Pagination();
+        pagination.setLimit(limit);
+        pagination.setPage(page);
+        pagination.setTotalRow(totalRow);
+        responsePageable.setPagination(pagination);
+        return responsePageable;
+    }
+
 
     public void deleteAll(){
         productRepository.deleteAll();

@@ -12,4 +12,6 @@ public class PostDto {
     private String postTitle;
     private String postDecription;
     private int soldQuantity;
+    private Long productId;
+    private Long userId;
 }
