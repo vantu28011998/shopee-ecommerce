@@ -16,7 +16,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
-    Product findById(long id);
+    Product findById(@Param("id") long id);
     @Query(value = "SELECT pr.id FROM product pr",nativeQuery = true)
     List<Long> findAllId();
     @Query(value = "SELECT pr.* \n" +

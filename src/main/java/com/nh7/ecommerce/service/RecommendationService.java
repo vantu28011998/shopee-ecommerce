@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.service;
 
+import com.nh7.ecommerce.dto.ProductCardDto;
 import com.nh7.ecommerce.entity.Rating;
 import com.nh7.ecommerce.model.RatedProductModel;
 import com.nh7.ecommerce.recommendation.MatrixFactorization;
@@ -23,7 +24,14 @@ public class RecommendationService {
     private MatrixUtil matrixUtil;
     @Autowired
     private MatrixFactorization matrixFactorization;
-    public void recommendFor(Long id, Pageable pageable){
+    @Autowired
+    private ProductService productService;
+    public List<ProductCardDto> recommendFor(Long id, Pageable pageable){
+        int limit=pageable.getPageSize();
+        int page=pageable.getPageNumber();
+        int offset=0;
+        offset=page*limit;
+        Long []productIdResult=new Long[limit];
 
         List<Long> userIds=userRepository.findAllId();
         List<Long> productIds=productRepository.findAllId();
@@ -60,10 +68,38 @@ public class RecommendationService {
         int userPosition=userIds.indexOf(id);
         System.out.println("POSITION : "+ userPosition);
         double []recommenderRating=new double[productSize];
+        RatedProductModel []ratedProductModels=new RatedProductModel[productSize];
+        System.out.println(ratedProductModels.length);
         for(int i=0;i<productSize;i++){
-            recommenderRating[i]=originMat[i][userPosition];
+            ratedProductModels[i]=new RatedProductModel(productIds.get(i),originMat[i][userPosition]);
         }
-
+        for(int i=0;i<productSize-1;i++){
+            for(int j=i+1;j<productSize;j++){
+                if(ratedProductModels[i].getRating()<ratedProductModels[j].getRating()){
+                    RatedProductModel temp=ratedProductModels[i];
+                    ratedProductModels[i]=ratedProductModels[j];
+                    ratedProductModels[j]=temp;
+                }
+            }
+        }
+        System.out.print("ID: ");
+        for(int i=0;i<productSize;i++){
+            System.out.print(" "+ratedProductModels[i].getId());
+        }
+        System.out.println();
+        System.out.print("RATING: ");
+        for(int i=0;i<productSize;i++){
+            System.out.print(" "+ratedProductModels[i].getRating());
+        }
+        System.out.println("PRODUCT SIZE:" + productSize);
+        if(offset+limit<productSize){
+            for(int i=0;i<limit;i++){
+                productIdResult[i]=ratedProductModels[offset+i].getId();
+                System.out.print(" "+ ratedProductModels[offset+i].getId());
+            }
+        }else System.out.println("OFFSET + LIMIT COULDN'T BE USED");
+        System.out.println("LENGHTH = " + productIdResult.length);
+        return productService.getProductsByIds(productIdResult);
     }
 
 

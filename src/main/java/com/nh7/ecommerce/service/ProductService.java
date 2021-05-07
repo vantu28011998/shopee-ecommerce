@@ -7,7 +7,6 @@ import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -80,6 +79,20 @@ public class ProductService {
         pagination.setTotalRow(totalRow);
         responsePageable.setPagination(pagination);
         return responsePageable;
+    }
+    public List<ProductCardDto> getProductsByIds(Long[] ids){
+        List<Product> products = new ArrayList<>();
+
+        for(int i=0;i<ids.length;i++){
+            System.out.println("IDS" + ids[i]);
+            products.add(productRepository.findById(ids[i]).get());
+        }
+        for(Product product : products){
+            System.out.println(product.getProductName());
+        }
+        System.out.println("PRODUCT SHOW");
+        System.out.println(products.size());;
+        return convert(products);
     }
     public ResponsePageable<ProductCardDto> getPageableProductsBySubcategoryId(long id,Pageable pageable){
         Sort sort=Sort.by("product_name").ascending();
