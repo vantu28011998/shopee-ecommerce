@@ -21,6 +21,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value = "DELETE FROM u WHERE u.id=:id",nativeQuery = true)
     @Transactional
     void deleteById(@Param("id") long id);
+    User findByUsername(String var);
     @Query(value = "SELECT u.id FROM u",nativeQuery = true)
     List<Long> findAllId();
 }

@@ -71,6 +71,7 @@ public class UserApi implements ICrudApi<UserDto, User> {
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Object> delete(@PathVariable Long id) {
+        userService.delete(id);
         return new ResponseEntity<>("User is deleted successfully",HttpStatus.CREATED);
     }
 }
