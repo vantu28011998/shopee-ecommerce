@@ -8,6 +8,8 @@ import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.repository.UserRepository;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public class UserService {
     @Autowired
     private ModelMapperUtil modelMapperUtil;
 
+    @Qualifier("passwordEncoder")
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
+
     public List<UserDto> findAll(){
         List<User> users= (List<User>) userRepository.findAll();
         return modelMapperUtil.mapList(users,UserDto.class);
@@ -30,10 +36,14 @@ public class UserService {
     }
 
     public List<User> saveAll(List<User> users){
+        for (User u : users){
+            u.setPassword(bcryptEncoder.encode(u.getPassword()));
+        }
         return (List<User>) userRepository.saveAll(users);
     }
 
     public User save(User user){
+        user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

@@ -21,7 +21,7 @@ public class Post extends BaseEntity {
     private String postDecription;
     @Column(name = "sold_quantity", columnDefinition = "integer default 0")
     private int soldQuantity;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
     @OneToMany(cascade = CascadeType.ALL,  mappedBy = "post", fetch = FetchType.LAZY)
