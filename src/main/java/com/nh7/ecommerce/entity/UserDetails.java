@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.entity;
 
+import com.nh7.ecommerce.enums.AuthProviderEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.relational.core.mapping.Column;
@@ -33,6 +34,4 @@ public class UserDetails extends BaseEntity{
 
     @Column
     private String gender;
-
-
 }

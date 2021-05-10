@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.entity;
 
+import com.nh7.ecommerce.enums.AuthProviderEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,5 +43,7 @@ public class User extends BaseEntity{
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Shop shop;
 
-
+    @Enumerated(EnumType.STRING)
+    @javax.persistence.Column
+    private AuthProviderEnum authProviderEnum;
 }

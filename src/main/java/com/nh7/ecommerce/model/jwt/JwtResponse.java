@@ -1,4 +1,4 @@
-package com.nh7.ecommerce.model;
+package com.nh7.ecommerce.model.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,11 +1,7 @@
 package com.nh7.ecommerce.controller.api;
 
-import com.nh7.ecommerce.dto.ShopDto;
 import com.nh7.ecommerce.dto.UserDto;
-import com.nh7.ecommerce.entity.Shop;
 import com.nh7.ecommerce.entity.User;
-import com.nh7.ecommerce.model.ProductCardModel;
-import com.nh7.ecommerce.service.ShopService;
 import com.nh7.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

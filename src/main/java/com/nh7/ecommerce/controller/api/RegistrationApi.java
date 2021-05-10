@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="api/registration")
+@RequestMapping(value="/api/registration")
 public class RegistrationApi {
     @Autowired
     private MailService notificationService;

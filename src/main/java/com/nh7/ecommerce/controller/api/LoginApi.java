@@ -1,8 +1,8 @@
 package com.nh7.ecommerce.controller.api;
 
-import com.nh7.ecommerce.config.JwtTokenUtil;
-import com.nh7.ecommerce.model.JwtRequest;
-import com.nh7.ecommerce.model.JwtResponse;
+import com.nh7.ecommerce.security.jwt.JwtTokenProvider;
+import com.nh7.ecommerce.model.jwt.JwtRequest;
+import com.nh7.ecommerce.model.jwt.JwtResponse;
 import com.nh7.ecommerce.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class LoginApi {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
@@ -46,8 +46,7 @@ public class LoginApi {
         final UserDetails userDetails = jwtUserDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
 
-        final String token = jwtTokenUtil.generateToken(userDetails);
-
+        final String token = jwtTokenProvider.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
     }
 }

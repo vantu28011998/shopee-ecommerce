@@ -1,7 +1,6 @@
 package com.nh7.ecommerce.repository;
 
 import com.nh7.ecommerce.entity.*;
-import com.nh7.ecommerce.model.ProductCardModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,7 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
 

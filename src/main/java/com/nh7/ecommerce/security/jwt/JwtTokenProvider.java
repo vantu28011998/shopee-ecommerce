@@ -1,4 +1,4 @@
-package com.nh7.ecommerce.config;
+package com.nh7.ecommerce.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -13,17 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-/*
-The JwtTokenUtil is responsible for performing JWT operations like creation and validation.
-It makes use of the io.jsonwebtoken.Jwts for achieving this.
- */
-
 @Component
-public class JwtTokenUtil implements Serializable {
+public class JwtTokenProvider implements Serializable {
 
-    private static final long serialVersionUID = -2550185165626007488L;
-
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public final Long JWT_TOKEN_VALIDITY=5*60*60L;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -44,7 +37,7 @@ public class JwtTokenUtil implements Serializable {
     }
 
     //for retrieveing any information from token we will need the secret key
-    private Claims getAllClaimsFromToken(String token) {
+    private Claims getAllClaimsFromToken(String token){
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
