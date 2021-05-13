@@ -23,9 +23,9 @@ import org.springframework.web.servlet.view.RedirectView;
 @ControllerAdvice
 @RequestMapping(value = "/login/facebook")
 public class SocialFacebookApi {
-    private String clientId="839676929970068";
+    private String clientId="304496104650841";
 
-    private String clientSecret="b5c16f524008692163d7c926079bf3cd";
+    private String clientSecret="bd2ac4a237cbda8fe4101f2b8835afd6";
 
     private String redirect="https://shopee-ecommerce-nh7.herokuapp.com/login/facebook/redirect";
 
