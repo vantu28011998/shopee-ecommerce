@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 public class MailService {
     @Autowired
     private JavaMailSender javaMailSender;
-    public void sendEmail(String emailAddress) throws MailException {
-        String title="This is title";
-        String content="This is content mail";
+    public void sendEmail(String emailAddress, Integer generatedNum) throws MailException {
+        String title="SHOPEE ECOMMERCE NH7";
+        String content="MÃ XÁC MINH ĐĂNG KÝ TÀI KHOẢN CỦA BẠN LÀ " + generatedNum +".Có hiệu lực trong 1 phút. Vui lòng KHÔNG chia sẻ mã này với người khác, kể cả nhân viên shopee.";
         SimpleMailMessage mail=new SimpleMailMessage();
         mail.setTo(emailAddress);
         mail.setSubject(title);

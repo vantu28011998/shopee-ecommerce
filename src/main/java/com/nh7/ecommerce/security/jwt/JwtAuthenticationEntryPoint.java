@@ -1,4 +1,4 @@
-package com.nh7.ecommerce.config;
+package com.nh7.ecommerce.security.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

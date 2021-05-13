@@ -1,15 +1,13 @@
-package com.nh7.ecommerce.dto;
-
+package com.nh7.ecommerce.dto.social;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDto {
+public class SocialLogin {
     private Long id;
     private String username;
     private String password;
-    private String avatar;
-    private String emailAddress;
+    private String email;
 }

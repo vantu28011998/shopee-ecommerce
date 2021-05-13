@@ -40,13 +40,12 @@ public class LoginApi {
 
     @PostMapping(value = "")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
         final UserDetails userDetails = jwtUserDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
 
         final String token = jwtTokenProvider.generateToken(userDetails);
+
         return ResponseEntity.ok(new JwtResponse(token));
     }
 }

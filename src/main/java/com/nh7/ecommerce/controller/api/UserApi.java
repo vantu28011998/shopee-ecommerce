@@ -50,12 +50,17 @@ public class UserApi implements ICrudApi<UserDto, User> {
 
     //----------PUT METHOD---------//
 
+
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<Object> update(@PathVariable Long id,@RequestBody User item) {
         return null;
     }
-
+    @PutMapping("/{id}/username")
+    public ResponseEntity<String> updateUsername(@PathVariable Long id,@RequestBody User user){
+        userService.saveUsername(id,user);
+        return new ResponseEntity<>("Username is updated successfully",HttpStatus.OK);
+    }
     //----------DELETE METHOD---------//
 
     @DeleteMapping("/all")
