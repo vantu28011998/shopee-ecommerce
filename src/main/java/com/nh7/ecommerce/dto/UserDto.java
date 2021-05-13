@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.dto;
 
 
+import com.nh7.ecommerce.enums.AuthProviderEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,4 +13,5 @@ public class UserDto {
     private String password;
     private String avatar;
     private String emailAddress;
+    private AuthProviderEnum authProvider;
 }
