@@ -32,11 +32,11 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value = "SELECT u.id FROM u WHERE u.username=:username",nativeQuery = true)
     Long findIdByUsername(@Param("username") String username);
     @Modifying
-    @Query(value = "UPDATE u SET u.username=:username WHERE id=:id",nativeQuery = true)
+    @Query(value = "UPDATE u SET username=:username WHERE id=:id",nativeQuery = true)
     @Transactional
     void saveUsername(@Param("id") Long id,@Param("username") String username);
     @Modifying
-    @Query(value = "UPDATE u SET u.password=:password WHERE id=:id",nativeQuery = true)
+    @Query(value = "UPDATE u SET password=:password WHERE id=:id",nativeQuery = true)
     @Transactional
     void savePassword(@Param("id") Long id,@Param("password") String password);
 
