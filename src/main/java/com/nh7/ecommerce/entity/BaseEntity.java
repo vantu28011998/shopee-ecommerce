@@ -6,17 +6,16 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @MappedSuperclass
+@EntityListeners({AuditingEntityListener.class})
 public abstract class BaseEntity implements Serializable {
 
     @CreatedBy
@@ -35,5 +34,5 @@ public abstract class BaseEntity implements Serializable {
     private LocalDateTime modifiedAt;
 
     @Column
-    private Boolean enable;
+    private Boolean enable=true;
 }
