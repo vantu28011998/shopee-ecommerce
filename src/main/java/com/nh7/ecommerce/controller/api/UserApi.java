@@ -6,6 +6,7 @@ import com.nh7.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class UserApi implements ICrudApi<UserDto, User> {
     private UserService userService;
 
     @GetMapping(value = {"/","","/all"})
+//    @PreAuthorize("@appAuthorizer.authorize(authentication,'VIEW',this)")
     @Override
     public ResponseEntity<List<UserDto>> getAll() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
@@ -58,8 +60,11 @@ public class UserApi implements ICrudApi<UserDto, User> {
     }
     @PutMapping("/{id}/username")
     public ResponseEntity<String> updateUsername(@PathVariable Long id,@RequestBody User user){
-        userService.saveUsername(id,user);
-        return new ResponseEntity<>("Username is updated successfully",HttpStatus.OK);
+        if(userService.updateUsername(id,user)){
+            return new ResponseEntity<>("Username is updated successfully",HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("Username updated fail",HttpStatus.OK);
+        }
     }
     //----------DELETE METHOD---------//
 

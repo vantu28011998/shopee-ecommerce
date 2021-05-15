@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -67,8 +68,13 @@ public class UserService {
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
-    public void saveUsername(Long id,User user){
-        userRepository.saveUsername(id,user.getUsername());
+    public boolean updateUsername(Long id,User user){
+        Long userId = findIdByUsername(user.getUsername());
+        if(userId == null){
+            userRepository.saveUsername(id,user.getUsername());
+            return true;
+        }
+        return false;
     }
     public void savePassword(Long id,User user){
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
