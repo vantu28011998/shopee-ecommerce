@@ -1,9 +1,11 @@
 package com.nh7.ecommerce.controller.api;
 
+import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.security.jwt.JwtTokenProvider;
 import com.nh7.ecommerce.model.jwt.JwtRequest;
 import com.nh7.ecommerce.model.jwt.JwtResponse;
 import com.nh7.ecommerce.service.JwtUserDetailsService;
+import com.nh7.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +29,8 @@ public class LoginApi {
 
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
+    @Autowired
+    private UserService userService;
 
     private void authenticate(String username, String password) throws Exception {
         try {
@@ -43,9 +47,9 @@ public class LoginApi {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = jwtUserDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
-
         final String token = jwtTokenProvider.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponse(token));
+        Long id =userService.findIdByUsername(authenticationRequest.getUsername());
+        UserDto userDto = userService.findById(id);
+        return ResponseEntity.ok(new JwtResponse(userDto,token));
     }
 }
