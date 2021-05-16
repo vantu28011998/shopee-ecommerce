@@ -3,6 +3,7 @@ package com.nh7.ecommerce.controller.api;
 import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.service.UserService;
+import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,8 @@ import java.util.List;
 public class UserApi implements ICrudApi<UserDto, User> {
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private ModelMapperUtil modelMapperUtil;
     @GetMapping(value = {"/","","/all"})
 //    @PreAuthorize("@appAuthorizer.authorize(authentication,'VIEW',this)")
     @Override
@@ -44,8 +46,8 @@ public class UserApi implements ICrudApi<UserDto, User> {
     @PostMapping(value = {"","/"})
     @Override
     public ResponseEntity<Object> create(@RequestBody User item) {
-        userService.save(item);
-        return new ResponseEntity<>("User is created successfully",HttpStatus.CREATED);
+        UserDto user = modelMapperUtil.map(userService.save(item),UserDto.class);
+        return new ResponseEntity<>(user,HttpStatus.CREATED);
     }
 
 
