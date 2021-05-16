@@ -27,7 +27,7 @@ public class ActionApi {
     public void create(@RequestBody Action action){
 
     }
-    @DeleteMapping
+    @DeleteMapping("/all")
     public void deleteAll(){
 
     }

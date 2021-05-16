@@ -27,7 +27,7 @@ public class PermissionApi {
     public void create(@RequestBody Permission permission){
 
     }
-    @DeleteMapping
+    @DeleteMapping("/all")
     public void deleteAll(){
 
     }

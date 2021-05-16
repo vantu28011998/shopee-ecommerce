@@ -26,7 +26,7 @@ public class FunctionApi {
     public void create(@RequestBody Func functions){
 
     }
-    @DeleteMapping
+    @DeleteMapping("/all")
     public void deleteAll(){
 
     }

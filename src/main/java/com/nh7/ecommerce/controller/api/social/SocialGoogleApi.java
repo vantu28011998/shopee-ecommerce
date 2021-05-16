@@ -23,14 +23,14 @@ import javax.print.DocFlavor;
 @CrossOrigin
 @RestController
 @ControllerAdvice
-@RequestMapping(value = "/login/google")
+@RequestMapping(value = "/api/login/google")
 
 public class SocialGoogleApi {
     private String clientId="860742485333-su2uj1cs46lq74014htl0amd7arc6gcs.apps.googleusercontent.com";
 
     private String clientSecret="xPYxvPzwqf-zhlnPI1hXKNLP";
 
-    private String redirect="https://shopee-ecommerce-nh7.herokuapp.com/login/google/redirect";
+    private String redirect="https://shopee-ecommerce-nh7.herokuapp.com/api/login/google/redirect";
 
     @Autowired
     private UserService userService;

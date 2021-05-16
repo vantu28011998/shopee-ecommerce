@@ -21,13 +21,13 @@ import org.springframework.web.servlet.view.RedirectView;
 @CrossOrigin
 @RestController
 @ControllerAdvice
-@RequestMapping(value = "/login/facebook")
+@RequestMapping(value = "/api/login/facebook")
 public class SocialFacebookApi {
     private String clientId="304496104650841";
 
     private String clientSecret="bd2ac4a237cbda8fe4101f2b8835afd6";
 
-    private String redirect="https://shopee-ecommerce-nh7.herokuapp.com/login/facebook/redirect";
+    private String redirect="https://shopee-ecommerce-nh7.herokuapp.com/api/login/facebook/redirect";
 
     @Autowired
     private UserService userService;
