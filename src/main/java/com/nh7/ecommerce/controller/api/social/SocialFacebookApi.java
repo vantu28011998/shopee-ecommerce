@@ -58,7 +58,6 @@ public class SocialFacebookApi {
         User userProfile = facebook.fetchObject("me",User.class,fields);
         Long idOfEmail = userService.findIdByEmailAddressAndAuthProvider(userProfile.getEmail(),AuthProviderEnum.FACEBOOK_USER);
         String password =randomPasswordUtil.rand();
-        System.out.println("TRUOC KHI VO IF");
         if(idOfEmail == null){
             // USER
             com.nh7.ecommerce.entity.User userEntity = new com.nh7.ecommerce.entity.User();
@@ -74,7 +73,6 @@ public class SocialFacebookApi {
             userDetails.setGender(userProfile.getGender());
             userDetails.setFullName(userProfile.getName());
             userDetailsService.save(userDetails);
-            System.out.println("TRONG IF");
         }
         SocialLogin socialLogin = new SocialLogin();
         com.nh7.ecommerce.entity.User u = new com.nh7.ecommerce.entity.User();
@@ -85,7 +83,6 @@ public class SocialFacebookApi {
         socialLogin.setUsername(user.getUsername());
         socialLogin.setPassword(password);
         socialLogin.setEmail(user.getEmailAddress());
-        System.out.println("NGOAI IF");
         return socialLogin;
     }
 
