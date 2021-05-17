@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +40,9 @@ public class User extends BaseEntity{
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id")
     )
+    @JsonManagedReference
     private List<Role> roles=new ArrayList<>();
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Shop shop;
 
