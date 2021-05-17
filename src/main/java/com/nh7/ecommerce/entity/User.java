@@ -35,6 +35,7 @@ public class User extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name="user_role",
             joinColumns = @JoinColumn(name="user_id"),

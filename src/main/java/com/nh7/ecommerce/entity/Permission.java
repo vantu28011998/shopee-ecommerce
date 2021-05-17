@@ -1,6 +1,5 @@
 package com.nh7.ecommerce.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,17 +18,17 @@ public class Permission extends BaseEntity{
     private Long id;
     @Column
     private String permissionName;
+    @ManyToMany(mappedBy = "permissions",fetch = FetchType.LAZY)
     @JsonManagedReference
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
-    private List<Role> roles=new ArrayList<>();
+    private List<Role> roles=new ArrayList<>()  ;
     @Column
     private String description;
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "action_id")
-    private Action action;
     @JsonManagedReference
+    private Action action;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "function_id")
+    @JsonManagedReference
     private Func func;
 }

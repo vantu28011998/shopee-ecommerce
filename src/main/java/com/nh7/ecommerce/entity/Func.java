@@ -1,8 +1,6 @@
 package com.nh7.ecommerce.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +13,10 @@ import javax.persistence.*;
 public class Func {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @OneToOne(mappedBy = "func",cascade = CascadeType.ALL)
     @JsonBackReference
-    @OneToOne(mappedBy = "func",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Permission permission;
     @Column
     private String name;
