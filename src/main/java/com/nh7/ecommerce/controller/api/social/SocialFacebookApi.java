@@ -18,7 +18,7 @@ import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @ControllerAdvice
 @RequestMapping(value = "/api/login/facebook")
@@ -38,7 +38,6 @@ public class SocialFacebookApi {
     @Autowired
     private UserDetailsService userDetailsService;
     private FacebookConnectionFactory factory = new FacebookConnectionFactory(clientId,clientSecret);
-    @CrossOrigin
     @GetMapping
     public RedirectView toFacebook(){
         OAuth2Operations operations = factory.getOAuthOperations();
@@ -48,7 +47,6 @@ public class SocialFacebookApi {
         String url=operations.buildAuthenticateUrl(parameters);
         return new RedirectView(url);
     }
-    @CrossOrigin
     @GetMapping("/redirect")
     public SocialLogin producer(@RequestParam("code") String authorizationCode){
         OAuth2Operations operations = factory.getOAuthOperations();

@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.print.DocFlavor;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @ControllerAdvice
 @RequestMapping(value = "/api/login/google")
@@ -40,7 +40,6 @@ public class SocialGoogleApi {
     private UserDetailsService userDetailsService;
     private GoogleConnectionFactory factory = new GoogleConnectionFactory(clientId,clientSecret);
     private GoogleServiceProvider provider = new GoogleServiceProvider(clientId,clientSecret);
-    @CrossOrigin
     @GetMapping
     public RedirectView toGoogle(){
         OAuth2Operations operations = factory.getOAuthOperations();
@@ -50,7 +49,6 @@ public class SocialGoogleApi {
         String url=operations.buildAuthenticateUrl(parameters);
         return new RedirectView(url);
     }
-    @CrossOrigin
     @GetMapping("/redirect")
     public RedirectView producer(@RequestParam("code") String authorizationCode,@RequestParam("scope") String scope){
         OAuth2Operations operations = factory.getOAuthOperations();
@@ -58,7 +56,6 @@ public class SocialGoogleApi {
         String getData = "https://www.googleapis.com/oauth2/v1/userinfo?access_token="+accessToken.getAccessToken();
         return new RedirectView(getData);
     }
-    @CrossOrigin
     @PostMapping
     public SocialLogin saveGoogleData(@RequestBody GoogleDataModel googleDataModel){
         Long idOfEmail = userService.findIdByEmailAddressAndAuthProvider(googleDataModel.getEmail(),AuthProviderEnum.GOOGLE_USER);
