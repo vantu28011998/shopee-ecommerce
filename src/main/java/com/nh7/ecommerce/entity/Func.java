@@ -13,7 +13,7 @@ public class Func {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(mappedBy = "func", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "func",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Permission permission;
     @Column
     private String name;

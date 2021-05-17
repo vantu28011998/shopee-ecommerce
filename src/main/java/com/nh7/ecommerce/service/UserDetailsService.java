@@ -7,6 +7,8 @@ import com.nh7.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserDetailsService {
     @Autowired
@@ -14,5 +16,8 @@ public class UserDetailsService {
 
     public UserDetails save(UserDetails userDetails){
         return userDetailsRepository.save(userDetails);
+    }
+    public List<UserDetails> findAll(){
+        return (List<UserDetails>) userDetailsRepository.findAll();
     }
 }
