@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +35,7 @@ public class User extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name="user_role",
             joinColumns = @JoinColumn(name="user_id"),
