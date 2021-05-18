@@ -74,6 +74,7 @@ public class UserApi implements ICrudApi<UserDto, User> {
     @DeleteMapping("/all")
     @Override
     public ResponseEntity<Object> deleteAll() {
+        System.out.println("CALL");
         userService.deleteAll();
         return new ResponseEntity<>("Users are deleted successfully",HttpStatus.CREATED);
     }

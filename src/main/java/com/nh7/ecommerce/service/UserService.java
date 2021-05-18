@@ -6,6 +6,7 @@ import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.entity.SubCategory;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
+import com.nh7.ecommerce.repository.UserDetailsRepository;
 import com.nh7.ecommerce.repository.UserRepository;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class UserService {
     @Autowired
     private ModelMapperUtil modelMapperUtil;
 
+    @Autowired
+    private UserDetailsRepository userDetailsRepository;
     @Qualifier("passwordEncoder")
     @Autowired
     private PasswordEncoder bcryptEncoder;
@@ -84,6 +87,7 @@ public class UserService {
         return userRepository.save(user);
     }
     public void deleteAll(){
+        userDetailsRepository.deleteAll();
         userRepository.deleteAll();
     }
 
