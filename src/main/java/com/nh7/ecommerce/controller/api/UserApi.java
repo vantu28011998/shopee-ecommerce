@@ -61,10 +61,8 @@ public class UserApi implements ICrudApi<UserDto, User> {
     public ResponseEntity<Object> update(@PathVariable Long id,@RequestBody User item) {
         return null;
     }
-    @PutMapping(value = "/{id}/{username}/updateUser")
-    public ResponseEntity<String> updateUsername(@PathVariable Long id,@PathVariable("username") String username){
-        User user = new User();
-        user.setUsername(username);
+    @PutMapping(value = "/{id}/username")
+    public ResponseEntity<String> updateUsername(@PathVariable Long id,@RequestBody User user){
         if(userService.updateUsername(id,user)){
             return new ResponseEntity<>("Username is updated successfully",HttpStatus.OK);
         }else {

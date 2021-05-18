@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.function.Function;
 
 @CrossOrigin
 @RestController
@@ -18,7 +19,7 @@ public class FunctionApi {
     @Autowired
     private FunctionService functionService;
     @GetMapping("/all")
-    public ResponseEntity<List<Func>> getAll(){
+    public ResponseEntity<List<FunctionDto>> getAll(){
         return new ResponseEntity<>(functionService.findAll(), HttpStatus.OK);
     }
     @GetMapping("")
@@ -26,8 +27,8 @@ public class FunctionApi {
 
     }
     @PostMapping("/all")
-    public ResponseEntity<String> createAll(@RequestBody List<FunctionDto> functionDtos){
-        functionService.saveAll(functionDtos);
+    public ResponseEntity<String> createAll(@RequestBody List<Func> funcs){
+        functionService.saveAll(funcs);
         return new ResponseEntity<>("Functions are created", HttpStatus.OK);
     }
     @PostMapping("")

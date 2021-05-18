@@ -15,17 +15,19 @@ import java.util.List;
 public class FunctionService {
     @Autowired
     private FunctionRepository functionRepository;
-    public void saveAll(List<FunctionDto> functionDtos){
-        List<Func> funcs = new ArrayList<>();
-        for(FunctionDto functionDto : functionDtos){
-            Func func = new Func();
-            func.setName(functionDto.getName());
-            func.setUrl(functionDto.getUrl());
-            funcs.add(func);
-        }
+    public void saveAll(List<Func> funcs){
         functionRepository.saveAll(funcs);
     }
-    public List<Func> findAll(){
-        return  (List<Func>)functionRepository.findAll();
+    public List<FunctionDto> findAll(){
+        List<FunctionDto> functionDtos = new ArrayList<>();
+        List<Func> funcs = (List<Func>)functionRepository.findAll();
+        for (Func func : funcs){
+            FunctionDto functionDto = new FunctionDto();
+            functionDto.setId(func.getId());
+            functionDto.setName(func.getName());
+            functionDto.setUrl(func.getUrl());
+            functionDtos.add(functionDto);
+        }
+        return  functionDtos;
     }
 }

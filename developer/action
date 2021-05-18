@@ -1,4 +1,4 @@
-/api/developer/actions/all
+POST /api/developer/actions/all
 
 [
     {

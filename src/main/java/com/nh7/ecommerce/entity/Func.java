@@ -16,7 +16,6 @@ public class Func {
     @Column(name = "id")
     private Long id;
     @OneToOne(mappedBy = "func",cascade = CascadeType.ALL)
-    @JsonBackReference
     private Permission permission;
     @Column
     private String name;

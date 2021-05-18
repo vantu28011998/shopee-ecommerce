@@ -1,12 +1,12 @@
-/api/developer/functions/all
+POST /api/developer/functions/all
 
 [
     {
         "name":"users",
-        "url": ""
+        "url": "/api/home/users"
     },
     {
-        "name": "",
-        "url": ""
+        "name": "products",
+        "url": "/api/home/products"
     }
 ]

@@ -18,6 +18,5 @@ public class Action extends BaseEntity{
     @Column
     private String name;
     @OneToOne(mappedBy = "action",cascade = CascadeType.ALL)
-    @JsonBackReference
     private Permission permission;
 }
