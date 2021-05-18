@@ -89,7 +89,7 @@ public class SocialFacebookApi {
     }
     @PostMapping
     public SocialLogin saveGoogleData(@RequestBody SocialDataModel socialDataModel){
-        Long idOfEmail = userService.findIdByEmailAddressAndAuthProvider(socialDataModel.getEmail(),AuthProviderEnum.GOOGLE_USER);
+        Long idOfEmail = userService.findIdByEmailAddressAndAuthProvider(socialDataModel.getEmail(),AuthProviderEnum.FACEBOOK_USER);
         String password =randomPasswordUtil.rand();
         if(idOfEmail == null){
             // USER
