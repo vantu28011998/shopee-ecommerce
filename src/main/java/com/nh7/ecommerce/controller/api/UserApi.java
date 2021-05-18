@@ -6,6 +6,7 @@ import com.nh7.ecommerce.service.UserService;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -60,8 +61,10 @@ public class UserApi implements ICrudApi<UserDto, User> {
     public ResponseEntity<Object> update(@PathVariable Long id,@RequestBody User item) {
         return null;
     }
-    @PutMapping("/{id}/username")
-    public ResponseEntity<String> updateUsername(@PathVariable Long id,@RequestBody User user){
+    @PutMapping(value = "/{id}/{username}/updateUser")
+    public ResponseEntity<String> updateUsername(@PathVariable Long id,@PathVariable("username") String username){
+        User user = new User();
+        user.setUsername(username);
         if(userService.updateUsername(id,user)){
             return new ResponseEntity<>("Username is updated successfully",HttpStatus.OK);
         }else {
