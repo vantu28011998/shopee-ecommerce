@@ -27,8 +27,9 @@ public class PermissionApi {
 
     }
     @PostMapping("/all")
-    public ResponseEntity<String> createAll(@RequestBody List<Permission> permissions){
-        permissionService.saveAll(permissions);
+    public ResponseEntity<String> createAll(@RequestBody List<PermissionDto> permissionDtos){
+
+        permissionService.saveAll(permissionDtos);
         return new ResponseEntity<>("Permission is created",HttpStatus.OK);
     }
     @PostMapping("")

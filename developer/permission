@@ -1,0 +1,13 @@
+POST /api/developer/permissions/all
+
+[
+    "permissionName":"VIEW USERS",
+    "description":"Xem users"
+    "action":{
+        "id":1
+    },
+    "function":{
+        "id":1
+    }
+
+]

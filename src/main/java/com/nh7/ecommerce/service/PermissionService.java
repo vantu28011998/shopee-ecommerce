@@ -4,6 +4,8 @@ import com.nh7.ecommerce.dto.developer.PermissionDto;
 import com.nh7.ecommerce.entity.Action;
 import com.nh7.ecommerce.entity.Func;
 import com.nh7.ecommerce.entity.Permission;
+import com.nh7.ecommerce.repository.ActionRepository;
+import com.nh7.ecommerce.repository.FunctionRepository;
 import com.nh7.ecommerce.repository.PermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,23 @@ import java.util.List;
 @Service
 public class PermissionService {
     @Autowired
+    private ActionRepository actionRepository;
+    @Autowired
+    private FunctionRepository functionRepository;
+    @Autowired
     private PermissionRepository permissionRepository;
-    public void saveAll(List<Permission> permissions){
+    public void saveAll(List<PermissionDto> permissionDtos){
+        List<Permission> permissions = new ArrayList<>();
+        for(PermissionDto permissionDto : permissionDtos){
+            Permission permission = new Permission();
+            permission.setPermissionName(permissionDto.getPermissionName());
+            permission.setDescription(permissionDto.getDescription());
+            Action action =actionRepository.findById(permissionDto.getActionId()).get();
+            permission.setAction(action);
+            Func func = functionRepository.findById(permissionDto.getFunctionId()).get();
+            permission.setFunc(func);
+            permissions.add(permission);
+        }
         permissionRepository.saveAll(permissions);
     }
     public List<PermissionDto> findAll(){
