@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.controller.api.developer;
 
+import com.nh7.ecommerce.dto.developer.FunctionDto;
 import com.nh7.ecommerce.entity.Func;
 import com.nh7.ecommerce.service.FunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class FunctionApi {
 
     }
     @PostMapping("/all")
-    public ResponseEntity<String> createAll(@RequestBody List<Func> functions){
-        functionService.saveAll(functions);
+    public ResponseEntity<String> createAll(@RequestBody List<FunctionDto> functionDtos){
+        functionService.saveAll(functionDtos);
         return new ResponseEntity<>("Functions are created", HttpStatus.OK);
     }
     @PostMapping("")

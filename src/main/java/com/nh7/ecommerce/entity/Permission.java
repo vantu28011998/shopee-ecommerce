@@ -28,7 +28,7 @@ public class Permission extends BaseEntity{
     @JsonManagedReference
     private Action action;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "function_id")
+    @JoinColumn(name = "func_id")
     @JsonManagedReference
     private Func func;
     public String getPermissionName() {
