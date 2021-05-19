@@ -5,6 +5,7 @@ import com.nh7.ecommerce.dto.SubCategoryDto;
 import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.entity.SubCategory;
 import com.nh7.ecommerce.entity.User;
+import com.nh7.ecommerce.entity.UserDetails;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
 import com.nh7.ecommerce.repository.UserDetailsRepository;
 import com.nh7.ecommerce.repository.UserRepository;
@@ -68,8 +69,23 @@ public class UserService {
     }
 
     public User save(User user){
+        String username = user.getUsername();
+        User checkUser = userRepository.findByUsername(username);
+        if(checkUser != null){
+            user.setUsername(null);
+            return user;
+        }
+        List<Long> ids = userRepository.findIdsByEmailAddress(user.getEmailAddress());
+        if(ids.size()>0){
+            user.setEmailAddress(null);
+            return user;
+        }
+        UserDetails userDetails = new UserDetails();
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        User saveUser = userRepository.save(user);
+        userDetails.setUser(saveUser);
+        userDetailsRepository.save(userDetails);
+        return saveUser;
     }
     public boolean updateUsername(Long id,User user){
         Long userId = findIdByUsername(user.getUsername());

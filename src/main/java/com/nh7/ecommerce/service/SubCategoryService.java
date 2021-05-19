@@ -28,7 +28,7 @@ public class SubCategoryService {
         List<SubCategoryDto> subcategoryDtos = new ArrayList<>();
         for(SubCategory subCategory : subcategories){
             SubCategoryDto subcategoryDto = new SubCategoryDto();
-            subcategoryDto.setCategoryId(subCategory.getId());
+            subcategoryDto.setId(subCategory.getId());
             subcategoryDto.setSubCategoryName(subCategory.getSubCategoryName());
             subcategoryDto.setCategoryId(subCategory.getCategory().getId());
             subcategoryDto.setCategoryName(subCategory.getCategory().getCategoryName());

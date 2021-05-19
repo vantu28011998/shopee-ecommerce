@@ -22,10 +22,10 @@ public class Permission extends BaseEntity{
     private List<Role> roles=new ArrayList<>()  ;
     @Column
     private String description;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "action_id")
     private Action action;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "func_id")
     private Func func;
     public String getPermissionName() {
