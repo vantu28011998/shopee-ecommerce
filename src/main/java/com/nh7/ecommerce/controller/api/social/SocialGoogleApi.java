@@ -5,7 +5,7 @@ import com.nh7.ecommerce.dto.social.SocialLogin;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.entity.UserDetails;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
-import com.nh7.ecommerce.model.GoogleDataModel;
+import com.nh7.ecommerce.model.SocialDataModel;
 import com.nh7.ecommerce.service.UserDetailsService;
 import com.nh7.ecommerce.service.UserService;
 import com.nh7.ecommerce.util.RandomPasswordUtil;
@@ -17,8 +17,6 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
-
-import javax.print.DocFlavor;
 
 @CrossOrigin("*")
 @RestController
@@ -57,23 +55,23 @@ public class SocialGoogleApi {
         return new RedirectView(getData);
     }
     @PostMapping
-    public SocialLogin saveGoogleData(@RequestBody GoogleDataModel googleDataModel){
-        Long idOfEmail = userService.findIdByEmailAddressAndAuthProvider(googleDataModel.getEmail(),AuthProviderEnum.GOOGLE_USER);
+    public SocialLogin saveGoogleData(@RequestBody SocialDataModel socialDataModel){
+        Long idOfEmail = userService.findIdByEmailAddressAndAuthProvider(socialDataModel.getEmail(),AuthProviderEnum.GOOGLE_USER);
         String password =randomPasswordUtil.rand();
         if(idOfEmail == null){
             // USER
             User userEntity = new User();
-            userEntity.setEmailAddress(googleDataModel.getEmail());
+            userEntity.setEmailAddress(socialDataModel.getEmail());
             userEntity.setPassword(password);
             userEntity.setAuthProvider(AuthProviderEnum.GOOGLE_USER);
-            userEntity.setAvatar(googleDataModel.getPicture());
+            userEntity.setAvatar(socialDataModel.getPicture());
             User user = userService.save(userEntity);
             idOfEmail = user.getId();
 
             //USER DETAIL
             UserDetails userDetails = new UserDetails();
             userDetails.setUser(user);
-            userDetails.setFullName(googleDataModel.getFamily_name()+" "+googleDataModel.getGiven_name());
+            userDetails.setFullName(socialDataModel.getFamily_name()+" "+ socialDataModel.getGiven_name());
             userDetailsService.save(userDetails);
         }
         SocialLogin socialLogin = new SocialLogin();

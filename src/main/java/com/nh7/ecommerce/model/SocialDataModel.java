@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GoogleDataModel {
-    private Long id;
+public class SocialDataModel {
     private String email;
     private String verified_email;
     private String name;
