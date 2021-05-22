@@ -1,155 +1,164 @@
-
-
 [
-    { "subCategoryName":"Áo thun"
+    {
+        "subCategoryName" : "Áo thun",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Áo sơ mi"
+    {
+        "subCategoryName" : "Áo sơ mi",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Áo khoác & Áo vét"
+    {
+        "subCategoryName" : "Áo khoác & Áo vest",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Áo nỉ/Áo len"
+    {
+        "subCategoryName" : "Áo nỉ / Áo len",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Đồ bộ/Đồ mặc nhà"
+    {
+        "subCategoryName" : "Đồ bộ / Đồ mặc nhà",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Đồ đôi"
+    {
+        "subCategoryName" : "Đồ đôi",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Quần"
+    {
+        "subCategoryName" : "Quần",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Balo/Túi/Ví"
+    {
+        "subCategoryName" : "Balo / Túi / VÍ",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Mắt kính"
+    {
+        "subCategoryName" : "Mắt kính",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Phụ kiện nam"
+    {
+        "subCategoryName" : "Phụ kiện nam",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Đồ trung niên"
+    {
+        "subCategoryName" : "Đồ trung niên",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Trang sức nam"
+    {
+        "subCategoryName" : "Trang sức nam",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Thắt lưng"
+    {
+        "subCategoryName" : "Thắc lưng",
+        "category" : {
+            "id" : 1
+        }
     },
-    { "subCategoryName":"Đồ lót"
+    {
+        "subCategoryName" : "Đồ lót",
+        "category" : {
+            "id" : 1
+        }
+    },
+    {
+        "subCategoryName" : "Áo",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Đầm",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Chân váy",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Quần",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Set trang phục & Jumpsuit",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Đồ đôi, Đồ ngủ & Đồ mặc nhà",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Đồ bơi",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Trang phục thể thao",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Phụ kiện may mặc",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Thời trang trung niên",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Áo khoác & Áo vest",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Trang phục đông",
+        "category" : {
+            "id" : 2
+        }
+    },
+    {
+        "subCategoryName" : "Thời trang bầu và sau sinh",
+        "category" : {
+            "id" : 2
+        }
     }
-]
-
-POST /api/home/categories/2/subcategories/all
-
-[
-        { "subCategoryName":"Áo"
-        },
-        { "subCategoryName":"Đầm"
-        },
-        { "subCategoryName":"Chân váy"
-        },
-        { "subCategoryName":"Set trang phục & Jumpsuit"
-        },
-        { "subCategoryName":"Đồ đôi"
-        },
-        { "subCategoryName":"Đồ lót, Đồ ngủ & Đồ mặc nhà"
-        },
-        { "subCategoryName":"Đồ bơi"
-        },
-        { "subCategoryName":"Trang phục thể thao"
-        },
-        { "subCategoryName":"Phụ kiện may mặc"
-        },
-        { "subCategoryName":"Thời trang trung niên"
-        },
-        { "subCategoryName":"Áo khoát & Áo vét"
-        },
-        { "subCategoryName":"Trang phục đông"
-        },
-        { "subCategoryName":"Thời trang bầu và sau sinh"
-        }
-]
-
-POST /api/home/categories/3/subcategories/all
-
-[
-    { "subCategoryName":"Điện thoại"
-        },
-        { "subCategoryName":"Máy tính bảng"
-        },
-        { "subCategoryName":"Vỏ, Bao & Ốp lưng"
-        },
-        { "subCategoryName":"Miếng dán màn hình"
-        },
-        { "subCategoryName":"Pin sạc dự phòng"
-        },
-        { "subCategoryName":"Pin, Cáp & Bộ sạc"
-        },
-        { "subCategoryName":"Giá đỡ & Kẹp"
-        },
-        { "subCategoryName":"Gậy chụp hình"
-        },
-        { "subCategoryName":"Sim"
-        }
-]
-
-POST /api/home/categories/4/subcategories/all
-
-[
-    { "subCategoryName":"Đồ dùng cho bé"
-        },
-        { "subCategoryName":"Tã & bỉm"
-        },
-        { "subCategoryName":"Ghế, Nôi, Cũi, Xe đẩy & Địu"
-        },
-        { "subCategoryName":"Vitamin & Đồ dùng cho mẹ"
-        },
-        { "subCategoryName":"Công thức sữa 0-24 tháng tuổi"
-        },
-        { "subCategoryName":"Thực phẩm bổ sung cho trẻ dưới 6 tháng tuổi"
-        },
-        { "subCategoryName":"Sữa trên 24 tháng tuổi"
-        },
-        { "subCategoryName":"Thực phẩm cho bé từ 6 tháng tuổi"
-        },
-        { "subCategoryName":"Vitamin thực phẩm bổ sung và đồ dùng cho mẹ"
-        }
-]
-
-POST /api/home/categories/5/subcategories/all
-
-[
-    { "subCategoryName":"Thiết bị âm thanh"
-        },
-        { "subCategoryName":"Tai nghe"
-        },
-        { "subCategoryName":"Thiết bị đeo thông minh"
-        },
-        { "subCategoryName":"Android Tivi Box"
-        },
-        { "subCategoryName":"Tivi"
-        },
-        { "subCategoryName":"Phụ kiện tivi"
-        },
-        { "subCategoryName":"Tai nghe"
-        },
-        { "subCategoryName":"Phụ kiện & Thiết bị game"
-        }
-]
-
-POST /api/home/categories/6/subcategories/all
-
-[
-    { "subCategoryName":"Dụng cụ & Thiết bị tiện ích"
-        },
-        { "subCategoryName":"Đồ dùng nhà bếp & Phòng ăn"
-        },
-        { "subCategoryName":"Chăn, Ga, Gối & Nệm"
-        },
-        { "subCategoryName":"Tủ đựng & Hộp lưu trữ"
-        },
-        { "subCategoryName":"Trang trí nhà cửa"
-        },
-        { "subCategoryName":"Đồ dùng phòng tắm"
-        },
-        { "subCategoryName":"Đồ nội thất"
-        },
-        { "subCategoryName":"Đèn    "
-        },
-        { "subCategoryName":"Ngoài trời & Sân vườn"
-        },
-        { "subCategoryName":"Dụng cụ cầm tay"
-        }
 ]

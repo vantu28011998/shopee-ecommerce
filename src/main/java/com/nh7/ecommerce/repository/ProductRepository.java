@@ -68,4 +68,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
             "JOIN SUB_CATEGORY sub_ca ON pr.subcategory_id=sub_ca.id\n" +
             "WHERE sub_ca.id=:id", nativeQuery = true)
     int countProductsBySubCategoryId(@Param("id") long id);
+
+    // (Admin) for get Products has been in month of year
+    @Query(value = "select count(id) from product where month(created_at) = :month and year(created_at) = :year", nativeQuery = true)
+    int countProductCreatedAtMonth(@Param("month") int month, @Param("year") int year);
 }

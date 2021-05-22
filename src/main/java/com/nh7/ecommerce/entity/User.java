@@ -1,6 +1,5 @@
 package com.nh7.ecommerce.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,15 +34,18 @@ public class User extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
-
     @ManyToMany
     @JoinTable(name="user_role",
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id")
     )
     private List<Role> roles=new ArrayList<>();
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Shop shop;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserDetails userDetails;
 
     @Enumerated(EnumType.STRING)
     @javax.persistence.Column

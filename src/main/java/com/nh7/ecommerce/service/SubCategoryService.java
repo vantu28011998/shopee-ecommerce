@@ -37,6 +37,9 @@ public class SubCategoryService {
         return  subcategoryDtos;
     }
 
+    // (Admin) get All SubCategory
+    public List<SubCategory> getAllForAdmin() {return subCategoryRepository.findAll();}
+
     public SubCategoryDto findById(long id){
         SubCategory subCategory = subCategoryRepository.findById(id);
         return modelMapperUtil.map(subCategory,SubCategoryDto.class);
@@ -80,4 +83,6 @@ public class SubCategoryService {
         }
         return subCategoryDtos;
     }
+
+
 }

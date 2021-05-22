@@ -17,12 +17,16 @@ public class UserOrder extends BaseEntity {
     @Getter
     @Column(name = "id")
     private Long id;
+
     @Column(name = "order_price")
     private Double orderPrice;
-    @Column(name = "status")
-    private String orderStatus;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private BillingInfo billingInfo;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
-    private List<Item> itemList=new ArrayList<>();
+    private List<Item> itemList;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

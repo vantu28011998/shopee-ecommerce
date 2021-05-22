@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.data.relational.core.mapping.Column;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="user_details")
@@ -16,7 +17,7 @@ public class UserDetails extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 

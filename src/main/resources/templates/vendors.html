@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="layout :: head" ></div>
+</head>
+
+<body>
+
+<div class="d-flex">
+    <div th:replace="layout :: sidebar"></div>
+
+    <div class="right-section d-flex flex-column">
+        <div th:replace="layout :: menu-top"></div>
+        <div id="content">
+            <section>
+                <div class="container">
+                    <div class="page-header">
+                        <h3 class="m-0">Manage Vendor</h3>
+                        <p class="m-0 mt-1">ShopBee Admin Panel</p>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12 mb-5">
+                                <div class="card border-0 shadow" style="border-radius: 8px !important;">
+                                    <div class="card-header d-flex"
+                                         style="padding: 30px !important; border-radius: 8px 8px 0 0 !important;">
+                                        <h5 class="align-middle">Vendor List</h5>
+                                        <button class="btn btn-main ms-auto" id="add-btn">Add Vendor</button>
+                                    </div>
+                                    <div class="card-body tables-view">
+                                        <table id="example" class="table table-hover table-bordered mb-4">
+                                            <thead>
+                                            <tr class="text-center">
+                                                <th scope="col">#</th>
+                                                <th scope="col" class="text-start">Vendor</th>
+                                                <th scope="col">Shop Name</th>
+                                                <th scope="col">Products</th>
+                                                <th scope="col">Create Date</th>
+                                                <th scope="col">Revenue</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="vendor : ${vendorList}" class="align-middle text-center">
+                                                <th th:text="${vendor.id}"></th>
+                                                <td style="width: 20%" class="text-start">
+                                                    <th:block th:if="${vendor.vendorAvatar!=null}">
+                                                        <img th:attr="src = ${vendor?.vendorAvatar}" class="thumbnail-table rounded-circle" alt="thumbnail"/>
+                                                        <span th:text="${vendor?.vendorName}"></span>
+                                                    </th:block>
+                                                </td>
+                                                <td th:text="${vendor?.shopName}"></td>
+                                                <td th:text="${vendor?.products}"></td>
+                                                <td th:text="${#temporals.format(vendor?.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
+                                                <td th:text="${vendor?.revenue}"></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-danger view-btn">
+                                                        <i class="bi bi-file-earmark-text"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-secondary edit-btn">
+                                                        <i class="bi bi-pen"></i>
+                                                    </button>
+                                                    <input type="hidden" class="userId" th:value="${vendor.id}">
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer th:replace="layout :: footer"></footer>
+    </div>
+
+</div>
+
+</body>
+
+</html>

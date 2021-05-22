@@ -98,6 +98,4 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
         return new ResponseEntity<>("Product is deleted successfully",HttpStatus.OK);
     }
 
-
-
 }

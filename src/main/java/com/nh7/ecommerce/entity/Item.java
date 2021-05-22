@@ -15,13 +15,24 @@ public class Item extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id;
-    @Column(name = "item_quantity")
-    private int itemQuantity;
+
+    @Column(name = "product_quantity")
+    private Integer productQuantity;
+
     @Column(name = "item_price")
     private Double itemPrice;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @Column(name = "item_status")
+    private String itemStatus;
+
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "shop_id")
+    private Shop shop;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private UserOrder order;

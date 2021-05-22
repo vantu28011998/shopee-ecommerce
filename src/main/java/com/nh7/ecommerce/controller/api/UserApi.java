@@ -4,6 +4,7 @@ import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.service.UserService;
 import com.nh7.ecommerce.util.ModelMapperUtil;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,7 +66,7 @@ public class UserApi implements ICrudApi<UserDto, User> {
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<Object> update(@PathVariable Long id,@RequestBody User item) {
+    public ResponseEntity<Object> update(@PathVariable(name = "id") Long id,@RequestBody User item) {
         return null;
     }
     @PutMapping(value = "/{id}/username")

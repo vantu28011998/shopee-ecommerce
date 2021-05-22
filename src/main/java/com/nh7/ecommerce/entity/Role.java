@@ -24,6 +24,6 @@ public class Role extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name="permission_id")
     )
     private List<Permission> permissions=new ArrayList<>();
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private List<User> users=new ArrayList<>();
 }
