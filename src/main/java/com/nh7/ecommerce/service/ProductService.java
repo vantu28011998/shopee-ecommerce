@@ -114,7 +114,7 @@ public class ProductService {
     }
 
     // for count products in month
-    public Integer getCountProductInMonth(int month, int year) {
+    public int getCountProductInMonth(int month, int year) {
         return productRepository.countProductCreatedAtMonth(month, year);
     }
 

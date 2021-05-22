@@ -17,14 +17,14 @@ public interface OrderRepository extends CrudRepository<UserOrder, Long> {
     List<UserOrder> getRecentPurchasesInWeek();
 
     // (Admin) for get Revenue in Month Of Year
-    @Query(value = "select sum(order_price) from user_order where month(created_at) = :month and status = 'Success' year(created_at) = :year", nativeQuery = true)
+    @Query(value = "select sum(order_price) from user_order where month(created_at) = :month and year(created_at) = :year", nativeQuery = true)
     Long getRevenueInMonth(@Param("month") int month, @Param("year") int year);
 
     // (Admin) for get count Order in Month of  Year
-    @Query(value = "select count(id) from user_order where month(created_at) = :month year(created_at) = :year", nativeQuery = true)
+    @Query(value = "select count(id) from user_order where month(created_at) = :month and year(created_at) = :year", nativeQuery = true)
     Integer getCountOrdersInMonth(@Param("month") int month, @Param("year") int year);
 
-    // (Admin) for get Total Revenue in Year
+    // (Admin) for get Total Revenue
     @Query(value = "select sum(uo.order_price) from user_order uo\n" +
             "join item on item.order_id = uo.id\n" +
             "join product pr on pr.id = item.product_id\n" +

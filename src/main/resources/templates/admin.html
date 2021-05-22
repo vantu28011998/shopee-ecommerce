@@ -138,14 +138,14 @@
                                                         <th scope="col">Customer</th>
                                                         <th scope="col">Email</th>
                                                         <th scope="col">Products</th>
-                                                        <th scope="col">Status</th>
                                                         <th scope="col">Amount</th>
                                                     </tr>
                                                     </thead>
+                                                    <th:block th:if="${orderList}">
                                                     <tbody>
                                                     <tr th:each="order : ${orderList}">
-                                                        <td class="text-secondary" th:text="${order.user.userDetails.fullName}"></td>
-                                                        <td th:text="${order.user.emailAddress}"></td>
+                                                        <td class="text-secondary" th:text="${order?.user?.userDetails?.fullName}"></td>
+                                                        <td th:text="${order?.user?.emailAddress}"></td>
                                                         <td>
                                                             <th:block th:if="${order.itemList}">
                                                                 <th:block th:each="item : ${order.itemList}">
@@ -153,10 +153,10 @@
                                                                 </th:block>
                                                             </th:block>
                                                         </td>
-                                                        <td th:text="${order?.orderStatus}"></td>
                                                         <td th:text="${order?.orderPrice} + 'đ'"></td>
                                                     </tr>
                                                     </tbody>
+                                                    </th:block>
                                                 </table>
                                             </div>
                                         </div>
