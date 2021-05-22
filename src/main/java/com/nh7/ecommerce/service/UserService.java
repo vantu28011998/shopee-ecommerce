@@ -92,7 +92,7 @@ public class UserService {
         return (List<User>) userRepository.saveAll(users);
     }
 
-    public User save(User user){
+    public User saveLocal(User user){
         String username = user.getUsername();
         User checkUser = userRepository.findByUsername(username);
         if(checkUser != null){
@@ -110,6 +110,9 @@ public class UserService {
         userDetails.setUser(saveUser);
         userDetailsRepository.save(userDetails);
         return saveUser;
+    }
+    public User saveSocial(User user){
+       return userRepository.save(user);
     }
 
     public boolean updateUsername(Long id,User user){
