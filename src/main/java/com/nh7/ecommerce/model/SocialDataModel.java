@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SocialDataModel {
-    private Long id;
     private String email;
     private String verified_email;
     private String name;
