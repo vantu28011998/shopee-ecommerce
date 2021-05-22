@@ -58,6 +58,7 @@ public class ProductService {
         List<Product> products = (List<Product>) productRepository.findAll();
         return convert(products);
     }
+
     public List<ProductCardDto> getPageableProducts(Pageable pageable){
         Sort sort=Sort.by("product_name").ascending();
         List<Product> products = productRepository.findAll(pageable).getContent();
@@ -112,6 +113,10 @@ public class ProductService {
         return responsePageable;
     }
 
+    // for count products in month
+    public Integer getCountProductInMonth(int month, int year) {
+        return productRepository.countProductCreatedAtMonth(month, year);
+    }
 
     public void deleteAll(){
         productRepository.deleteAll();
@@ -127,5 +132,10 @@ public class ProductService {
 
     public List<Product> saveAll(List<Product> products){
         return (List<Product>) productRepository.saveAll(products);
+    }
+
+    // (Admin) for get All for Admin
+    public List<Product> getAllForAdmin() {
+        return (List<Product>) productRepository.findAll();
     }
 }

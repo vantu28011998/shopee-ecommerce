@@ -19,7 +19,16 @@ public class CategoryService {
         List<Category> categoryList= categoryRepository.findAll();
         return modelMapperUtil.mapList(categoryList,CategoryDto.class);
     }
-    // No use
+
+    public CategoryDto getById(long id) {
+        Category category = categoryRepository.findById(id);
+        CategoryDto categoryDTO = new CategoryDto();
+        categoryDTO.setId(id);
+        categoryDTO.setCategoryName(category.getCategoryName());
+        categoryDTO.setCategoryThumbnail(category.getCategoryThumbnail());
+        return categoryDTO;
+    }
+
     public List<Category> findByName(String var){return categoryRepository.findByCategoryName(var);}
     //
     public Category save(Category category){

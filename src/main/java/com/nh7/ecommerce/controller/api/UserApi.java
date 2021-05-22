@@ -4,6 +4,7 @@ import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.service.UserService;
 import com.nh7.ecommerce.util.ModelMapperUtil;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,11 +58,11 @@ public class UserApi implements ICrudApi<UserDto, User> {
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<Object> update(@PathVariable Long id,@RequestBody User item) {
+    public ResponseEntity<Object> update(@PathVariable(name = "id") Long id,@RequestBody User item) {
         return null;
     }
     @PutMapping("/{id}/username")
-    public ResponseEntity<String> updateUsername(@PathVariable Long id,@RequestBody User user){
+    public ResponseEntity<String> updateUsername(@PathVariable(name = "id") long id,@RequestBody User user){
         if(userService.updateUsername(id,user)){
             return new ResponseEntity<>("Username is updated successfully",HttpStatus.OK);
         }else {

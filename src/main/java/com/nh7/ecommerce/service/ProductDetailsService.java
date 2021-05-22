@@ -29,6 +29,7 @@ public class ProductDetailsService {
         productDetailsDTO.setAvgEvalute(product.getAvgEvalute());
         productDetailsDTO.setCategoryName(product.getSubCategory().getCategory().getCategoryName());
         productDetailsDTO.setSubCategoryName(product.getSubCategory().getSubCategoryName());
+        productDetailsDTO.setShopId(product.getPost().getUser().getShop().getId());
         productDetailsDTO.setShopLogo(product.getPost().getUser().getShop().getLogo());
         productDetailsDTO.setShopName(product.getPost().getUser().getShop().getName());
         productDetailsDTO.setShopAddress(product.getPost().getUser().getShop().getAddress());

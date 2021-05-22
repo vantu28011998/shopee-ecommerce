@@ -1,0 +1,26 @@
+
+    {
+        "orderPrice": 300000,
+        "billingInfor": {
+            "shipAddress": "40 Phạm Phú Tiết, Quận Cẩm Lệ, Tp. Đà Nẵng",
+            "fullName": "Trần Văn Tú",
+            "phoneNumber": "06969696969"
+        },
+        "itemList": [
+            {
+                "productQuantity": 2,
+                "itemPrice": 300000,
+                "status": "Waiting",
+                "productId": 33,
+                "shopId": 2
+            },
+            {
+                "productQuantity": 5,
+                "itemPrice": 300000,
+                "status": "Waiting",
+                "productId": 55,
+                "shopId": 3
+            }
+        ],
+        "userId": 2
+    }

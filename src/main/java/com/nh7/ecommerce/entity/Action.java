@@ -19,6 +19,5 @@ public class Action {
     @Column
     private String name;
     @OneToOne(mappedBy = "action",cascade = CascadeType.ALL)
-    @JsonBackReference
     private Permission permission;
 }

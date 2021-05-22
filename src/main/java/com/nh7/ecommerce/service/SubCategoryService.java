@@ -28,7 +28,7 @@ public class SubCategoryService {
         List<SubCategoryDto> subcategoryDtos = new ArrayList<>();
         for(SubCategory subCategory : subcategories){
             SubCategoryDto subcategoryDto = new SubCategoryDto();
-            subcategoryDto.setCategoryId(subCategory.getId());
+            subcategoryDto.setId(subCategory.getId());
             subcategoryDto.setSubCategoryName(subCategory.getSubCategoryName());
             subcategoryDto.setCategoryId(subCategory.getCategory().getId());
             subcategoryDto.setCategoryName(subCategory.getCategory().getCategoryName());
@@ -36,6 +36,9 @@ public class SubCategoryService {
         }
         return  subcategoryDtos;
     }
+
+    // (Admin) get All SubCategory
+    public List<SubCategory> getAllForAdmin() {return subCategoryRepository.findAll();}
 
     public SubCategoryDto findById(long id){
         SubCategory subCategory = subCategoryRepository.findById(id);
@@ -80,4 +83,6 @@ public class SubCategoryService {
         }
         return subCategoryDtos;
     }
+
+
 }

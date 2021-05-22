@@ -1,10 +1,10 @@
 package com.nh7.ecommerce.repository;
 
-import com.nh7.ecommerce.entity.Cart;
+import com.nh7.ecommerce.entity.BillingInfo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartRepository extends CrudRepository<Cart, Long> {
-    Cart findById(int id);
+public interface BillingInfoRepository extends CrudRepository<BillingInfo, Long> {
+    BillingInfo findById(long id);
 }

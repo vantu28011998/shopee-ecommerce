@@ -17,6 +17,7 @@ public class ProductDetailsDto {
     private int discount;
     private double avgEvalute;
     // information of shop
+    private long shopId;
     private String shopLogo;
     private String shopName;
     private String shopAddress;
