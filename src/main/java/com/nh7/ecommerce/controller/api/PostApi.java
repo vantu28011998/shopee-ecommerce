@@ -42,7 +42,8 @@ public class PostApi implements ICrudApi<PostDto, Post>{
     @PostMapping(value = {"/posts","/posts/"})
     @Override
     public ResponseEntity<Object> create(@RequestBody Post item) {
-        return new ResponseEntity<>("Post is created successfully",HttpStatus.CREATED);
+        postService.save(item);
+        return new ResponseEntity<>("POST HAS JUST CREATED SUCCESSFULLY",HttpStatus.CREATED);
     }
 
     //----------PUT METHOD---------//
