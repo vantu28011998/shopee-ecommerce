@@ -5,19 +5,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
 
 @Entity
 @Table(name="action")
 @Getter
 @Setter
+
+
 public class Action {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column
     private String name;
-    @OneToOne(mappedBy = "action",cascade = CascadeType.ALL)
+
+    @OneToOne(mappedBy = "action",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Permission permission;
 }

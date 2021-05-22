@@ -4,6 +4,7 @@ import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.dto.social.SocialLogin;
 import com.nh7.ecommerce.entity.UserDetails;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
+import com.nh7.ecommerce.model.SocialDataModel;
 import com.nh7.ecommerce.service.UserDetailsService;
 import com.nh7.ecommerce.service.UserService;
 import com.nh7.ecommerce.util.RandomPasswordUtil;
@@ -50,6 +51,7 @@ public class SocialFacebookApi {
     @GetMapping("/redirect")
     public SocialLogin producer(@RequestParam("code") String authorizationCode){
         OAuth2Operations operations = factory.getOAuthOperations();
+        System.out.println("AUTHORIZATION "+ authorizationCode);
         AccessGrant accessToken = operations.exchangeForAccess(authorizationCode,redirect,null);
         Connection<Facebook> connection =factory.createConnection(accessToken);
         System.out.println("FACEBOOK "+authorizationCode);
@@ -85,6 +87,36 @@ public class SocialFacebookApi {
         socialLogin.setEmail(user.getEmailAddress());
         return socialLogin;
     }
+    @PostMapping
+    public SocialLogin saveGoogleData(@RequestBody SocialDataModel socialDataModel){
+        Long idOfEmail = userService.findIdByEmailAddressAndAuthProvider(socialDataModel.getEmail(),AuthProviderEnum.FACEBOOK_USER);
+        String password =randomPasswordUtil.rand();
+        if(idOfEmail == null){
+            // USER
+            com.nh7.ecommerce.entity.User userEntity = new com.nh7.ecommerce.entity.User();
+            userEntity.setEmailAddress(socialDataModel.getEmail());
+            userEntity.setPassword(password);
+            userEntity.setAuthProvider(AuthProviderEnum.FACEBOOK_USER);
+            userEntity.setAvatar(socialDataModel.getPicture());
+            com.nh7.ecommerce.entity.User user = userService.save(userEntity);
+            idOfEmail = user.getId();
 
+            //USER DETAIL
+            UserDetails userDetails = new UserDetails();
+            userDetails.setUser(user);
+            userDetails.setFullName(socialDataModel.getFamily_name()+" "+ socialDataModel.getGiven_name());
+            userDetailsService.save(userDetails);
+        }
+        SocialLogin socialLogin = new SocialLogin();
+        UserDto user = userService.findById(idOfEmail);
+        com.nh7.ecommerce.entity.User u = new com.nh7.ecommerce.entity.User();
+        u.setPassword(password);
+        userService.savePassword(idOfEmail,u);
+        socialLogin.setId(idOfEmail);
+        socialLogin.setUsername(user.getUsername());
+        socialLogin.setPassword(password);
+        socialLogin.setEmail(user.getEmailAddress());
+        return socialLogin;
+    }
 
 }

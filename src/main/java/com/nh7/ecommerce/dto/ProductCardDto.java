@@ -23,5 +23,5 @@ public class ProductCardDto {
     //TAM THOI
     //subcategory id
     private Long subcategoryId;
-
+    private Long postId;
 }

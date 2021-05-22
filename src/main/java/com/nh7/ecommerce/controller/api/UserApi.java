@@ -7,6 +7,7 @@ import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -47,8 +48,15 @@ public class UserApi implements ICrudApi<UserDto, User> {
     @PostMapping(value = {"","/"})
     @Override
     public ResponseEntity<Object> create(@RequestBody User item) {
-        UserDto user = modelMapperUtil.map(userService.save(item),UserDto.class);
-        return new ResponseEntity<>(user,HttpStatus.CREATED);
+        User user = userService.save(item);
+        if(user.getUsername()==null) {
+            return new ResponseEntity<>("User doesn't create because username have existed",HttpStatus.OK);
+        }
+        if(user.getEmailAddress()==null) {
+            return new ResponseEntity<>("User doesn't create because email address have existed",HttpStatus.OK);
+        }
+        UserDto userDto = modelMapperUtil.map(user,UserDto.class);
+        return new ResponseEntity<>(userDto,HttpStatus.CREATED);
     }
 
 
@@ -61,8 +69,8 @@ public class UserApi implements ICrudApi<UserDto, User> {
     public ResponseEntity<Object> update(@PathVariable(name = "id") Long id,@RequestBody User item) {
         return null;
     }
-    @PutMapping("/{id}/username")
-    public ResponseEntity<String> updateUsername(@PathVariable(name = "id") long id,@RequestBody User user){
+    @PutMapping(value = "/{id}/username")
+    public ResponseEntity<String> updateUsername(@PathVariable Long id,@RequestBody User user){
         if(userService.updateUsername(id,user)){
             return new ResponseEntity<>("Username is updated successfully",HttpStatus.OK);
         }else {
@@ -74,6 +82,7 @@ public class UserApi implements ICrudApi<UserDto, User> {
     @DeleteMapping("/all")
     @Override
     public ResponseEntity<Object> deleteAll() {
+        System.out.println("CALL");
         userService.deleteAll();
         return new ResponseEntity<>("Users are deleted successfully",HttpStatus.CREATED);
     }

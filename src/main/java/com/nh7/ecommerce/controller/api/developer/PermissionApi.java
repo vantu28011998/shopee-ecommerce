@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.controller.api.developer;
 
+import com.nh7.ecommerce.dto.developer.PermissionDto;
 import com.nh7.ecommerce.entity.Permission;
 import com.nh7.ecommerce.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,7 @@ public class PermissionApi {
     @Autowired
     private PermissionService permissionService;
     @GetMapping("/all")
-    public ResponseEntity<List<Permission>> getAll(){
-        System.out.println("PERMISSION");
+    public ResponseEntity<List<PermissionDto>> getAll(){
         return new ResponseEntity<>(permissionService.findAll(), HttpStatus.OK);
     }
     @GetMapping("")
@@ -27,8 +27,10 @@ public class PermissionApi {
 
     }
     @PostMapping("/all")
-    public void createAll(@RequestBody List<Permission> permissions){
+    public ResponseEntity<String> createAll(@RequestBody List<PermissionDto> permissionDtos){
 
+        permissionService.saveAll(permissionDtos);
+        return new ResponseEntity<>("Permission is created",HttpStatus.OK);
     }
     @PostMapping("")
     public void create(@RequestBody Permission permission){
