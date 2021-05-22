@@ -3,10 +3,10 @@ POST /api/developer/functions/all
 [
     {
         "name":"users",
-        "url": "/api/home/users"
+        "url": "/api/home/users/all"
     },
     {
         "name": "products",
-        "url": "/api/home/products"
+        "url": "/api/home/categories/all"
     }
 ]

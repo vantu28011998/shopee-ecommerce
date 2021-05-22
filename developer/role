@@ -1,0 +1,12 @@
+POST /api/home/roles
+{
+    "roleName":"USER",
+    "permissions":[
+        {"id":1},
+        {"id":2}
+    ],
+    "users":[
+        {"id":8}
+    ]
+
+}

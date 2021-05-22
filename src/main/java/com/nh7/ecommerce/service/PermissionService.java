@@ -27,7 +27,7 @@ public class PermissionService {
             Permission permission = new Permission();
             permission.setPermissionName(permissionDto.getPermissionName());
             permission.setDescription(permissionDto.getDescription());
-            Action action =actionRepository.findById(permissionDto.getActionId()).get();
+            Action action = actionRepository.findById(permissionDto.getActionId()).get();
             permission.setAction(action);
             Func func = functionRepository.findById(permissionDto.getFunctionId()).get();
             permission.setFunc(func);

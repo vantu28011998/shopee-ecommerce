@@ -1,13 +1,17 @@
 POST /api/developer/permissions/all
 
 [
+   {
     "permissionName":"VIEW USERS",
-    "description":"Xem users"
-    "action":{
-        "id":1
-    },
-    "function":{
-        "id":1
-    }
+    "description":"View all users",
+    "actionId":1,
+    "functionId":1
+   },
+   {
+    "permissionName":"VIEW CATEGORIES",
+    "description":"View all categories",
+    "actionId":1,
+    "functionId":2
+   }
 
 ]

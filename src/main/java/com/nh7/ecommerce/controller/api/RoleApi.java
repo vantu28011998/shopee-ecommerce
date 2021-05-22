@@ -14,17 +14,17 @@ import java.util.List;
 @RestController
 @ControllerAdvice
 @RequestMapping(value = "/api/home/roles")
-public class RoleApi implements ICrudApi<Role, Role> {
+public class RoleApi implements ICrudApi<RoleDto, Role> {
     @Autowired
     private RoleService roleService;
     @GetMapping("/all")
     @Override
-    public ResponseEntity<List<Role>> getAll() {
+    public ResponseEntity<List<RoleDto>> getAll() {
         return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
     }
     @GetMapping("")
     @Override
-    public ResponseEntity<Role> get(Long id) {
+    public ResponseEntity<RoleDto> get(Long id) {
         return null;
     }
     @PostMapping("/all")
@@ -35,7 +35,11 @@ public class RoleApi implements ICrudApi<Role, Role> {
     @PostMapping("")
     @Override
     public ResponseEntity<Object> create(@RequestBody Role item) {
-        return new ResponseEntity<>(roleService.save(item), HttpStatus.OK);
+        RoleDto roleDto = roleService.save(item);
+        if(roleDto == null){
+            return new ResponseEntity<>("Role is exist which couldn't create",HttpStatus.OK);
+        }else
+        return new ResponseEntity<>(roleDto, HttpStatus.OK);
     }
     @PutMapping("/all")
     @Override
@@ -50,6 +54,7 @@ public class RoleApi implements ICrudApi<Role, Role> {
     @DeleteMapping
     @Override
     public ResponseEntity<Object> delete(Long id) {
-        return null;
+        roleService.delete(id);
+        return new ResponseEntity<>("OK",HttpStatus.OK);
     }
 }
