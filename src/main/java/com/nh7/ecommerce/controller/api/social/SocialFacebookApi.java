@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @CrossOrigin("*")
 @RestController
 @ControllerAdvice
-@RequestMapping(value = "/api/login/facebook")
+    @RequestMapping(value = "/api/login/facebook")
 public class SocialFacebookApi {
     private String clientId="304496104650841";
 

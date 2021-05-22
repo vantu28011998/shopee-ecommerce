@@ -48,7 +48,7 @@ public class User extends BaseEntity{
     private UserDetails userDetails;
 
     @Enumerated(EnumType.STRING)
-    @javax.persistence.Column
+    @Column
     private AuthProviderEnum authProvider = AuthProviderEnum.LOCAL;
 
 }
