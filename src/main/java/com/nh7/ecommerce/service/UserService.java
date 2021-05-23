@@ -99,7 +99,6 @@ public class UserService {
         UserDetails userDetails = new UserDetails();
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         User saveUser = userRepository.save(user);
-        System.out.println("SAVE USER USERNAME "+ saveUser.getUsername());
         userDetails.setUser(saveUser);
         userDetailsRepository.save(userDetails);
         Shop shop = new Shop();
@@ -112,7 +111,7 @@ public class UserService {
         Shop shop = new Shop();
         shop.setUser(saveUser);
         shopRepository.save(shop);
-        return saveUser;
+        return userRepository.save(user);
     }
 
     public boolean updateUsername(Long id,User user){

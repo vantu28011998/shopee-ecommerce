@@ -1,14 +1,13 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ItemDto;
+import com.nh7.ecommerce.dto.ItemStatus;
 import com.nh7.ecommerce.dto.OrderDto;
 import com.nh7.ecommerce.entity.BillingInfo;
 import com.nh7.ecommerce.entity.Item;
+import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.entity.UserOrder;
-import com.nh7.ecommerce.repository.BillingInfoRepository;
-import com.nh7.ecommerce.repository.OrderRepository;
-import com.nh7.ecommerce.repository.ProductRepository;
-import com.nh7.ecommerce.repository.UserRepository;
+import com.nh7.ecommerce.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +28,9 @@ public class OrderService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ItemRepository itemRepository;
+
     public UserOrder save(UserOrder userOrder) {
         try {
             return orderRepository.save(userOrder);
@@ -47,10 +49,10 @@ public class OrderService {
             Item item = new Item();
             long productId = itemDto.getProduct();
             item.setProduct(productRepository.findById(productId));
-            item.setItemStatus("Waiting");
+            item.setItemStatus(ItemStatus.AWAITING_FULFILLMENT.toString());
             item.setOrder(newOrder);
             item.setProductQuantity(itemDto.getQty());
-            item.setItemPrice(itemDto.getQty() * itemDto.getProductPrice());
+            item.setItemPrice(itemDto.getQty() * productRepository.findById(productId).getProductPrice());
             item.setShop(productRepository.findById(productId).getPost().getUser().getShop());
             itemList.add(item);
         }
@@ -67,7 +69,44 @@ public class OrderService {
         billingInfo = billingInfoRepository.save(billingInfo);
         newOrder.setBillingInfo(billingInfo);
         newOrder.setUser(userRepository.findById(userId));
+        newOrder.setOrderPrice(0D);
         orderRepository.save(newOrder);
+    }
+
+    // (Vendor) for update orderPrice when set itemStatus = "Success"
+    public void updateItemStatus(long itemId, String newStatus) {
+        Item item = itemRepository.findById(itemId);
+
+        // Update Sold Quantity
+        String oldStatus = item.getItemStatus();
+        String completed = ItemStatus.COMPLETED.toString();
+        if (!oldStatus.equals(completed) && newStatus.equals(completed)) {
+            Product product = item.getProduct();
+            int productQuantity = product.getQuantity();
+            product.setQuantity(productQuantity + item.getProductQuantity());
+            productRepository.save(product);
+        }
+        if (oldStatus.equals(completed) && !newStatus.equals(completed)) {
+            Product product = item.getProduct();
+            int productQuantity = product.getQuantity();
+            product.setQuantity(productQuantity - item.getProductQuantity());
+            productRepository.save(product);
+        }
+        // Update Item Status
+        item.setItemStatus(newStatus);
+        item = itemRepository.save(item);
+
+        // Update Order Price
+        UserOrder order = item.getOrder();
+        Double orderPrice = 0D;
+        for (Item it : order.getItemList()) {
+            if (it.getItemStatus().equals(ItemStatus.COMPLETED.toString())) {
+                orderPrice += it.getItemPrice();
+            }
+        }
+        order.setOrderPrice(orderPrice);
+        orderRepository.save(order);
+
     }
 
     // (Admin) for get Recent Purchases in Week

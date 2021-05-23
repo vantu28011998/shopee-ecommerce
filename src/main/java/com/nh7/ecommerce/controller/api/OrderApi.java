@@ -1,5 +1,6 @@
 package com.nh7.ecommerce.controller.api;
 
+import com.nh7.ecommerce.dto.ItemStatus;
 import com.nh7.ecommerce.dto.OrderDto;
 import com.nh7.ecommerce.entity.UserOrder;
 import com.nh7.ecommerce.service.ItemService;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -23,6 +25,22 @@ public class OrderApi implements ICrudApi<OrderDto, UserOrder> {
     private UserService userService;
     @Autowired
     private ItemService itemService;
+
+    @GetMapping("/item/{itemId}/{itemStatus}")
+    public ResponseEntity<Object> updateItem(@PathVariable(name = "itemId") long itemId,
+                                             @PathVariable(name = "itemStatus") String itemStatus) {
+        orderService.updateItemStatus(itemId,itemStatus);
+        return new ResponseEntity<>("Update Item Success", HttpStatus.OK);
+    }
+
+    @GetMapping("/itemStatus")
+    public ResponseEntity<Object> getItemStatus() {
+        List<String> itemStatus = new ArrayList<>();
+        for (ItemStatus status : ItemStatus.values()) {
+            itemStatus.add(status.toString());
+        }
+        return new ResponseEntity<>(itemStatus, HttpStatus.OK);
+    }
 
     @Override
     public ResponseEntity<List<OrderDto>> getAll() {
