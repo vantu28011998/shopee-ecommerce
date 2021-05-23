@@ -15,6 +15,20 @@
       }
     }
   }
+   {
+      "postTitle": "Samsung",
+      "postDescription": "Mua cùng chỗ với iphone",
+      "product": {
+        "productThumbnail": "https://cf.shopee.vn/file/c83764f21a4ffb1e9242ed7188d70f8f_tn",
+        "productPrice": 150000.0,
+        "productName": "Áo thun",
+        "quantity": 999,
+        "discount": 15,
+        "subCategory": {
+          "id": 1
+        }
+      }
+  }
 
 
 [
