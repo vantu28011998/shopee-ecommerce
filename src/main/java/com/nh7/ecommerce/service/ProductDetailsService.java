@@ -36,7 +36,7 @@ public class ProductDetailsService {
         productDetailsDTO.setShopPhone(product.getPost().getUser().getShop().getPhoneNumber());
         productDetailsDTO.setSumProduct(productRepository.countProductByPostUserShop(product.getPost().getUser().getShop().getId()));
         productDetailsDTO.setPostTitle(product.getPost().getPostTitle());
-        productDetailsDTO.setPostDecription(product.getPost().getPostDescription());
+        productDetailsDTO.setPostDescription(product.getPost().getPostDescription());
         productDetailsDTO.setSoldQuantity(product.getPost().getSoldQuantity());
         List<CommentCardDto> commentCardDtos = new ArrayList<>();
         List<Comment> comments = product.getPost().getCommentList();

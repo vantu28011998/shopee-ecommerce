@@ -29,7 +29,7 @@ public class ProductDetailsDto {
     private String subCategoryName;
     // information of Post
     private String postTitle;
-    private String postDecription;
+    private String postDescription;
     private int soldQuantity;
     // information of Comment
     List<CommentCardDto> commentList;

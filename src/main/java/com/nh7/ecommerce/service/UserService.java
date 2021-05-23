@@ -5,13 +5,11 @@ import com.nh7.ecommerce.dto.UserDto;
 import com.nh7.ecommerce.entity.Role;
 import com.nh7.ecommerce.dto.UserInfoDto;
 import com.nh7.ecommerce.dto.VendorDto;
+import com.nh7.ecommerce.entity.Shop;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.entity.UserDetails;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
-import com.nh7.ecommerce.repository.UserDetailsRepository;
-import com.nh7.ecommerce.repository.OrderRepository;
-import com.nh7.ecommerce.repository.ProductRepository;
-import com.nh7.ecommerce.repository.UserRepository;
+import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,7 +37,8 @@ public class UserService {
     @Qualifier("passwordEncoder")
     @Autowired
     private PasswordEncoder bcryptEncoder;
-
+    @Autowired
+    private ShopRepository shopRepository;
     private void setRoleFromEntityToDto(User user,UserDto userDto){
         List<Role> roles = user.getRoles();
         List<String> roleNames = new ArrayList<>();
@@ -95,24 +94,25 @@ public class UserService {
     public User saveLocal(User user){
         String username = user.getUsername();
         User checkUser = userRepository.findByUsername(username);
-        if(checkUser != null){
-            user.setUsername(null);
-            return user;
-        }
         List<Long> ids = userRepository.findIdsByEmailAddress(user.getEmailAddress());
-        if(ids.size()>0){
-            user.setEmailAddress(null);
-            return user;
-        }
+        if(checkUser != null || ids.size()>0) return null;
         UserDetails userDetails = new UserDetails();
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         User saveUser = userRepository.save(user);
+        System.out.println("SAVE USER USERNAME "+ saveUser.getUsername());
         userDetails.setUser(saveUser);
         userDetailsRepository.save(userDetails);
+        Shop shop = new Shop();
+        shop.setUser(saveUser);
+        shopRepository.save(shop);
         return saveUser;
     }
     public User saveSocial(User user){
-       return userRepository.save(user);
+        User saveUser = userRepository.save(user);
+        Shop shop = new Shop();
+        shop.setUser(saveUser);
+        shopRepository.save(shop);
+        return saveUser;
     }
 
     public boolean updateUsername(Long id,User user){
