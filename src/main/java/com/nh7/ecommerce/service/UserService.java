@@ -104,12 +104,8 @@ public class UserService {
             user.setEmailAddress(null);
             return user;
         }
-        UserDetails userDetails = new UserDetails();
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
-        User saveUser = userRepository.save(user);
-        userDetails.setUser(saveUser);
-        userDetailsRepository.save(userDetails);
-        return saveUser;
+        return userRepository.save(user);
     }
 
     public boolean updateUsername(Long id,User user){

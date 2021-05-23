@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.repository;
 
 import com.nh7.ecommerce.entity.Shop;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-public interface ShopRepository extends CrudRepository<Shop, Long> {
+public interface ShopRepository extends JpaRepository<Shop, Long> {
     Shop findById(long id);
 
     @Modifying

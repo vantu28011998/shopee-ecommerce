@@ -3,6 +3,7 @@ package com.nh7.ecommerce.repository;
 import com.nh7.ecommerce.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,7 +14,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findById(long id);
     @Query(value = "SELECT pr.id FROM product pr",nativeQuery = true)

@@ -44,7 +44,7 @@ public class User extends BaseEntity{
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Shop shop;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user")
     private UserDetails userDetails;
 
     @Enumerated(EnumType.STRING)

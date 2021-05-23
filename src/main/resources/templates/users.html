@@ -43,7 +43,7 @@
                                             <tbody>
                                             <tr th:each="user : ${userList}" class="align-middle text-center">
                                                 <th th:text="${user.id}"></th>
-                                                <td><img th:attr="src = ${user.avatar}" class="thumbnail-table" alt="">
+                                                <td><img th:attr="src = ${user.avatar}" class="thumbnail-table" alt=""/>
                                                 </td>
                                                 <td th:text="${user?.userDetails?.fullName}"></td>
                                                 <td th:text="${user.emailAddress}"></td>

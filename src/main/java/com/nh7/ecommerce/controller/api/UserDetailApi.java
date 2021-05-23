@@ -27,8 +27,12 @@ public class UserDetailApi implements ICrudApi<UserDetails,UserDetails> {
     }
 
     @Override
-    public ResponseEntity<Object> createAll(List<UserDetails> items) {
-        return null;
+    @PostMapping("/all")
+    public ResponseEntity<Object> createAll(@RequestBody List<UserDetails> items) {
+        if (userDetailsService.saveAll(items) != null) {
+            return new ResponseEntity<>("Oke roi nha", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Chua Ok nha", HttpStatus.OK);
     }
 
     @Override

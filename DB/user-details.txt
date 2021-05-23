@@ -1,0 +1,43 @@
+[
+    {
+        "phoneNumber": "0929580412",
+        "address": "117 To Huu",
+        "fullName": "Nguyen Van Hoang",
+        "dayOfBird": "01/01/2000",
+        "gender": "Nam",
+        "user": {
+            "id": 1
+        }
+    },
+    {
+        "phoneNumber": "0928279504",
+        "address": "40 Pham Phu Tiet",
+        "fullName": "Lam Ngoc Huy",
+        "dayOfBird": "19/12/1999",
+        "gender": "Nam",
+        "user": {
+            "id": 2
+        }
+    },
+    {
+        "phoneNumber": "0984729348",
+        "address": "K39/05 Hai Ho",
+        "fullName": "Pham Thu Xoan",
+        "dayOfBird": "27/05/1999",
+        "gender": "Nu",
+        "user": {
+            "id": 3
+        }
+    },
+    {
+        "phoneNumber": "0984729348",
+        "address": "39 Hung Vuong",
+        "fullName": "Tran Ngoc Bao",
+        "dayOfBird": "14/02/1997",
+        "gender": "Nu",
+        "user": {
+            "id": 4
+        }
+    },
+
+]
