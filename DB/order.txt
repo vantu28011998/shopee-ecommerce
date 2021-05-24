@@ -8,11 +8,20 @@
             "productThumbnail": "https://cf.shopee.vn/file/c83764f21a4ffb1e9242ed7188d70f8f_tn",
             "qty": 3,
             "quantity": 6554
+        },
+        {
+            "postTitle": " Áo thun bò sữa tay lỡ, form rộng Unisex ATLBO",
+            "product": 15,
+            "productName": "Áo thun",
+            "productPrice": 150000,
+            "productThumbnail": "https://cf.shopee.vn/file/c83764f21a4ffb1e9242ed7188d70f8f_tn",
+            "qty": 2,
+            "quantity": 6554
         }
     ],
     "billingInfo": {
         "fullName": "Lam Ngoc Huy",
-       "phonenumber":"069696969",
+        "phoneNumber": "069696969",
         "address": "40 Pham Phu Tiet",
         "ward": "Khue Trung",
         "district": "Cam Le",
@@ -22,7 +31,7 @@
         "authProvider": "FACEBOOK_USER",
         "avatar": null,
         "emailAddress": "tranvantu123456789abc@gmail.com",
-        "id": 5,
+        "id": 2,
         "password": "vul3ZtdBjVH08hpM5OUJrDbIPjYgl2",
         "username": "Tran Van Tu"
     }

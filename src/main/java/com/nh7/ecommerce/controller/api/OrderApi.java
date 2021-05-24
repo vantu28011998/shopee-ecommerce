@@ -64,8 +64,7 @@ public class OrderApi implements ICrudApi<OrderDto, UserOrder> {
 
     @PostMapping("")
     public ResponseEntity<Object> createOrder(@RequestBody OrderDto orderDto) {
-        orderService.createNewOrder(orderDto);
-        return new ResponseEntity<>("OK rồi nhá", HttpStatus.OK);
+        return new ResponseEntity<>(orderService.createNewOrder(orderDto), HttpStatus.OK);
     }
 
     @Override
