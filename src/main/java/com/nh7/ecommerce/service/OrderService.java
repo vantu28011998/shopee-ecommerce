@@ -40,7 +40,7 @@ public class OrderService {
     }
 
     // (User) for Buy Products
-    public void createNewOrder(OrderDto orderDto) {
+    public OrderDto createNewOrder(OrderDto orderDto) {
         UserOrder newOrder = new UserOrder();
         long userId = orderDto.getUser().getId();
         newOrder = orderRepository.save(newOrder);
@@ -71,6 +71,7 @@ public class OrderService {
         newOrder.setUser(userRepository.findById(userId));
         newOrder.setOrderPrice(0D);
         orderRepository.save(newOrder);
+        return orderDto;
     }
 
     // (Vendor) for update orderPrice when set itemStatus = "Success"
