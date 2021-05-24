@@ -9,9 +9,6 @@
       "discount": 48,
       "subCategory": {
         "id": 1
-      },
-      "shop":{
-      "id":1
       }
     }
   }
