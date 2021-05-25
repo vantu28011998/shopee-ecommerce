@@ -45,7 +45,7 @@ public class ProductService {
             productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
             productCardDto.setDiscount(pr.getDiscount());
             productCardDto.setSubcategoryId(pr.getSubCategory().getId());
-            productCardDto.setAvgEvalute(pr.getAvgEvalute());
+            productCardDto.setAvgEvalute(pr.getAvgRating());
             productCardDtos.add(productCardDto);
         }
         return productCardDtos;

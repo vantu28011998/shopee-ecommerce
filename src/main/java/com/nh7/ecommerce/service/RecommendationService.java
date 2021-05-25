@@ -38,8 +38,6 @@ public class RecommendationService {
         List<Rating> ratings= (List<Rating>)ratingRepository.findAll();
         int userSize=userIds.size();
         int productSize=productIds.size();
-        System.out.println("USER SIZE:"+userSize);
-        System.out.println("ITEM SIZE:"+productSize);
         int k=2;
         double [][]originMat=new double[productSize][userSize];
         double [][]matX=new double[productSize][k];

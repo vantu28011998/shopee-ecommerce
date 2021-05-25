@@ -15,7 +15,7 @@ public class ProductDetailsDto {
     private String productThumbnail;
     private int quantity;
     private int discount;
-    private double avgEvalute;
+    private Double avgRating;
     // information of shop
     private long shopId;
     private String shopLogo;

@@ -54,10 +54,7 @@ public class UserApi implements ICrudApi<UserDto, User> {
         return new ResponseEntity<>(userDto,HttpStatus.CREATED);
     }
 
-
-
     //----------PUT METHOD---------//
-
 
     @PutMapping("/{id}")
     @Override

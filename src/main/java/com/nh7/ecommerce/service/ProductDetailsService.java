@@ -26,7 +26,7 @@ public class ProductDetailsService {
         productDetailsDTO.setProductThumbnail(product.getProductThumbnail());
         productDetailsDTO.setQuantity(product.getQuantity());
         productDetailsDTO.setDiscount(product.getDiscount());
-        productDetailsDTO.setAvgEvalute(product.getAvgEvalute());
+        productDetailsDTO.setAvgRating(product.getAvgRating());
         productDetailsDTO.setCategoryName(product.getSubCategory().getCategory().getCategoryName());
         productDetailsDTO.setSubCategoryName(product.getSubCategory().getSubCategoryName());
         productDetailsDTO.setShopId(product.getPost().getUser().getShop().getId());
@@ -43,7 +43,7 @@ public class ProductDetailsService {
         for (Comment comment : comments){
             CommentCardDto commentCardDTO = new CommentCardDto();
             commentCardDTO.setContent(comment.getContent());
-            commentCardDTO.setEvalute(comment.getEvalute());
+            commentCardDTO.setRating(comment.getRating());
             commentCardDTO.setUserName(comment.getUser().getUsername());
             commentCardDTO.setUserAvatar(comment.getUser().getAvatar());
             commentCardDtos.add(commentCardDTO);

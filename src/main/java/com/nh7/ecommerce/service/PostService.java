@@ -44,7 +44,7 @@ public class PostService {
             Product product = post.getProduct();
             productDto.setId(product.getId());
             productDto.setQuantity(product.getQuantity());
-            productDto.setAvgEvalute(product.getAvgEvalute());
+            productDto.setAvgEvalute(product.getAvgRating());
             productDto.setProductThumbnail(product.getProductThumbnail());
             productDto.setProductPrice(product.getProductPrice());
             productDto.setDiscount(product.getDiscount());

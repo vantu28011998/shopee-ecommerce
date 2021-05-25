@@ -23,7 +23,7 @@ public class Product extends BaseEntity {
     private String productName;
 
     @Column(name = "avg_evalute")
-    private Double avgEvalute;
+    private Double avgRating;
 
     @Column(name="product_thumbnail")
     private String productThumbnail;

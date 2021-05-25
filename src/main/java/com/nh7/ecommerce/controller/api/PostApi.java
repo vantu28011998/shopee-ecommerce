@@ -1,7 +1,9 @@
 package com.nh7.ecommerce.controller.api;
 
 import com.nh7.ecommerce.dto.PostDto;
+import com.nh7.ecommerce.entity.Comment;
 import com.nh7.ecommerce.entity.Post;
+import com.nh7.ecommerce.service.CommentService;
 import com.nh7.ecommerce.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,8 @@ import java.util.List;
 public class PostApi implements ICrudApi<PostDto, Post>{
     @Autowired
     private PostService postService;
-
+    @Autowired
+    private CommentService commentService;
     @GetMapping(value = {"/posts/","/posts","/posts/all"})
     @Override
     public ResponseEntity<List<PostDto>> getAll() {
@@ -46,6 +49,11 @@ public class PostApi implements ICrudApi<PostDto, Post>{
         return new ResponseEntity<>("POST HAS JUST CREATED SUCCESSFULLY",HttpStatus.CREATED);
     }
 
+    @PostMapping("/posts/{id}/comments")
+    public ResponseEntity<Object> commentAndRating(@RequestBody Comment comment){
+        commentService.save(comment);
+        return new ResponseEntity<>(null,HttpStatus.OK);
+    }
     //----------PUT METHOD---------//
 
     @PutMapping("/posts/{id}")
