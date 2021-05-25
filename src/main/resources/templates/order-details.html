@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="layout :: head" ></div>
+</head>
+
+<body>
+
+<div class="d-flex">
+    <div th:replace="layout :: sidebar"></div>
+
+    <div class="right-section d-flex flex-column">
+        <div th:replace="layout :: menu-top"></div>
+        <div id="content">
+            <section>
+                <div class="container-fluid col mt-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5>Order Details: #<span th:text="${order.id}"></span></h5>
+                            <p class="fs--1">
+                                <span th:text="${#temporals.monthName(order.createdAt)}"></span> <span th:text="${#temporals.day(order.createdAt)}"></span>,
+                                <span th:text="${#temporals.year(order.createdAt)}"></span>, <span th:text="${#temporals.hour(order.createdAt)}"></span>:<span th:text="${#temporals.minute(order.createdAt)}"></span></p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5 class="mb-3 fs-0">Billing Address</h5>
+                                    <h6 class="mb-2">Antony Hopkins</h6>
+                                    <p class="mb-1 fs--1">2393 Main Avenue<br>Penasauka, New Jersey 87896</p>
+                                    <p class="mb-0 fs--1"> <strong>Email: </strong><a href="mailto:ricky@gmail.com">antony@example.com</a></p>
+                                    <p class="mb-0 fs--1"> <strong>Phone: </strong><a href="tel:7897987987">7897987987</a></p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5 class="mb-3 fs-0">Shipping Address</h5>
+                                    <h6 class="mb-2">Antony Hopkins</h6>
+                                    <p class="mb-0 fs--1">2393 Main Avenue<br>Penasauka, New Jersey 87896</p>
+                                    <div class="text-500 fs--1">(Free Shipping)</div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h5 class="mb-3 fs-0">Payment Method</h5>
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h6 class="mb-0">Antony Hopkins</h6>
+                                            <p class="mb-0 fs--1">**** **** **** 9809</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="table-responsive fs--1">
+                                <table class="table table-striped border-bottom">
+                                    <thead class="bg-200 text-900">
+                                    <tr>
+                                        <th class="border-0">Products</th>
+                                        <th class="border-0 text-center">Quantity</th>
+                                        <th class="border-0 text-right">Rate</th>
+                                        <th class="border-0 text-right">Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <h6 class="mb-0 text-nowrap">Platinum web hosting package</h6>
+                                            <p class="mb-0">Down 35mb, Up 100mb</p>
+                                        </td>
+                                        <td class="align-middle text-center">2</td>
+                                        <td class="align-middle text-right">$65.00</td>
+                                        <td class="align-middle text-right">$130.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <h6 class="mb-0 text-nowrap">2 Page website design</h6>
+                                            <p class="mb-0">Includes basic wireframes and responsive templates</p>
+                                        </td>
+                                        <td class="align-middle text-center">1</td>
+                                        <td class="align-middle text-right">$2,100.00</td>
+                                        <td class="align-middle text-right">$2,100.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <h6 class="mb-0 text-nowrap">Mobile App Development</h6>
+                                            <p class="mb-0">Includes responsive navigation</p>
+                                        </td>
+                                        <td class="align-middle text-center">8</td>
+                                        <td class="align-middle text-right">$5,00.00</td>
+                                        <td class="align-middle text-right">$4,000.00</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row no-gutters justify-content-end">
+                                <div class="col-auto">
+                                    <table class="table table-sm table-borderless fs--1 text-right">
+                                        <tbody><tr>
+                                            <th class="text-900">Subtotal:</th>
+                                            <td class="font-weight-semi-bold">$6,230.00 </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-900">Tax 5%:</th>
+                                            <td class="font-weight-semi-bold">$311.50</td>
+                                        </tr>
+                                        <tr class="border-top">
+                                            <th class="text-900">Total:</th>
+                                            <td class="font-weight-semi-bold">$6541.50</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer th:replace="layout :: footer"></footer>
+    </div>
+
+</div>
+
+</body>
+
+</html>

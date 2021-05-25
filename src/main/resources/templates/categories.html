@@ -100,7 +100,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Do you want to delete Category <strong id="del-content"></strong> ? </p>
+                        <p>Do you want to delete category <strong id="del-content"></strong> ? </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -120,7 +120,7 @@
         $('#addModalLabel').html('Edit Category');
         $.ajax({
             type: 'GET',
-            url: '/api/categories/' + id + "/getById",
+            url: '/api/admin/categories/' + id + "/getById",
             success: function (category) {
                 $('#addModal #id').val(category.id);
                 $('#addModal #categoryName').val(category.categoryName);
@@ -146,9 +146,9 @@
         $('#delModalLabel').html('Are you sure ?');
         $.ajax({
             type: 'GET',
-            url: '/api/categories/' + id + "/getById",
+            url: '/api/admin/categories/' + id + "/getById",
             success: function (category) {
-                $('#delModalLabel #del-content').val(category.categoryName);
+                $('#delModal #del-content').text(category.categoryName);
                 $('#delModal #del-link').attr("href", "/admin/categories/" + id + "/delete");
             }
         });

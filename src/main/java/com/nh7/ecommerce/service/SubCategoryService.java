@@ -84,5 +84,7 @@ public class SubCategoryService {
         return subCategoryDtos;
     }
 
+    // for (Admin) get SubCategory by Id
+    public SubCategory getById(long id) {return subCategoryRepository.findById(id);}
 
 }

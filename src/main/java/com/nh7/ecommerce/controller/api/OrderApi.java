@@ -26,7 +26,7 @@ public class OrderApi implements ICrudApi<OrderDto, UserOrder> {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/item/{itemId}/{itemStatus}")
+    @GetMapping("/item/{itemId}/status/{itemStatus}")
     public ResponseEntity<Object> updateItem(@PathVariable(name = "itemId") long itemId,
                                              @PathVariable(name = "itemStatus") String itemStatus) {
         orderService.updateItemStatus(itemId,itemStatus);

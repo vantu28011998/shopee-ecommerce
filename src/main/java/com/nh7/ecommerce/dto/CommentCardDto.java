@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class CommentCardDto {
     private String content;
-    private int evalute;
+    private Double rating;
     private String userName;
     private String userAvatar;
 }

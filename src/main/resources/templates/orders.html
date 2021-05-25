@@ -31,17 +31,17 @@
                                         <table id="example" class="table table-hover table-bordered mb-4">
                                             <thead>
                                             <tr class="text-center">
-                                                <th scope="col">Order Id</th>
+                                                <th scope="col" class="text-start">Customer</th>
                                                 <th scope="col" class="text-start">Product</th>
-                                                <th scope="col">Status</th>
                                                 <th scope="col">Billing Address</th>
                                                 <th scope="col">Date</th>
                                                 <th scope="col">Total</th>
+                                                <th scope="col">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr th:each="order : ${orderList}" class="align-middle text-center">
-                                                <th th:text="${order.id}"></th>
+                                                <td th:text="${order?.user?.userDetails?.fullName}" class="text-start"></td>
                                                 <td style="width: 20%" class="text-start">
                                                     <th:block th:if="${order.itemList}">
                                                         <th:block th:each="item : ${order.itemList}">
@@ -49,10 +49,14 @@
                                                         </th:block>
                                                     </th:block>
                                                 </td>
-                                                <td th:text="${order?.orderStatus}"></td>
                                                 <td th:text="${order?.user?.userDetails?.address}"></td>
                                                 <td th:text="${#temporals.format(order?.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
                                                 <td th:text="${order?.orderPrice}"></td>
+                                                <td>
+                                                    <a th:href="@{/admin/order-details/{orderId}(orderId = ${order.id})}" class="btn btn-sm btn-danger view-btn">
+                                                        <i class="bi bi-file-earmark-text"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>

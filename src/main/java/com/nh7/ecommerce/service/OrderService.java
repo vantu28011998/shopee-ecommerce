@@ -39,6 +39,14 @@ public class OrderService {
         }
     }
 
+    public UserOrder getById(long id) {
+        try {
+            return orderRepository.findById(id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     // (User) for Buy Products
     public OrderDto createNewOrder(OrderDto orderDto) {
         UserOrder newOrder = new UserOrder();
@@ -107,7 +115,6 @@ public class OrderService {
         }
         order.setOrderPrice(orderPrice);
         orderRepository.save(order);
-
     }
 
     // (Admin) for get Recent Purchases in Week

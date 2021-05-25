@@ -17,7 +17,7 @@ public class Comment extends BaseEntity{
     @Column
     private String content;
     @Column
-    private Integer evalute;
+    private Double rating;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;

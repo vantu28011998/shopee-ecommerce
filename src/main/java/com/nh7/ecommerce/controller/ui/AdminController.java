@@ -102,4 +102,12 @@ public class AdminController {
         model.addAttribute("orderList", orderService.getAll());
         return "orders";
     }
+
+    @RequestMapping("/order-details/{orderId}")
+    public String showOrderDetails(@PathVariable(name = "orderId") long orderId,Model model) {
+        model.addAttribute("order", orderService.getById(orderId));
+        return "order-details";
+    }
+
+
 }

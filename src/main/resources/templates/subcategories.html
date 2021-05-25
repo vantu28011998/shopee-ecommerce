@@ -125,7 +125,7 @@
         $('#addModalLabel').html('Edit Sub Category');
         $.ajax({
             type: 'GET',
-            url: '/api/subcategories/' + id + "/getById",
+            url: '/api/admin/subcategories/' + id + "/getById",
             success: function (subCategory) {
                 $('#addModal #id').val(subCategory.id);
                 $('#addModal #subCategoryName').val(subCategory.subCategoryName);
@@ -150,9 +150,9 @@
         $('#delModalLabel').html('Are you sure ?');
         $.ajax({
             type: 'GET',
-            url: '/api/subcategories/' + id + "/getById",
+            url: '/api/admin/subcategories/' + id + "/getById",
             success: function (subCategory) {
-                $('#delModalLabel #del-content').val(subCategory.subCategoryName);
+                $('#delModal #del-content').text(subCategory.subCategoryName);
                 $('#delModal #del-link').attr("href", "/admin/subcategories/" + id + "/delete");
             }
         });

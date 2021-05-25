@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<UserOrder, Long> {
-    UserOrder findById(int id);
+    UserOrder findById(long id);
 
     // (Admin) for get Recent Purchases in Week
     @Query(value = "select * from user_order where yearweek(created_at) = yearweek(now())", nativeQuery = true)
