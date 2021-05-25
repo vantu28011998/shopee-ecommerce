@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @CrossOrigin("*")
 @RestController
 @ControllerAdvice
-@RequestMapping(value = "/api/login/facebook")
+    @RequestMapping(value = "/api/login/facebook")
 public class SocialFacebookApi {
     private String clientId="304496104650841";
 
@@ -66,7 +66,7 @@ public class SocialFacebookApi {
             userEntity.setEmailAddress(userProfile.getEmail());
             userEntity.setPassword(password);
             userEntity.setAuthProvider(AuthProviderEnum.FACEBOOK_USER);
-            com.nh7.ecommerce.entity.User user =userService.save(userEntity);
+            com.nh7.ecommerce.entity.User user =userService.saveSocial(userEntity);
             idOfEmail = user.getId();
             //USER DETAIL
             UserDetails userDetails = new UserDetails();
@@ -98,7 +98,7 @@ public class SocialFacebookApi {
             userEntity.setPassword(password);
             userEntity.setAuthProvider(AuthProviderEnum.FACEBOOK_USER);
             userEntity.setAvatar(socialDataModel.getPicture());
-            com.nh7.ecommerce.entity.User user = userService.save(userEntity);
+            com.nh7.ecommerce.entity.User user = userService.saveSocial(userEntity);
             idOfEmail = user.getId();
 
             //USER DETAIL

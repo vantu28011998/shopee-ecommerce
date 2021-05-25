@@ -48,21 +48,13 @@ public class UserApi implements ICrudApi<UserDto, User> {
     @PostMapping(value = {"","/"})
     @Override
     public ResponseEntity<Object> create(@RequestBody User item) {
-        User user = userService.save(item);
-        if(user.getUsername()==null) {
-            return new ResponseEntity<>("User doesn't create because username have existed",HttpStatus.OK);
-        }
-        if(user.getEmailAddress()==null) {
-            return new ResponseEntity<>("User doesn't create because email address have existed",HttpStatus.OK);
-        }
+        User user = userService.saveLocal(item);
+        if(user==null)return new ResponseEntity<>("Username or password is existed",HttpStatus.CREATED);
         UserDto userDto = modelMapperUtil.map(user,UserDto.class);
         return new ResponseEntity<>(userDto,HttpStatus.CREATED);
     }
 
-
-
     //----------PUT METHOD---------//
-
 
     @PutMapping("/{id}")
     @Override

@@ -1,18 +1,14 @@
 package com.nh7.ecommerce.dto;
-
-import com.nh7.ecommerce.entity.Product;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Lob;
-
+import java.time.LocalDateTime;
 @Getter
 @Setter
 public class PostDto {
     private Long id;
     private String postTitle;
-    private String postDecription;
-    private int soldQuantity;
-    private Product product;
-    private Long userId;
+    private String postDescription;
+    private ProductDto productDto;
+    private String createBy;
+    private LocalDateTime createAt;
 }

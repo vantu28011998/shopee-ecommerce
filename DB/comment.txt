@@ -1,24 +1,7 @@
-[
-    {
-        "id": 1,
-        "content": "Tôi đã nhận được hàng, áo rất đẹp cảm ơn shop nhé, hình ảnh k liên quan",
-        "evalute": 5,
-        "post": {
-            "id": 1
-        },
-        "user": {
-            "id": 3
-        }
-    },
-    {
-        "id": 2,
-        "content": "☘️ KHÁCH Lưu ý mua theo combo để hưởng giá ưu đãi nhé. chất cotton 4 c siêu đẹp luôn nhé mọi người,- Đường may tỉ mỉ, bền đẹp: Từng đường viền may được thực hiện tỉ mỉ và tinh tế vừa đẹp mắt vừa đảm bảo độ bền",
-        "evalute": 5,
-        "post": {
-            "id": 1
-        },
-        "user": {
-            "id": 4
-        }
-    }
-]
+{
+   "content": "☘️Tôi đã nhận được hàng, áo rất đẹp cảm ơn shop nhé, hình ảnh k liên quan",
+   "rating": 5,
+   "post": {
+       "id": 1
+   }
+}   

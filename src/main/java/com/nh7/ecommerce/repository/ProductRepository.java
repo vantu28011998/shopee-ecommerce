@@ -26,7 +26,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "WHERE ca.id=:id", nativeQuery = true)
     List<Product> findByCategoryId(@Param("id") long id);
     Page<Product> findAll(Pageable pageable);
-
     @Query(value = "SELECT products.*\n" +
             "FROM(\n" +
             "\tSELECT pr.*\n" +

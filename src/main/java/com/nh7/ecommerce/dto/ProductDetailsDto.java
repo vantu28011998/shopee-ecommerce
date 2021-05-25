@@ -15,7 +15,7 @@ public class ProductDetailsDto {
     private String productThumbnail;
     private int quantity;
     private int discount;
-    private double avgEvalute;
+    private Double avgRating;
     // information of shop
     private long shopId;
     private String shopLogo;
@@ -29,7 +29,7 @@ public class ProductDetailsDto {
     private String subCategoryName;
     // information of Post
     private String postTitle;
-    private String postDecription;
+    private String postDescription;
     private int soldQuantity;
     // information of Comment
     List<CommentCardDto> commentList;

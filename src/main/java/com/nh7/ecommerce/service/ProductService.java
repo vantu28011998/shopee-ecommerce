@@ -45,7 +45,7 @@ public class ProductService {
             productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
             productCardDto.setDiscount(pr.getDiscount());
             productCardDto.setSubcategoryId(pr.getSubCategory().getId());
-            productCardDto.setAvgEvalute(pr.getAvgEvalute());
+            productCardDto.setAvgEvalute(pr.getAvgRating());
             productCardDtos.add(productCardDto);
         }
         return productCardDtos;
@@ -103,6 +103,7 @@ public class ProductService {
         int page = pageable.getPageNumber();
         int totalRow = productRepository.countProductsBySubCategoryId(id);
         List<Product> products = productRepository.findProductsBySubCategoryAndId(id,limit,offset);
+        System.out.println("DANG TEST CHO NAY");
         List<ProductCardDto> productCardDtos = convert(products);
         ResponsePageable<ProductCardDto> responsePageable = new ResponsePageable<>();
         responsePageable.setItems(productCardDtos);

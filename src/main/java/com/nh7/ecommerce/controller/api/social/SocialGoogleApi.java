@@ -65,15 +65,15 @@ public class SocialGoogleApi {
             userEntity.setPassword(password);
             userEntity.setAuthProvider(AuthProviderEnum.GOOGLE_USER);
             userEntity.setAvatar(socialDataModel.getPicture());
-            User user = userService.save(userEntity);
+            User user = userService.saveSocial(userEntity);
             idOfEmail = user.getId();
-
             //USER DETAIL
             UserDetails userDetails = new UserDetails();
             userDetails.setUser(user);
             userDetails.setFullName(socialDataModel.getFamily_name()+" "+ socialDataModel.getGiven_name());
             userDetailsService.save(userDetails);
         }
+
         SocialLogin socialLogin = new SocialLogin();
         UserDto user = userService.findById(idOfEmail);
         User u = new User();
