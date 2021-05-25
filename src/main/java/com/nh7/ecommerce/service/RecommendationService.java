@@ -90,7 +90,7 @@ public class RecommendationService {
             System.out.print(" "+ratedProductModels[i].getRating());
         }
         System.out.println("PRODUCT SIZE:" + productSize);
-        if(offset+limit<productSize){
+        if(offset+limit<=productSize){
             for(int i=0;i<limit;i++){
                 productIdResult[i]=ratedProductModels[offset+i].getId();
                 System.out.print(" "+ ratedProductModels[offset+i].getId());
