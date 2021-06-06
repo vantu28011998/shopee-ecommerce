@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RatingRepository extends JpaRepository<Rating,Long> {
-    @Query(value = "select avg(rate.rating) from ecommerce.rating rate where product_id=:productId",nativeQuery = true)
+    @Query(value = "select avg(rating.rating) from rating where product_id=:productId",nativeQuery = true)
     Double findAvgRating(@Param("productId") Long productId);
 }
