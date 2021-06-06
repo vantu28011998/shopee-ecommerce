@@ -20,7 +20,7 @@ public class CategoryApi implements ICrudApi<CategoryDto,Category> {
 
     //----------GET METHOD---------//
     @Override
-    @GetMapping(value = {"/","","/all"})
+    @GetMapping(value = "")
     public ResponseEntity<List<CategoryDto>> getAll() {
         return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
     }

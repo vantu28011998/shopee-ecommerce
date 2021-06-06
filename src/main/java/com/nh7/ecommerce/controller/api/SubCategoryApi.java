@@ -20,7 +20,7 @@ public class SubCategoryApi implements ICrudApi<SubCategoryDto, SubCategory>{
 
     //----------GET METHOD---------//
 
-    @GetMapping(value = {"/subcategories","/subcategories/","/subcategories/all"})
+    @GetMapping(value = "/subcategories")
     @Override
     public ResponseEntity<List<SubCategoryDto>> getAll() {
         return new ResponseEntity<>(subCategoryService.findAll(), HttpStatus.OK);
@@ -65,7 +65,7 @@ public class SubCategoryApi implements ICrudApi<SubCategoryDto, SubCategory>{
 
     //----------DELETE METHOD---------//
 
-    @DeleteMapping("/subcategories/all")
+    @DeleteMapping("/subcategories")
     @Override
     public ResponseEntity<Object> deleteAll() {
         subCategoryService.deleteAll();

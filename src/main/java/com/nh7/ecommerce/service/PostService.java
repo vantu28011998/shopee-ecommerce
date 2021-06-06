@@ -7,9 +7,7 @@ import com.nh7.ecommerce.entity.Post;
 import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.entity.Shop;
 import com.nh7.ecommerce.entity.User;
-import com.nh7.ecommerce.repository.PostRepository;
-import com.nh7.ecommerce.repository.ShopRepository;
-import com.nh7.ecommerce.repository.UserRepository;
+import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,9 @@ public class PostService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private ShopRepository shopRepository;
+    private ProductRepository productRepository;
+    @Autowired
+    private RatingRepository ratingRepository;
     Post getPostById(int id) {return postRepository.findById(id);}
     List<Post> getAllPost(){return (List<Post>) postRepository.findAll();}
     // CODE BY HUY
@@ -44,7 +44,8 @@ public class PostService {
             Product product = post.getProduct();
             productDto.setId(product.getId());
             productDto.setQuantity(product.getQuantity());
-            productDto.setAvgEvalute(product.getAvgRating());
+            productDto.setAvgRating(ratingRepository.findAvgRating(product.getId()));
+            productDto.setProductName(product.getProductName());
             productDto.setProductThumbnail(product.getProductThumbnail());
             productDto.setProductPrice(product.getProductPrice());
             productDto.setDiscount(product.getDiscount());
@@ -63,7 +64,23 @@ public class PostService {
         postDto.setPostDescription(post.getPostDescription());
         return postDto;
     }
-
+    public List<ProductDto> findProductInPost(Long id){
+        List<Post> posts = postRepository.findAllByUserId(id);
+        List<ProductDto> productDtos = new ArrayList<>();
+        for(Post post : posts){
+            Product product = post.getProduct();
+            ProductDto productDto = new ProductDto();
+            productDto.setId(product.getId());
+            productDto.setProductName(product.getProductName());
+            productDto.setProductPrice(product.getProductPrice());
+            productDto.setProductThumbnail(product.getProductThumbnail());
+            productDto.setDiscount(product.getDiscount());
+            productDto.setQuantity(product.getQuantity());
+            productDto.setAvgRating(ratingRepository.findAvgRating(product.getId()));
+            productDtos.add(productDto);
+        }
+        return productDtos;
+    }
     public List<Post> saveAll(List<Post> posts){
         return (List<Post>) postRepository.saveAll(posts);
     }

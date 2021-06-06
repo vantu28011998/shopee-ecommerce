@@ -23,7 +23,7 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     private ProductDetailsService productDetailsService;
 
     //---------GET METHOD----------//
-    @GetMapping(value = {"/products","/products/all","/product/"})
+    @GetMapping(value = {"/products"})
     @Override
     public ResponseEntity<List<ProductCardDto>> getAll() {
         return new ResponseEntity<>(productService.getAll(),HttpStatus.OK);

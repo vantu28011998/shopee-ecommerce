@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
@@ -19,4 +20,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     void deleteById(long id);
     @Query(value = "select * from post po join product pr on pr.id = po.product_id where pr.id = :id ",nativeQuery = true)
     Post findByProductId(@Param("id")long id);
+    @Query(value = "SELECT * FROM post WHERE user_id=:userId",nativeQuery = true)
+    List<Post> findAllByUserId(@Param("userId") Long userId);
 }

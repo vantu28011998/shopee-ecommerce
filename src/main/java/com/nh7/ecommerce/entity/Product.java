@@ -22,9 +22,6 @@ public class Product extends BaseEntity {
     @Column(name="product_name")
     private String productName;
 
-    @Column(name = "avg_evalute")
-    private Double avgRating;
-
     @Column(name="product_thumbnail")
     private String productThumbnail;
 
