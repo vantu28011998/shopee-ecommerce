@@ -22,7 +22,8 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
+    @Autowired
+    private RatingRepository ratingRepository;
     // CODE BY HUY
     @Autowired
     private CategoryRepository categoryRepository;
@@ -47,7 +48,7 @@ public class ProductService {
             productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
             productCardDto.setDiscount(pr.getDiscount());
             productCardDto.setSubcategoryId(pr.getSubCategory().getId());
-            productCardDto.setAvgEvalute(pr.getAvgRating());
+            productCardDto.setAvgEvalute(ratingRepository.findAvgRating(pr.getId()));
             productCardDtos.add(productCardDto);
         }
         return productCardDtos;

@@ -6,6 +6,7 @@ import com.nh7.ecommerce.dto.ProductDetailsDto;
 import com.nh7.ecommerce.entity.Comment;
 import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.repository.ProductRepository;
+import com.nh7.ecommerce.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ import java.util.List;
 public class ProductDetailsService {
     @Autowired
     private ProductRepository productRepository;
-
+    @Autowired
+    private RatingRepository ratingRepository;
     public ProductDetailsDto getProductDetailByProductId(long id){
         ProductDetailsDto productDetailsDTO = new ProductDetailsDto();
         Product product = productRepository.findById(id);
@@ -26,7 +28,7 @@ public class ProductDetailsService {
         productDetailsDTO.setProductThumbnail(product.getProductThumbnail());
         productDetailsDTO.setQuantity(product.getQuantity());
         productDetailsDTO.setDiscount(product.getDiscount());
-        productDetailsDTO.setAvgRating(product.getAvgRating());
+        productDetailsDTO.setAvgRating(ratingRepository.findAvgRating(product.getId()));
         productDetailsDTO.setCategoryName(product.getSubCategory().getCategory().getCategoryName());
         productDetailsDTO.setSubCategoryName(product.getSubCategory().getSubCategoryName());
         productDetailsDTO.setShopId(product.getPost().getUser().getShop().getId());
@@ -44,7 +46,7 @@ public class ProductDetailsService {
             CommentCardDto commentCardDTO = new CommentCardDto();
             commentCardDTO.setContent(comment.getContent());
             commentCardDTO.setRating(comment.getRating());
-            commentCardDTO.setUserName(comment.getUser().getUsername());
+                commentCardDTO.setUserName(comment.getUser().getUsername());
             commentCardDTO.setUserAvatar(comment.getUser().getAvatar());
             commentCardDtos.add(commentCardDTO);
         }

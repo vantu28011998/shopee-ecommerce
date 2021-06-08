@@ -23,7 +23,7 @@ public class UserApi implements ICrudApi<UserDto, User> {
     private UserService userService;
     @Autowired
     private ModelMapperUtil modelMapperUtil;
-    @GetMapping(value = {"/","","/all"})
+    @GetMapping
 //    @PreAuthorize("@appAuthorizer.authorize(authentication,'VIEW',this)")
     @Override
     public ResponseEntity<List<UserDto>> getAll() {
@@ -45,7 +45,7 @@ public class UserApi implements ICrudApi<UserDto, User> {
         return new ResponseEntity<>("Users are created successfully",HttpStatus.CREATED);
     }
 
-    @PostMapping(value = {"","/"})
+    @PostMapping
     @Override
     public ResponseEntity<Object> create(@RequestBody User item) {
         User user = userService.saveLocal(item);

@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.controller.api;
 
 import com.nh7.ecommerce.dto.PostDto;
+import com.nh7.ecommerce.dto.ProductDto;
 import com.nh7.ecommerce.entity.Comment;
 import com.nh7.ecommerce.entity.Post;
 import com.nh7.ecommerce.service.CommentService;
@@ -8,12 +9,13 @@ import com.nh7.ecommerce.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/home")
+@RequestMapping("/api/home/posts")
 @ControllerAdvice
 @CrossOrigin
 public class PostApi implements ICrudApi<PostDto, Post>{
@@ -21,42 +23,47 @@ public class PostApi implements ICrudApi<PostDto, Post>{
     private PostService postService;
     @Autowired
     private CommentService commentService;
-    @GetMapping(value = {"/posts/","/posts","/posts/all"})
+    @GetMapping
     @Override
     public ResponseEntity<List<PostDto>> getAll() {
         return new ResponseEntity<>(postService.findAll(),HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/posts/{id}"})
+    @GetMapping(value = {"/{id}"})
     @Override
     public ResponseEntity<PostDto> get(@PathVariable Long id) {
         return new ResponseEntity<>(postService.findById(id),HttpStatus.OK);
     }
+    @GetMapping(value = {"/products"})
+    public ResponseEntity<List<ProductDto>> getProduct(@RequestParam("userId") Long id) {
+        return new ResponseEntity<>(postService.findProductInPost(id),HttpStatus.OK);
+    }
 
     //----------POST METHOD---------//
 
-    @PostMapping("/posts/all")
+    @PostMapping("/all")
     @Override
     public ResponseEntity<Object> createAll(@RequestBody List<Post> items) {
         postService.saveAll(items);
         return new ResponseEntity<>("Posts are created successfully",HttpStatus.CREATED);
     }
 
-    @PostMapping(value = {"/posts","/posts/"})
+    @PostMapping
+    @PreAuthorize("@appAuthorizer.authorize(authentication,'CREATE',this)")
     @Override
     public ResponseEntity<Object> create(@RequestBody Post item) {
         postService.save(item);
         return new ResponseEntity<>("POST HAS JUST CREATED SUCCESSFULLY",HttpStatus.CREATED);
     }
 
-    @PostMapping("/posts/{id}/comments")
+    @PostMapping("/comments")
     public ResponseEntity<Object> commentAndRating(@RequestBody Comment comment){
         commentService.save(comment);
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
     //----------PUT METHOD---------//
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("{id}")
     @Override
     public ResponseEntity<Object> update(@PathVariable Long id,@RequestBody Post item) {
         return null;
@@ -64,13 +71,13 @@ public class PostApi implements ICrudApi<PostDto, Post>{
 
     //----------DELETE METHOD---------//
 
-    @DeleteMapping("/posts/all")
+    @DeleteMapping("all")
     @Override
     public ResponseEntity<Object> deleteAll() {
         postService.deleteAll();
         return new ResponseEntity<>("Posts are deleted successfully",HttpStatus.OK);
     }
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("{id}")
     @Override
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         postService.delete(id);

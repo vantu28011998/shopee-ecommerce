@@ -28,11 +28,11 @@
         "city": "Da Nang"
     },
     "user":{
-        "authProvider": "FACEBOOK_USER",
+        "authProvider": "LOCAL",
         "avatar": null,
-        "emailAddress": "tranvantu123456789abc@gmail.com",
+        "emailAddress": "lnh99@gmail.com",
         "id": 2,
-        "password": "vul3ZtdBjVH08hpM5OUJrDbIPjYgl2",
-        "username": "Tran Van Tu"
+        "password": "huy",
+        "username": "huy"
     }
 }
