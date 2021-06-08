@@ -1,4 +1,4 @@
-package com.nh7.ecommerce.dto;
+package com.nh7.ecommerce.enums;
 
 public enum ItemStatus {
     AWAITING_FULFILLMENT,

@@ -3,12 +3,15 @@ package com.nh7.ecommerce.controller.api;
 import com.nh7.ecommerce.dto.SubCategoryDto;
 import com.nh7.ecommerce.entity.SubCategory;
 import com.nh7.ecommerce.service.CategoryService;
+import com.nh7.ecommerce.service.ProductService;
 import com.nh7.ecommerce.service.SubCategoryService;
 import com.nh7.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @CrossOrigin
 @RestController
@@ -23,6 +26,12 @@ public class AdminApi {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProductService productService;
+
+    final int currentMonth = LocalDate.now().getMonthValue();
+    final int currentYear = LocalDate.now().getYear();
 
     @GetMapping("/categories/{id}/getById")
     public ResponseEntity<Object> getCategoryById(@PathVariable(name = "id") long id){
@@ -43,5 +52,11 @@ public class AdminApi {
     @GetMapping("/users/{id}/getById")
     public ResponseEntity<Object> getUserInfoById(@PathVariable(name = "id") long id) {
         return new ResponseEntity<>(userService.getUserInfoById(id), HttpStatus.OK);
+    }
+
+    // for get map Product Best Sell In Current Month
+    @GetMapping("/home/line-chart")
+    public ResponseEntity<Object> getProductsBestSell() {
+        return new ResponseEntity<>(productService.getProductBestSell(currentMonth,currentYear), HttpStatus.OK);
     }
 }

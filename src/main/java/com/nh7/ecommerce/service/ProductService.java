@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -67,7 +69,7 @@ public class ProductService {
         return convert(products);
     }
     public ResponsePageable<ProductCardDto> getPageableProductsByCategoryId(long id,Pageable pageable){
-        Sort sort=Sort.by("product_name").ascending();
+        Sort sort = Sort.by("product_name").ascending();
         int offset = (int) pageable.getOffset();
         int limit= pageable.getPageSize();
         int page = pageable.getPageNumber();
@@ -98,7 +100,7 @@ public class ProductService {
         return convert(products);
     }
     public ResponsePageable<ProductCardDto> getPageableProductsBySubcategoryId(long id,Pageable pageable){
-        Sort sort=Sort.by("product_name").ascending();
+        Sort sort = Sort.by("product_name").ascending();
         int offset = (int) pageable.getOffset();
         int limit= pageable.getPageSize();
         int page = pageable.getPageNumber();
@@ -116,7 +118,7 @@ public class ProductService {
         return responsePageable;
     }
 
-    // for count products in month
+    // (Admin) for count products in month
     public int getCountProductInMonth(int month, int year) {
         return productRepository.countProductCreatedAtMonth(month, year);
     }
@@ -140,5 +142,19 @@ public class ProductService {
     // (Admin) for get All for Admin
     public List<Product> getAllForAdmin() {
         return (List<Product>) productRepository.findAll();
+    }
+
+    // (Admin) for get Products best sell
+    public Map<String, Object> getProductBestSell(int currentMonth, int currentYear) {
+        Map<String, Object> mapProduct = new HashMap<>();
+        List<String> productNameList = new ArrayList<>();
+        List<Integer> soldQuantityList = productRepository.getSumQuantityOfPrBestSell(currentMonth,currentYear);
+        List<Product> productList = productRepository.getProductsBestSell(currentMonth,currentYear);
+        for (Product pr : productList) {
+            productNameList.add(pr.getProductName());
+        }
+        mapProduct.put("productsName", productNameList);
+        mapProduct.put("soldQuantity", soldQuantityList);
+        return mapProduct;
     }
 }

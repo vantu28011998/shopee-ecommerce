@@ -72,4 +72,31 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // (Admin) for get Products has been in month of year
     @Query(value = "select count(id) from product where month(created_at) = :month and year(created_at) = :year", nativeQuery = true)
     int countProductCreatedAtMonth(@Param("month") int month, @Param("year") int year);
+
+    // (Admin) for get Product Best Sell
+    @Query(value = "select pr.* from product pr\n" +
+            "join item on pr.id = item.product_id\n" +
+            "where item_status = 'COMPLETED' and month(item.created_at) = :currentMonth and year(item.created_at) = :currentYear\n " +
+            "group by pr.id\n" +
+            "order by sum(item.product_quantity) desc\n" +
+            "limit 7", nativeQuery = true)
+    List<Product> getProductsBestSell(@Param("currentMonth") int currentMonth, @Param("currentYear") int currentYear);
+
+    @Query(value = "select sum(item.product_quantity) from product pr\n" +
+            "join item on pr.id = item.product_id\n" +
+            "where item_status = 'COMPLETED' and month(item.created_at) = :currentMonth and year(item.created_at) = :currentYear\n" +
+            "group by pr.id\n" +
+            "order by sum(item.product_quantity) desc\n" +
+            "limit 7", nativeQuery = true)
+    List<Integer> getSumQuantityOfPrBestSell(@Param("currentMonth") int currentMonth, @Param("currentYear") int currentYear);
+
+    // (User) for search product at home
+    @Query(value = "select * from product pr \n" +
+            "join post po on pr.id = po.product_id\n" +
+            "join sub_category scg on pr.subcategory_id = scg.id\n" +
+            "where pr.product_name like '%:searchArg%'\n" +
+            "or po.post_title like '%:searchArg%'\n" +
+            "or scg.sub_category_name like '%:searchArg%'", nativeQuery = true)
+    List<Product> searchProductAtHomePage(@Param("searchArg") String searchArg);
+
 }
