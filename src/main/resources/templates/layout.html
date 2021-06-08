@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <div th:fragment="head">
+    <th:block th:fragment="head">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.1/chart.min.js"></script>
         <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
         <title>ShopBee Admin Website</title>
-    </div>
+    </th:block>
 
     <div th:fragment="sidebar" id="sidebar-container">
         <div class="sidebar-user text-center">

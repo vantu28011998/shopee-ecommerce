@@ -128,7 +128,7 @@
                                 <div class="col-12 mb-4">
                                     <div class="card border-0 shadow" style="border-radius: 8px !important;">
                                         <div class="card-header" style="border-radius: 8px 8px 0 0 !important;">
-                                            <h5>Recent Purchases</h5>
+                                            <h5>Lastest Orders <small>(this week)</small></h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="user-status table-responsive latest-order-table">
@@ -153,7 +153,7 @@
                                                                 </th:block>
                                                             </th:block>
                                                         </td>
-                                                        <td th:text="${order?.orderPrice} + 'đ'"></td>
+                                                        <td th:text="${#numbers.formatInteger(order?.orderPrice,5)} + ' đ'"></td>
                                                     </tr>
                                                     </tbody>
                                                     </th:block>

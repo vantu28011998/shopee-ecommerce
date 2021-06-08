@@ -49,7 +49,7 @@
                                                         </th:block>
                                                     </th:block>
                                                 </td>
-                                                <td th:text="${order?.user?.userDetails?.address}"></td>
+                                                <td th:text="${order?.billingInfo?.shipAddress}"></td>
                                                 <td th:text="${#temporals.format(order?.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
                                                 <td th:text="${order?.orderPrice}"></td>
                                                 <td>

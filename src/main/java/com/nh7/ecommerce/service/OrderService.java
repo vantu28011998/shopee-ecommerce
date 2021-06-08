@@ -1,7 +1,7 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ItemDto;
-import com.nh7.ecommerce.dto.ItemStatus;
+import com.nh7.ecommerce.enums.ItemStatus;
 import com.nh7.ecommerce.dto.OrderDto;
 import com.nh7.ecommerce.entity.BillingInfo;
 import com.nh7.ecommerce.entity.Item;
@@ -60,7 +60,8 @@ public class OrderService {
             item.setItemStatus(ItemStatus.AWAITING_FULFILLMENT.toString());
             item.setOrder(newOrder);
             item.setProductQuantity(itemDto.getQty());
-            item.setItemPrice(itemDto.getQty() * productRepository.findById(productId).getProductPrice());
+            Product product = productRepository.findById(productId);
+            item.setItemPrice(itemDto.getQty() * product.getProductPrice() * (100 - product.getDiscount()) / 100);
             item.setShop(productRepository.findById(productId).getPost().getUser().getShop());
             itemList.add(item);
         }

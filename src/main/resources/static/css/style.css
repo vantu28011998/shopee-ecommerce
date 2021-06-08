@@ -147,6 +147,9 @@ ul.avatar-dropdown {
 .bg-secondary {
     background-color: #13c9ca !important;
 }
+.bg-success {
+    background-color: #81ba00 !important;
+}
 .btn-secondary {
     background-color: #13c9ca !important;
     color: #FFFFFF !important;
