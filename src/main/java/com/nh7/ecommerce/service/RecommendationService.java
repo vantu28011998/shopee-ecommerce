@@ -1,6 +1,8 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ProductCardDto;
+import com.nh7.ecommerce.dto.pageable.Pagination;
+import com.nh7.ecommerce.dto.pageable.ResponsePageable;
 import com.nh7.ecommerce.entity.Rating;
 import com.nh7.ecommerce.model.RatedProductModel;
 import com.nh7.ecommerce.recommendation.MatrixFactorization;
@@ -26,7 +28,7 @@ public class RecommendationService {
     private MatrixFactorization matrixFactorization;
     @Autowired
     private ProductService productService;
-    public List<ProductCardDto> recommendFor(Long id, Pageable pageable){
+    public ResponsePageable<ProductCardDto> recommendFor(Long id, Pageable pageable){
         int limit=pageable.getPageSize();
         int page=pageable.getPageNumber();
         int offset=0;
@@ -97,7 +99,15 @@ public class RecommendationService {
             }
         }else System.out.println("OFFSET + LIMIT COULDN'T BE USED");
         System.out.println("LENGHTH = " + productIdResult.length);
-        return productService.getProductsByIds(productIdResult);
+        ResponsePageable<ProductCardDto> productCardDtoResponse = new ResponsePageable<>();
+        Pagination pagination = new Pagination();
+        pagination.setLimit(limit);
+        pagination.setPage(page);
+        Integer totalRow = productRepository.countAll();
+        pagination.setTotalRow(totalRow);
+        productCardDtoResponse.setPagination(pagination);
+        productCardDtoResponse.setItems(productService.getProductsByIds(productIdResult));
+        return productCardDtoResponse;
     }
 
 

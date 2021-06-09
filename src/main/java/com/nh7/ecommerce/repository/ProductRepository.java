@@ -15,7 +15,8 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
+    @Query(value = "SELECT count(*) FROM product",nativeQuery = true)
+    Integer countAll();
     Product findById(long id);
     @Query(value = "SELECT pr.id FROM product pr",nativeQuery = true)
     List<Long> findAllId();
