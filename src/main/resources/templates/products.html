@@ -51,8 +51,8 @@
                                                 <td th:text="'đ ' + ${product.productPrice}"></td>
                                                 <td th:text="${product.discount} + ' %'"></td>
                                                 <td th:text="${product.quantity}"></td>
-                                                <td th:text="${product.subCategory.category.categoryName}">̣</td>
-                                                <td th:text="${product.subCategory.subCategoryName}"></td>
+                                                <td th:text="${product?.subCategory?.category?.categoryName}">̣</td>
+                                                <td th:text="${product?.subCategory?.subCategoryName}"></td>
                                                 <td>
                                                     <a th:href="@{/admin/deleteProduct/{id}(id=${product.id})}" class="btn btn-sm btn-danger">
                                                         <i class="bi bi-trash"></i>

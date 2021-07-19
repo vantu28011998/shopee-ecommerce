@@ -1,7 +1,9 @@
 package com.nh7.ecommerce.controller.ui;
 
+import com.nh7.ecommerce.dto.LoginDto;
 import com.nh7.ecommerce.entity.Category;
 import com.nh7.ecommerce.entity.SubCategory;
+import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
@@ -30,13 +33,16 @@ public class AdminController {
     final int currentMonth = LocalDate.now().getMonthValue();
     final int currentYear = LocalDate.now().getYear();
 
-    @RequestMapping("")
+    @RequestMapping("/home")
     public String showAllCategoies(Model model){
         model.addAttribute("orderList", orderService.getRecentPurchasesInWeek());
         model.addAttribute("totalProductsInMonth", productService.getCountProductInMonth(currentMonth, currentYear));
         model.addAttribute("revenueInMonth", orderService.getRevenueInMonth(currentMonth,currentYear));
         model.addAttribute("countOrdersInMonth", orderService.getCountOrdersInMonth(currentMonth,currentYear));
         model.addAttribute("countVendersInMonth", userService.getCountVendorsInMonth(currentMonth,currentYear));
+        model.addAttribute("userLogin", model.asMap().get("userLogin"));
+//        model.addAttribute("fullname", model.asMap().get("fullname"));
+//        model.addAttribute("avatarUrl", model.asMap().get("avatarUrl"));
         return "admin";
     }
 
@@ -109,5 +115,24 @@ public class AdminController {
         return "order-details";
     }
 
+    @RequestMapping("")
+    public String login(Model model) {
+        model.addAttribute("loginDto", new LoginDto());
+        return "login";
+    }
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String handleLogin(LoginDto loginDto, Model model, RedirectAttributes redir) {
+        for (User user : userService.getAllForAdmin()) {
+            if (user.getUsername().equals(loginDto.getUsername())
+                && userService.checkPassword(loginDto.getPassword(), user.getPassword())) {
+                redir.addFlashAttribute("userLogin", user);
+//                redir.addFlashAttribute("fullname", user.getUserDetails().getFullName());
+//                redir.addFlashAttribute("avatarUrl", user.getAvatar());
+                return "redirect:/admin/home";
+            }
+        }
+        model.addAttribute("message", "Tài khoản không tồn tại");
+        return "login";
+    }
 }

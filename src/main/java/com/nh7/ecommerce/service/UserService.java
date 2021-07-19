@@ -37,8 +37,14 @@ public class UserService {
     @Qualifier("passwordEncoder")
     @Autowired
     private PasswordEncoder bcryptEncoder;
+
     @Autowired
     private ShopRepository shopRepository;
+
+    public boolean checkPassword(String rawPassword, String encodedPassword) {
+        return bcryptEncoder.matches(rawPassword, encodedPassword);
+    }
+
     private void setRoleFromEntityToDto(User user,UserDto userDto){
         List<Role> roles = user.getRoles();
         List<String> roleNames = new ArrayList<>();
@@ -47,6 +53,7 @@ public class UserService {
         }
         userDto.setRoleNames(roleNames);
     }
+
     public List<UserDto> findAll(){
         List<User> users= (List<User>) userRepository.findAll();
         List<UserDto> userDtos = modelMapperUtil.mapList(users,UserDto.class);

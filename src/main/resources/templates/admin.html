@@ -8,7 +8,7 @@
 <body>
 
     <div class="d-flex">
-        <div th:replace="layout :: sidebar"></div>
+        <div th:replace="~{layout :: sidebar(${fullname}, ${avatarUrl})}"></div>
 
         <div class="right-section d-flex flex-column">
             <div th:replace="layout :: menu-top"></div>
