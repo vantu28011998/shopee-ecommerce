@@ -14,15 +14,15 @@ public interface OrderRepository extends JpaRepository<UserOrder, Long> {
     UserOrder findById(long id);
 
     // (Admin) for get Recent Purchases in Week
-    @Query(value = "select * from user_order where yearweek(created_at) = yearweek(now())", nativeQuery = true)
+    @Query(value = "select * from user_order where date_part('week', created_at) = date_part('week', now())", nativeQuery = true)
     List<UserOrder> getRecentPurchasesInWeek();
 
     // (Admin) for get Revenue in Month Of Year
-    @Query(value = "select sum(order_price) from user_order where month(created_at) = :month and year(created_at) = :year", nativeQuery = true)
+    @Query(value = "select sum(order_price) from user_order where date_part('week',created_at) = :month and date_part('year',created_at) = :year", nativeQuery = true)
     Long getRevenueInMonth(@Param("month") int month, @Param("year") int year);
 
     // (Admin) for get count Order in Month of  Year
-    @Query(value = "select count(id) from user_order where month(created_at) = :month and year(created_at) = :year", nativeQuery = true)
+    @Query(value = "select count(id) from user_order where date_part('week',created_at) = :month and date_part('year',created_at) = :year", nativeQuery = true)
     Integer getCountOrdersInMonth(@Param("month") int month, @Param("year") int year);
 
     // (Admin) for get Total Revenue

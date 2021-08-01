@@ -56,7 +56,10 @@ public class ItemService {
         for (Item item : itemList) {
             VODto voDto = new VODto();
             voDto.setItemId(item.getId());
-            voDto.setCustomerName(item.getOrder().getUser().getUserDetails().getFullName());
+            System.out.println(item.getOrder().getId());
+            System.out.println(item.getOrder().getUser().getId());
+            System.out.println(item.getOrder().getUser().getUserDetails().getId());
+            voDto.setCustomerName("null");
             voDto.setProductName(item.getProduct().getProductName());
             voDto.setPostTitle(item.getProduct().getPost().getPostTitle());
             voDto.setProductQuantity(item.getProductQuantity());

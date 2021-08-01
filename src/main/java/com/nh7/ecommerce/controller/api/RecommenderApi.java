@@ -2,6 +2,7 @@ package com.nh7.ecommerce.controller.api;
 
 import com.nh7.ecommerce.dto.CategoryDto;
 import com.nh7.ecommerce.dto.ProductCardDto;
+import com.nh7.ecommerce.dto.pageable.ResponsePageable;
 import com.nh7.ecommerce.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -20,10 +21,9 @@ public class RecommenderApi {
     @Autowired
     private RecommendationService recommendationService;
     @GetMapping("/users/{id}/recommender")
-    public ResponseEntity<List<ProductCardDto>> getProductsByRecommender(@PathVariable Long id,@RequestParam("page") int page,@RequestParam("limit") int limit) {
+    public ResponseEntity<ResponsePageable<ProductCardDto>> getProductsByRecommender(@PathVariable Long id, @RequestParam("page") int page, @RequestParam("limit") int limit) {
         Pageable pageable= PageRequest.of(page,limit);
-        List<ProductCardDto> productCardDtos=recommendationService.recommendFor(id,pageable);
-        return new ResponseEntity<>(productCardDtos, HttpStatus.OK);
+        return new ResponseEntity<>(recommendationService.recommendFor(id,pageable), HttpStatus.OK);
     }
     @GetMapping("/anonymous/recommender")
     public ResponseEntity<List<ProductCardDto>> getProductsByRecommenderForAnonymous(@RequestParam("page") int page,@RequestParam("limit") int limit){

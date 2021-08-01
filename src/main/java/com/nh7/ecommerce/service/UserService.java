@@ -88,6 +88,7 @@ public class UserService {
     public List<Long> findIdsByEmailAddress(String emailaddress){
         return userRepository.findIdsByEmailAddress(emailaddress);
     }
+
     public Long findIdByUsername(String username){
         return userRepository.findIdByUsername(username);
     }

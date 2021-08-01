@@ -15,7 +15,8 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
+    @Query(value = "SELECT count(*) FROM product",nativeQuery = true)
+    Integer countAll();
     Product findById(long id);
     @Query(value = "SELECT pr.id FROM product pr",nativeQuery = true)
     List<Long> findAllId();
@@ -70,13 +71,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     int countProductsBySubCategoryId(@Param("id") long id);
 
     // (Admin) for get Products has been in month of year
-    @Query(value = "select count(id) from product where month(created_at) = :month and year(created_at) = :year", nativeQuery = true)
+    @Query(value = "select count(id) from product where date_part('month',created_at) = :month and date_part('year',created_at) = :year", nativeQuery = true)
     int countProductCreatedAtMonth(@Param("month") int month, @Param("year") int year);
 
     // (Admin) for get Product Best Sell
     @Query(value = "select pr.* from product pr\n" +
             "join item on pr.id = item.product_id\n" +
-            "where item_status = 'COMPLETED' and month(item.created_at) = :currentMonth and year(item.created_at) = :currentYear\n " +
+            "where item_status = 'COMPLETED' and date_part('month',item.created_at) = :currentMonth and date_part('year',item.created_at) = :currentYear\n " +
             "group by pr.id\n" +
             "order by sum(item.product_quantity) desc\n" +
             "limit 7", nativeQuery = true)
@@ -84,7 +85,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "select sum(item.product_quantity) from product pr\n" +
             "join item on pr.id = item.product_id\n" +
-            "where item_status = 'COMPLETED' and month(item.created_at) = :currentMonth and year(item.created_at) = :currentYear\n" +
+            "where item_status = 'COMPLETED' and date_part('month',item.created_at) = :currentMonth and date_part('year',item.created_at) = :currentYear\n" +
             "group by pr.id\n" +
             "order by sum(item.product_quantity) desc\n" +
             "limit 7", nativeQuery = true)
