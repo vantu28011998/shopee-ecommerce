@@ -10,8 +10,8 @@ import java.util.Properties;
 
 @Configuration
 public class MailConfig {
-    private String usernameGmail="shope.ecommerce.nh7@gmail.com";
-    private String passwordGmail="shope.ecommerce.28011998";
+    private String usernameGmail="nguyenvantu28011998it@gmail.com";
+    private String passwordGmail="nguyenvantu28011998it";
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
