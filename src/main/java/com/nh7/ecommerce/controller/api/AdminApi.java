@@ -1,6 +1,5 @@
 package com.nh7.ecommerce.controller.api;
 
-import com.nh7.ecommerce.dto.SubCategoryDto;
 import com.nh7.ecommerce.dto.admin.RevenueShopDto;
 import com.nh7.ecommerce.dto.admin.UserDto;
 import com.nh7.ecommerce.entity.*;
@@ -46,6 +45,37 @@ public class AdminApi {
 //        subCategoryDto.setCategoryName(subCategory.getCategory().getCategoryName());
 //        return new ResponseEntity<>(subCategoryDto, HttpStatus.OK);
 //    }
+
+    // api get admin info
+    @GetMapping("/personal-info")
+    public ResponseEntity<Object> getPersonalAdminInfo(@RequestParam(name = "id") long id) {
+        User user = userService.getUserById(id);
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        if (user.getUserDetails()!=null) {
+            userDto.setFullName(user.getUserDetails().getFullName());
+            userDto.setPhoneNumber(user.getUserDetails().getPhoneNumber());
+            userDto.setAddress(user.getUserDetails().getAddress());
+            userDto.setDayOfBirth(user.getUserDetails().getDayOfBird());
+        }
+        userDto.setAvatarUrl(user.getAvatar());
+        userDto.setEmail(user.getEmailAddress());
+        userDto.setStatus(user.getEnable());
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    // api change personal admin info
+    @PostMapping("/personal-info")
+    public ResponseEntity<Object> changePersonalAdminInfo(@RequestBody UserDto userDto) {
+        User user = userService.getUserById(userDto.getId());
+        user.setAvatar(userDto.getAvatarUrl());
+        user.getUserDetails().setFullName(userDto.getFullName());
+        user.getUserDetails().setPhoneNumber(userDto.getPhoneNumber());
+        user.getUserDetails().setAddress(userDto.getAddress());
+        user.getUserDetails().setDayOfBird(userDto.getDayOfBirth());
+        userService.saveNoBcrypt(user);
+        return new ResponseEntity<>("Changed personal information", HttpStatus.OK);
+    }
 
     // api get all account for [Manage Account]
     @GetMapping("/accounts")

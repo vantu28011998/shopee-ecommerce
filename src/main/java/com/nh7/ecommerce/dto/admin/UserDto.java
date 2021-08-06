@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,6 +19,7 @@ public class UserDto {
     private String phoneNumber;
     private String avatarUrl;
     private String shopName;
+    private String dayOfBirth;
     private List<Role> roles;
     private boolean status;
 }
