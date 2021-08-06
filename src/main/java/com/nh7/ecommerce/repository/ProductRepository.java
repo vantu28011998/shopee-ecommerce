@@ -80,7 +80,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "where item_status = 'COMPLETED' and date_part('month',item.created_at) = :currentMonth and date_part('year',item.created_at) = :currentYear\n " +
             "group by pr.id\n" +
             "order by sum(item.product_quantity) desc\n" +
-            "limit 7", nativeQuery = true)
+            "limit 5", nativeQuery = true)
     List<Product> getProductsBestSell(@Param("currentMonth") int currentMonth, @Param("currentYear") int currentYear);
 
     @Query(value = "select sum(item.product_quantity) from product pr\n" +
@@ -88,7 +88,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "where item_status = 'COMPLETED' and date_part('month',item.created_at) = :currentMonth and date_part('year',item.created_at) = :currentYear\n" +
             "group by pr.id\n" +
             "order by sum(item.product_quantity) desc\n" +
-            "limit 7", nativeQuery = true)
+            "limit 5", nativeQuery = true)
     List<Integer> getSumQuantityOfPrBestSell(@Param("currentMonth") int currentMonth, @Param("currentYear") int currentYear);
 
     // (User) for search product at home

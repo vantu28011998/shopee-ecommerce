@@ -200,4 +200,16 @@ public class UserService {
         return (List<User>) userRepository.findAll();
     }
 
+    // (Admin) lock user by Id
+    public boolean lockUserById(long id) {
+        return userRepository.lockUserById(id);
+    }
+    // (Admin) unlock user by id
+    public boolean unlockUserById(long id) {
+        return userRepository.unlockUserById(id);
+    }
+
+    // (Admin) set Role user by id
+
+
 }
