@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class GoogleAuthorized {
     @GetMapping("/")
     public String authorizeGoogle(Model model) {
-        return "google2267c49c2ec726ab"; // Trả về file index.html
+        return "googlef5ffcba406dd90c7"; // Trả về file index.html
     }
-    @GetMapping("/google2267c49c2ec726ab.html")
+    @GetMapping("/googlef5ffcba406dd90c7.html")
     public String authorizeGoogle2(Model model) {
-        return "google2267c49c2ec726ab"; // Trả về file index.html
+        return "googlef5ffcba406dd90c7"; // Trả về file index.html
     }
 }
