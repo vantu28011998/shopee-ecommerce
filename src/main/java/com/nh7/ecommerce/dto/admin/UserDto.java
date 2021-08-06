@@ -17,6 +17,7 @@ public class UserDto {
     private String address;
     private String phoneNumber;
     private String avatarUrl;
+    private String shopName;
     private List<Role> roles;
     private boolean status;
 }

@@ -44,4 +44,8 @@ public class ShopService {
     public void delete(Long id){
         shopRepository.deleteById(id);
     }
+
+    public List<Shop> getRevenueShop(int currentMonth, int currentYear) {
+        return shopRepository.revenueShop(currentMonth, currentYear);
+    }
 }

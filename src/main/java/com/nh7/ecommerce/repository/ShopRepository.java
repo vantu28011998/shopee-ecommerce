@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface ShopRepository extends JpaRepository<Shop, Long> {
@@ -18,4 +19,12 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
     @Query(value = "DELETE FROM shop WHERE shop.id=:id",nativeQuery = true)
     @Transactional
     void deleteById(long id);
+
+    @Query(value = "select shop.*  from shop join item\n" +
+            "on shop.id = item.shop_id \n" +
+            "where item_status = 'COMPLETED' and date_part('month',item.created_at) = :currentMonth and date_part('year',item.created_at) = :currentYear\n" +
+            "group by shop.id\n" +
+            "order by sum(item_price) desc\n" +
+            "limit 5", nativeQuery = true)
+    List<Shop> revenueShop(@Param("currentMonth") int currentMonth, @Param("currentYear") int currentYear);
 }

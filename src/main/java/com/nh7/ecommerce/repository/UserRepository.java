@@ -63,4 +63,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "join role r on r.id = ur.role_id\n" +
             "where r.role_name = 'VENDOR'", nativeQuery = true)
     List<User> getAllVendors();
+
+    @Query(value = "update u set enable = false where u.id = :id returning enable", nativeQuery = true)
+    boolean lockUserById(@Param("id") long id);
+
+    @Query(value = "update u set enable = true where u.id = :id returning enable", nativeQuery = true)
+    boolean unlockUserById(@Param("id") long id);
 }
