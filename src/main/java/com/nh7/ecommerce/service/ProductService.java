@@ -1,8 +1,10 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.ProductCardDto;
+import com.nh7.ecommerce.dto.admin.ProductBestSell;
 import com.nh7.ecommerce.dto.pageable.Pagination;
 import com.nh7.ecommerce.dto.pageable.ResponsePageable;
+import com.nh7.ecommerce.entity.Item;
 import com.nh7.ecommerce.entity.Product;
 import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
@@ -118,11 +120,6 @@ public class ProductService {
         return responsePageable;
     }
 
-    // (Admin) for count products in month
-    public int getCountProductInMonth(int month, int year) {
-        return productRepository.countProductCreatedAtMonth(month, year);
-    }
-
     public void deleteAll(){
         productRepository.deleteAll();
     }
@@ -145,16 +142,29 @@ public class ProductService {
     }
 
     // (Admin) for get Products best sell
-    public Map<String, Object> getProductBestSell(int currentMonth, int currentYear) {
-        Map<String, Object> mapProduct = new HashMap<>();
-        List<String> productNameList = new ArrayList<>();
-        List<Integer> soldQuantityList = productRepository.getSumQuantityOfPrBestSell(currentMonth,currentYear);
-        List<Product> productList = productRepository.getProductsBestSell(currentMonth,currentYear);
-        for (Product pr : productList) {
-            productNameList.add(pr.getProductName());
+    public List<ProductBestSell> getProductBestSell(int currentMonth, int currentYear, int limit) {
+        List<ProductBestSell> productBS = new ArrayList<>();
+        List<Product> productsBestSell = productRepository.getProductsBestSell(currentMonth, currentYear, limit);
+        for (Product pr : productsBestSell) {
+            ProductBestSell pbs = new ProductBestSell();
+            pbs.setCreatedAt(pr.getCreatedAt());
+            pbs.setDiscount(pr.getDiscount());
+            pbs.setProductName(pr.getProductName());
+            pbs.setProductPrice(pr.getProductPrice());
+            pbs.setProductThumbnail(pr.getProductThumbnail());
+            pbs.setSubcategoryName(pr.getSubCategory().getSubCategoryName());
+            pbs.setCategoryName(pr.getSubCategory().getCategory().getCategoryName());
+            int soldquantity = 0;
+            for (Item i : pr.getItemList()) {
+                soldquantity += i.getProductQuantity();
+            }
+            pbs.setSoldQuantity(soldquantity);
+            productBS.add(pbs);
         }
-        mapProduct.put("productsName", productNameList);
-        mapProduct.put("soldQuantity", soldQuantityList);
-        return mapProduct;
+        return productBS;
+    }
+    //(Admin) for get count all products in system
+    public int countProduct() {
+        return productRepository.countAll();
     }
 }

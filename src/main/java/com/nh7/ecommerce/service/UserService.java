@@ -152,9 +152,6 @@ public class UserService {
     public User getUserById(long id) { return userRepository.findById(id);}
 
     // (Admin)
-    public Integer getCountVendorsInMonth(int month, int year) { return userRepository.getCountVendorInMonth(month, year);}
-
-    // (Admin)
     public UserInfoDto getUserInfoById(long id) {
         User user = userRepository.findById(id);
         UserInfoDto userInfo = new UserInfoDto();
@@ -173,28 +170,6 @@ public class UserService {
         return userInfo;
     }
 
-    // (Admin)
-    public List<VendorDto> getAllVendors() {
-        List<User> userList = userRepository.getAllVendors();
-        List<VendorDto> vendorDtoList = new ArrayList<>();
-        for (User user : userList) {
-            VendorDto vendorDTO = new VendorDto();
-            vendorDTO.setId(user.getId());
-            vendorDTO.setCreatedAt(user.getCreatedAt());
-            if (user.getUserDetails() != null) {
-                vendorDTO.setVendorAvatar(user.getAvatar());
-                vendorDTO.setVendorName(user.getUserDetails().getFullName());
-            }
-            if (user.getShop() != null) {
-                vendorDTO.setShopName(user.getShop().getName());
-                vendorDTO.setProducts(productRepository.countProductByPostUserShop(user.getShop().getId()));
-                vendorDTO.setRevenue(orderRepository.getTotalRevenue(user.getShop().getId()));
-            }
-            vendorDtoList.add(vendorDTO);
-        }
-        return vendorDtoList;
-    }
-
     // (Admin) get All for Admin
     public List<User> getAllForAdmin(){
         return (List<User>) userRepository.findAll();
@@ -208,7 +183,10 @@ public class UserService {
     public boolean unlockUserById(long id) {
         return userRepository.unlockUserById(id);
     }
-
+    // (Admin) count account in system
+    public int countAccount() {
+        return userRepository.countById();
+    }
     // (Admin) set Role user by id
 
 
