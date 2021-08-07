@@ -15,6 +15,9 @@ import java.util.List;
 public interface ShopRepository extends JpaRepository<Shop, Long> {
     Shop findById(long id);
 
+    @Query(value = "select count(shop.id) from shop", nativeQuery=true)
+    int countById();
+
     @Modifying
     @Query(value = "DELETE FROM shop WHERE shop.id=:id",nativeQuery = true)
     @Transactional
@@ -25,6 +28,10 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
             "where item_status = 'COMPLETED' and date_part('month',item.created_at) = :currentMonth and date_part('year',item.created_at) = :currentYear\n" +
             "group by shop.id\n" +
             "order by sum(item_price) desc\n" +
-            "limit 5", nativeQuery = true)
-    List<Shop> revenueShop(@Param("currentMonth") int currentMonth, @Param("currentYear") int currentYear);
+            "limit :limit", nativeQuery = true)
+    List<Shop> revenueShop(@Param("currentMonth") int currentMonth, @Param("currentYear") int currentYear, @Param("limit") int limit);
+
+    @Query(value = "select sum(i.item_price) from shop sh\n" +
+            "join item i on sh.id = i.shop_id", nativeQuery = true)
+    String sumAllRevenue();
 }

@@ -45,7 +45,15 @@ public class ShopService {
         shopRepository.deleteById(id);
     }
 
-    public List<Shop> getRevenueShop(int currentMonth, int currentYear) {
-        return shopRepository.revenueShop(currentMonth, currentYear);
+    public List<Shop> getRevenueShop(int currentMonth, int currentYear, int limit) {
+        return shopRepository.revenueShop(currentMonth, currentYear, limit);
+    }
+
+    public int countShop() {
+        return shopRepository.countById();
+    }
+
+    public String sumAllRevenue() {
+        return shopRepository.sumAllRevenue();
     }
 }

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -151,8 +153,8 @@ public class AdminApi {
     }
     // api get 5 Revenue Shop In Current Month
     @GetMapping("/revenue-top/shops/month")
-    public ResponseEntity<Object> getRevenueShop() {
-        List<Shop> shops = shopService.getRevenueShop(currentMonth, currentYear);
+    public ResponseEntity<Object> getRevenueShop(@RequestParam(name = "limit") int limit) {
+        List<Shop> shops = shopService.getRevenueShop(currentMonth, currentYear, limit);
         System.out.println(shops);
         List<RevenueShopDto> revenueShopDtos = new ArrayList<>();
         for (Shop shop : shops) {
@@ -180,5 +182,19 @@ public class AdminApi {
             revenueShopDtos.add(r);
         }
         return new ResponseEntity<>(revenueShopDtos, HttpStatus.OK);
+    }
+    // api get overview for dashboard
+    @GetMapping("/overview")
+    public ResponseEntity<Object> getOverview() {
+        Map<String, String> overview = new HashMap<>();
+        overview.put("countAccount", String.valueOf(userService.countAccount()));
+        overview.put("countShop", String.valueOf(shopService.countShop()));
+        overview.put("countProduct", String.valueOf(productService.countProduct()));
+        if (shopService.sumAllRevenue().equals("null")) {
+            overview.put("sumAllRevenue", null);
+        } else {
+            overview.put("sumAllRevenue", String.valueOf(shopService.sumAllRevenue()));
+        }
+        return new ResponseEntity<>(overview, HttpStatus.OK);
     }
 }

@@ -118,11 +118,6 @@ public class ProductService {
         return responsePageable;
     }
 
-    // (Admin) for count products in month
-    public int getCountProductInMonth(int month, int year) {
-        return productRepository.countProductCreatedAtMonth(month, year);
-    }
-
     public void deleteAll(){
         productRepository.deleteAll();
     }
@@ -156,5 +151,9 @@ public class ProductService {
         mapProduct.put("productsName", productNameList);
         mapProduct.put("soldQuantity", soldQuantityList);
         return mapProduct;
+    }
+    //(Admin) for get count all products in system
+    public int countProduct() {
+        return productRepository.countAll();
     }
 }

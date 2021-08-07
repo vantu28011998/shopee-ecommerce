@@ -51,22 +51,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
     void savePassword(@Param("id") Long id,@Param("password") String password);
 
-    @Query(value = "select count(u.id) from u \n" +
-            "join user_role on u.id = user_role.user_id\n" +
-            "join role on role.id = user_role.role_id\n" +
-            "where role.role_name = 'VENDOR'\n" +
-            "and date_part('month',u.created_at) = :month and date_part('year',u.created_at) = :year", nativeQuery = true)
-    Integer getCountVendorInMonth(@Param(("month")) int month, @Param("year") int year);
-
-    @Query(value = "select u.* from u \n" +
-            "join user_role ur on u.id = ur.user_id\n" +
-            "join role r on r.id = ur.role_id\n" +
-            "where r.role_name = 'VENDOR'", nativeQuery = true)
-    List<User> getAllVendors();
-
     @Query(value = "update u set enable = false where u.id = :id returning enable", nativeQuery = true)
     boolean lockUserById(@Param("id") long id);
 
     @Query(value = "update u set enable = true where u.id = :id returning enable", nativeQuery = true)
     boolean unlockUserById(@Param("id") long id);
+
+    @Query(value = "select count(u.id) from u", nativeQuery = true)
+    int countById();
 }
