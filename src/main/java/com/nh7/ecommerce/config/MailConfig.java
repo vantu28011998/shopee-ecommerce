@@ -8,6 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 @Configuration
 @Configurable
@@ -80,7 +86,7 @@ public class MailConfig {
         props.put("mail.smtp.auth", auth);
         props.put("mail.smtp.starttls.enable", ttlsEnable);
         props.put("mail.debug", debug);
-
+        Session session = Session.getDefaultInstance(props);
         return props;
     }
 }
