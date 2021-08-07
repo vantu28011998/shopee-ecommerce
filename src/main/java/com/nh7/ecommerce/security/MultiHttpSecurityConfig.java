@@ -62,7 +62,7 @@ public class MultiHttpSecurityConfig {
             httpSecurity.csrf().disable()
                     // dont authenticate this particular request
                     .authorizeRequests().antMatchers("/api/login/**","/api/login", "/api/register","/api/home/**","/api/developer/**",
-                                                    "/admin/**","/api/admin/**","/css/**","/images/**","/js/**").permitAll().
+                                                    "/admin/**","/api/admin/**","/css/**","/images/**","/js/**","/googlef5ffcba406dd90c7.html","/").permitAll().
                     // all other requests need to be authenticated
                             anyRequest().authenticated().and().
                     // make sure we use stateless session; session won't be used to
