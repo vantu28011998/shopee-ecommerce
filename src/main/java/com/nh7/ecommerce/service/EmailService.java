@@ -18,7 +18,7 @@ public class EmailService {
 
     @Value("${email.from.address}")
     private String fromAddress;
-
+    //TEST
     public void sendMailMultipart(String toEmail, String subject, String message, File file) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
