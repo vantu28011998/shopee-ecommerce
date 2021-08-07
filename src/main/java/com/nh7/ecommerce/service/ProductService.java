@@ -44,7 +44,7 @@ public class ProductService {
             productCardDto.setId(pr.getId());
             productCardDto.setProductPrice(pr.getProductPrice());
             productCardDto.setProductThumbnail(pr.getProductThumbnail());
-            productCardDto.setAddress(pr.getPost().getUser().getShop().getAddress());
+//            productCardDto.setAddress(pr.getPost().getUser().getShop().getAddress());
             productCardDto.setPostTitle(pr.getPost().getPostTitle());
             productCardDto.setPostId(pr.getPost().getId());
             productCardDto.setSoldQuantity(pr.getPost().getSoldQuantity());
