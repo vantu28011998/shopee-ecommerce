@@ -190,11 +190,7 @@ public class AdminApi {
         overview.put("countAccount", String.valueOf(userService.countAccount()));
         overview.put("countShop", String.valueOf(shopService.countShop()));
         overview.put("countProduct", String.valueOf(productService.countProduct()));
-        if (shopService.sumAllRevenue().equals("null")) {
-            overview.put("sumAllRevenue", null);
-        } else {
-            overview.put("sumAllRevenue", String.valueOf(shopService.sumAllRevenue()));
-        }
+        overview.put("sumAllRevenue", shopService.sumAllRevenue());
         return new ResponseEntity<>(overview, HttpStatus.OK);
     }
 }
