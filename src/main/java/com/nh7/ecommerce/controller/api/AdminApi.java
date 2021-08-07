@@ -90,10 +90,12 @@ public class AdminApi {
                 userDto.setAddress(user.getUserDetails().getAddress());
                 userDto.setFullName(user.getUserDetails().getFullName());
                 userDto.setPhoneNumber(user.getUserDetails().getPhoneNumber());
+                userDto.setDayOfBirth(user.getUserDetails().getDayOfBird());
             } else  {
                 userDto.setAddress("");
                 userDto.setFullName("");
                 userDto.setPhoneNumber("");
+                userDto.setDayOfBirth("");
             }
             if (user.getShop()!=null) {
                 userDto.setShopName(user.getShop().getName());
