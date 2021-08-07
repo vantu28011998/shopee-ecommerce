@@ -148,8 +148,8 @@ public class AdminApi {
     }
     // api get 10 Product Best Sell In Current Month
     @GetMapping("/products/best-sell/month")
-    public ResponseEntity<Object> getProductsBestSell() {
-        return new ResponseEntity<>(productService.getProductBestSell(currentMonth,currentYear), HttpStatus.OK);
+    public ResponseEntity<Object> getProductsBestSell(@RequestParam(name = "limit") int limit) {
+        return new ResponseEntity<>(productService.getProductBestSell(currentMonth, currentYear, limit), HttpStatus.OK);
     }
     // api get 5 Revenue Shop In Current Month
     @GetMapping("/revenue-top/shops/month")
