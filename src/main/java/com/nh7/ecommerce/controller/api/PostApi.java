@@ -49,7 +49,7 @@ public class PostApi implements ICrudApi<PostDto, Post>{
     }
 
     @PostMapping
-    @PreAuthorize("@appAuthorizer.authorize(authentication,'CREATE',this)")
+//    @PreAuthorize("@appAuthorizer.authorize(authentication,'CREATE',this)")
     @Override
     public ResponseEntity<Object> create(@RequestBody Post item) {
         postService.save(item);

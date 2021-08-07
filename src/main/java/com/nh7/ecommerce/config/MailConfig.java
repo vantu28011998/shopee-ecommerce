@@ -1,14 +1,15 @@
 package com.nh7.ecommerce.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.Properties;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import java.util.Properties;
 
 @Configuration
+@Configurable
 public class MailConfig {
     private String usernameGmail="shope.ecommerce.nh7@gmail.com";
     private String passwordGmail="shope.ecommerce.28011998";
@@ -22,6 +23,8 @@ public class MailConfig {
         mailSender.setPassword(passwordGmail);
 
         Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.smtp.host", "mail.authsmtp.com");
+        props.put("mail.smtp.port", "mail.authsmtp.com");
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
