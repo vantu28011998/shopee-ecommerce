@@ -86,7 +86,6 @@ public class MailConfig {
         props.put("mail.smtp.auth", auth);
         props.put("mail.smtp.starttls.enable", ttlsEnable);
         props.put("mail.debug", debug);
-        Session session = Session.getDefaultInstance(props);
         return props;
     }
 }

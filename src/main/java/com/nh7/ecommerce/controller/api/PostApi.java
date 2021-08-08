@@ -59,7 +59,7 @@ public class PostApi implements ICrudApi<PostDto, Post>{
     @PostMapping("/comments")
     public ResponseEntity<Object> commentAndRating(@RequestBody Comment comment){
         commentService.save(comment);
-        return new ResponseEntity<>(null,HttpStatus.OK);
+        return new ResponseEntity<>("ok",HttpStatus.OK);
     }
     //----------PUT METHOD---------//
 

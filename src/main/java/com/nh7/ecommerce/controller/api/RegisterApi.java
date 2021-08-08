@@ -1,17 +1,13 @@
 package com.nh7.ecommerce.controller.api;
 
 import com.nh7.ecommerce.service.EmailService;
-import com.nh7.ecommerce.service.MailService;
-import com.nh7.ecommerce.service.UserService;
-import com.nh7.ecommerce.util.VerifyNumberUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailException;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import java.util.List;
+
 
 @RestController
 @CrossOrigin
@@ -44,10 +40,11 @@ public class RegisterApi {
     @RequestMapping(value = "" , method = RequestMethod.GET)
     public void sendEmail(@RequestParam("email-address") String email){
         try {
-            emailService.sendMail(email, "Test Subject", "TestMessage");
+            emailService.sendMail(email,"CLEVERCLOUD OK","CLEVERCLOUD OK");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+
     }
 
 }
