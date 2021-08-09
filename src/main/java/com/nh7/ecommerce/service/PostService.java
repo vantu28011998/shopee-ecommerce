@@ -40,6 +40,7 @@ public class PostService {
             postDto.setId(post.getId());
             postDto.setPostTitle(post.getPostTitle());
             postDto.setPostDescription(post.getPostDescription());
+            postDto.setSoldQuantity(post.getSoldQuantity());
             ProductDto productDto = new ProductDto();
             Product product = post.getProduct();
             productDto.setId(product.getId());
@@ -62,24 +63,63 @@ public class PostService {
         postDto.setId(post.getId());
         postDto.setPostTitle(post.getPostTitle());
         postDto.setPostDescription(post.getPostDescription());
+        postDto.setCreateAt(post.getCreatedAt());
+        postDto.setCreateBy(post.getCreatedBy());
+        postDto.setSoldQuantity(post.getSoldQuantity());
+        Product product = productRepository.findById(post.getProduct().getId()).get();
+        ProductDto productDto = new ProductDto();
+        productDto.setId(product.getId());
+        productDto.setProductName(product.getProductName());
+        productDto.setProductPrice(product.getProductPrice());
+        productDto.setQuantity(product.getQuantity());
+        productDto.setProductThumbnail(product.getProductThumbnail());
+        productDto.setDiscount(product.getDiscount());
+        productDto.setAvgRating(null);
+        postDto.setProductDto(productDto);
         return postDto;
     }
-    public List<ProductDto> findProductInPost(Long id){
-        List<Post> posts = postRepository.findAllByUserId(id);
-        List<ProductDto> productDtos = new ArrayList<>();
-        for(Post post : posts){
-            Product product = post.getProduct();
+    public  List<PostDto> findPostsByUserId(long userId){
+        List<Post> posts = postRepository.findAllByUserId(userId);
+        List<PostDto> postDtos = new ArrayList<>();
+        for(Post post : posts) {
+            PostDto postDto = new PostDto();
+            postDto.setId(1L);
+            postDto.setPostTitle(post.getPostTitle());
+            postDto.setSoldQuantity(post.getSoldQuantity());
+            postDto.setPostDescription(post.getPostDescription());
+            postDto.setCreateAt(post.getCreatedAt());
+            postDto.setCreateBy(post.getCreatedBy());
+            Product product = productRepository.findById(post.getProduct().getId()).get();
             ProductDto productDto = new ProductDto();
             productDto.setId(product.getId());
             productDto.setProductName(product.getProductName());
             productDto.setProductPrice(product.getProductPrice());
+            productDto.setQuantity(product.getQuantity());
             productDto.setProductThumbnail(product.getProductThumbnail());
             productDto.setDiscount(product.getDiscount());
-            productDto.setQuantity(product.getQuantity());
-            productDto.setAvgRating(ratingRepository.findAvgRating(product.getId()));
-            productDtos.add(productDto);
+            productDto.setAvgRating(null);
+            postDto.setProductDto(productDto);
+            postDtos.add(postDto);
         }
-        return productDtos;
+        return postDtos;
+    }
+    public PostDto updatePost(PostDto postDto){
+           Post post = new Post();
+           ProductDto productDto = postDto.getProductDto();
+           post.setId(postDto.getId());
+           post.setPostTitle(postDto.getPostTitle());
+           post.setPostDescription(postDto.getPostDescription());
+           post.setCreatedBy(postDto.getCreateBy());
+           post.setCreatedAt(postDto.getCreateAt());
+           Post savePost = postRepository.save(post);
+           Product product = productRepository.findById(savePost.getProduct().getId()).get();
+           product.setProductPrice(productDto.getProductPrice());
+           product.setProductName(productDto.getProductName());
+           product.setDiscount(productDto.getDiscount());
+           product.setProductThumbnail(productDto.getProductThumbnail());
+           product.setQuantity(productDto.getQuantity());
+           productRepository.save(product);
+           return postDto;
     }
     public List<Post> saveAll(List<Post> posts){
         return (List<Post>) postRepository.saveAll(posts);
@@ -91,6 +131,17 @@ public class PostService {
         User user = userRepository.findById(id).get();
         savePost.setUser(user);
         postRepository.save(savePost);
+    }
+    public boolean update(Post post){
+       Post dbPost = postRepository.findById(post.getId()).get();
+       if (dbPost == null ){
+           return false;
+       }
+       post.setUser(dbPost.getUser());
+       post.setCommentList(dbPost.getCommentList());
+       postRepository.save(post);
+       productRepository.save(post.getProduct());
+       return true;
     }
 
     public void deleteAll(){

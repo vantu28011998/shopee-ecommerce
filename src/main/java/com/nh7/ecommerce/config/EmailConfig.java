@@ -17,29 +17,7 @@ import javax.mail.internet.MimeMessage;
 
 @Configuration
 @Configurable
-public class MailConfig {
-//    private String usernameGmail="shope.ecommerce.nh7@gmail.com";
-//    private String passwordGmail="shope.ecommerce.28011998";
-//    @Bean
-//    public JavaMailSender getJavaMailSender() {
-//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//        mailSender.setHost("smtp.gmail.com");
-//        mailSender.setPort(587);
-//
-//        mailSender.setUsername(usernameGmail);
-//        mailSender.setPassword(passwordGmail);
-//
-//        Properties props = mailSender.getJavaMailProperties();
-//        props.put("mail.smtp.host", "mail.authsmtp.com");
-//        props.put("mail.smtp.port", "mail.authsmtp.com");
-//        props.put("mail.transport.protocol", "smtp");
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.starttls.enable", "true");
-//        props.put("mail.debug", "true");
-//
-//        return mailSender;
-//    }
-
+public class EmailConfig {
     @Value("${email.sender.host}")
     private String host;
 

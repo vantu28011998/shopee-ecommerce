@@ -4,6 +4,7 @@ import com.nh7.ecommerce.dto.PostDto;
 import com.nh7.ecommerce.dto.ProductDto;
 import com.nh7.ecommerce.entity.Comment;
 import com.nh7.ecommerce.entity.Post;
+import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.service.CommentService;
 import com.nh7.ecommerce.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class PostApi implements ICrudApi<PostDto, Post>{
     private PostService postService;
     @Autowired
     private CommentService commentService;
-    @GetMapping
+    @GetMapping("/all")
     @Override
     public ResponseEntity<List<PostDto>> getAll() {
         return new ResponseEntity<>(postService.findAll(),HttpStatus.OK);
@@ -35,8 +36,8 @@ public class PostApi implements ICrudApi<PostDto, Post>{
         return new ResponseEntity<>(postService.findById(id),HttpStatus.OK);
     }
     @GetMapping(value = {"/products"})
-    public ResponseEntity<List<ProductDto>> getProduct(@RequestParam("userId") Long id) {
-        return new ResponseEntity<>(postService.findProductInPost(id),HttpStatus.OK);
+    public ResponseEntity<List<PostDto>> getPostsByUserId(@RequestParam("userId") Long id) {
+        return new ResponseEntity<>(postService.findPostsByUserId(id),HttpStatus.OK);
     }
 
     //----------POST METHOD---------//
@@ -63,10 +64,15 @@ public class PostApi implements ICrudApi<PostDto, Post>{
     }
     //----------PUT METHOD---------//
 
-    @PutMapping("{id}")
     @Override
     public ResponseEntity<Object> update(@PathVariable Long id,@RequestBody Post item) {
-        return null;
+        item.setId(id);
+        return new ResponseEntity<>(item,HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updatePost(@PathVariable Long id,@RequestBody PostDto item) {
+        item.setId(id);
+        return new ResponseEntity<>(postService.updatePost(item),HttpStatus.OK);
     }
 
     //----------DELETE METHOD---------//

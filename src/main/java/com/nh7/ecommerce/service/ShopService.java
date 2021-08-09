@@ -28,12 +28,25 @@ public class ShopService {
         Shop shop = shopRepository.findById(id);
         return modelMapperUtil.map(shop,ShopDto.class);
     }
+    public ShopDto findByUserId(long userId){
+        Shop shop = shopRepository.findByUserId(userId);
+        System.out.println(shop.getId());
+        return modelMapperUtil.map(shop,ShopDto.class);
+    }
 
     public List<Shop> saveAll(List<Shop> shops){
         return (List<Shop>) shopRepository.saveAll(shops);
     }
 
     public Shop save(Shop shop){
+        return shopRepository.save(shop);
+    }
+    public Shop update(Shop shop){
+        Shop dbShop = shopRepository.findByUserId(shop.getUser().getId());
+        if (dbShop == null ){
+            return null;
+        }
+        shop.setId(dbShop.getId());
         return shopRepository.save(shop);
     }
 

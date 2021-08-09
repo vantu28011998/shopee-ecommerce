@@ -14,7 +14,8 @@ import java.util.List;
 @Repository
 public interface ShopRepository extends JpaRepository<Shop, Long> {
     Shop findById(long id);
-
+    @Query(value = "select * from shop where user_id= :id AND enable=true", nativeQuery=true)
+    Shop findByUserId(@Param("id") long id);
     @Query(value = "select count(shop.id) from shop", nativeQuery=true)
     int countById();
 

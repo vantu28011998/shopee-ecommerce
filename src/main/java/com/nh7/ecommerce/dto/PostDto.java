@@ -8,6 +8,7 @@ public class PostDto {
     private Long id;
     private String postTitle;
     private String postDescription;
+    private int soldQuantity;
     private ProductDto productDto;
     private String createBy;
     private LocalDateTime createAt;
