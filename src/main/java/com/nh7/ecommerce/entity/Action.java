@@ -21,7 +21,6 @@ public class Action {
     private Long id;
     @Column
     private String name;
-
     @OneToOne(mappedBy = "action",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Permission permission;
 }

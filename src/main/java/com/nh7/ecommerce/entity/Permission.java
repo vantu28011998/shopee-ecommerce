@@ -24,7 +24,6 @@ public class Permission extends BaseEntity{
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "action_id")
     private Action action;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "function_id")
     private Func func;

@@ -112,12 +112,16 @@ public class AdminApi {
     // api lock user by id
     @PostMapping("/accounts/{id}/lock_user")
     public ResponseEntity<Object> lockUserById(@PathVariable(name = "id") long id) {
-        return new ResponseEntity<>(userService.lockUserById(id),HttpStatus.OK);
+        User user = userService.getUserById(id);
+        userService.lockUserById(id);
+        return new ResponseEntity<>("Đã mở khóa tài khoản " + user.getUsername(),HttpStatus.OK);
     }
     // api unlock user by id
     @PostMapping("/accounts/{id}/unlock_user")
     public ResponseEntity<Object> unlockUserById(@PathVariable(name = "id") long id) {
-        return new ResponseEntity<>(userService.unlockUserById(id),HttpStatus.OK);
+        User user = userService.getUserById(id);
+        userService.unlockUserById(id);
+        return new ResponseEntity<>("Đã mở khóa tài khoản " + user.getUsername(),HttpStatus.OK);
     }
     // api set roles by id
     @PostMapping("/accounts/{id}")
