@@ -114,7 +114,7 @@ public class AdminApi {
     public ResponseEntity<Object> lockUserById(@PathVariable(name = "id") long id) {
         User user = userService.getUserById(id);
         userService.lockUserById(id);
-        return new ResponseEntity<>("Đã mở khóa tài khoản " + user.getUsername(),HttpStatus.OK);
+        return new ResponseEntity<>("Đã khóa tài khoản " + user.getUsername(),HttpStatus.OK);
     }
     // api unlock user by id
     @PostMapping("/accounts/{id}/unlock_user")
