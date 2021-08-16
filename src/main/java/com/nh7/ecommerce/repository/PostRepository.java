@@ -22,4 +22,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Post findByProductId(@Param("id")long id);
     @Query(value = "SELECT * FROM post WHERE user_id=:userId",nativeQuery = true)
     List<Post> findAllByUserId(@Param("userId") Long userId);
+    @Query(value = "SELECT * FROM post WHERE user_id=:userId AND enable=true",nativeQuery = true)
+    List<Post> findAllEnableProductsByUserId(@Param("userId") Long userId);
+    @Query(value = "SELECT * FROM post WHERE user_id=:userId AND enable=false",nativeQuery = true)
+    List<Post> findAllDisableProductsByUserId(@Param("userId") Long userId);
+    @Modifying
+    @Query(value = "UPDATE post SET enable = false WHERE post.id=:id",nativeQuery = true)
+    @Transactional
+    void disablePost(@Param("id") Long id);
 }

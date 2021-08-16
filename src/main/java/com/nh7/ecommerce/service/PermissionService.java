@@ -1,9 +1,10 @@
 package com.nh7.ecommerce.service;
 
-import com.nh7.ecommerce.dto.developer.PermissionDto;
+import com.nh7.ecommerce.dto.PermissionDto;
 import com.nh7.ecommerce.entity.Action;
 import com.nh7.ecommerce.entity.Func;
 import com.nh7.ecommerce.entity.Permission;
+import com.nh7.ecommerce.entity.Role;
 import com.nh7.ecommerce.repository.ActionRepository;
 import com.nh7.ecommerce.repository.FunctionRepository;
 import com.nh7.ecommerce.repository.PermissionRepository;
@@ -37,7 +38,7 @@ public class PermissionService {
     }
     public List<PermissionDto> findAll(){
         List<PermissionDto> permissionDtos = new ArrayList<>();
-        List<Permission> permissions = (List<Permission>) permissionRepository.findAll();
+        List<Permission> permissions = permissionRepository.findAll();
         for(Permission permission : permissions ){
             PermissionDto permissionDto = new PermissionDto();
             permissionDto.setId(permission.getId());
@@ -45,11 +46,13 @@ public class PermissionService {
             permissionDto.setDescription(permission.getDescription());
             permissionDto.setActionId(permission.getAction().getId());
             permissionDto.setActionName(permission.getAction().getName());
-            permissionDto.setFunctionId(permission.getFunc().getId());
-            permissionDto.setFunctionName(permission.getFunc().getName());
+//            permissionDto.setFunctionId(permission.getFunc().getId());
+//            permissionDto.setFunctionName(permission.getFunc().getName());
             permissionDtos.add(permissionDto);
         }
+        for (PermissionDto permissionDto : permissionDtos){
+            System.out.println(permissionDto.getDescription());
+        }
         return permissionDtos;
-
     }
 }

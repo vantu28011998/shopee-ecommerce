@@ -1,6 +1,6 @@
 package com.nh7.ecommerce.controller.api.developer;
 
-import com.nh7.ecommerce.dto.developer.PermissionDto;
+import com.nh7.ecommerce.dto.PermissionDto;
 import com.nh7.ecommerce.entity.Permission;
 import com.nh7.ecommerce.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @ControllerAdvice
-@RequestMapping(value = "/api/developer/permissions")
+@RequestMapping(value = "/api/developer/permissions/test")
 public class PermissionApi {
 
     @Autowired

@@ -35,16 +35,22 @@ public class RoleApi implements ICrudApi<RoleDto, Role> {
     @PostMapping("")
     @Override
     public ResponseEntity<Object> create(@RequestBody Role item) {
-        RoleDto roleDto = roleService.save(item);
-        if(roleDto == null){
-            return new ResponseEntity<>("Role is exist which couldn't create",HttpStatus.OK);
-        }else
-        return new ResponseEntity<>(roleDto, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
-    @PutMapping("/all")
     @Override
-    public ResponseEntity<Object> update(Long id, Role item) {
-        return null;
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, Role item) {
+         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updatePermission(@PathVariable("id") Long id,@RequestBody RoleDto item) {
+        item.setId(id);
+        System.out.println("permission "+ item.getPermissions().size());
+        boolean check =roleService.updatePermission(item);
+        if (check) {
+            return new ResponseEntity<>("Update role permission successfully", HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("Update role permission fail", HttpStatus.OK);
+        }
     }
     @DeleteMapping("/all")
     @Override

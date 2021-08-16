@@ -83,7 +83,7 @@ public class PostService {
         List<PostDto> postDtos = new ArrayList<>();
         for(Post post : posts) {
             PostDto postDto = new PostDto();
-            postDto.setId(1L);
+            postDto.setId(post.getId());
             postDto.setPostTitle(post.getPostTitle());
             postDto.setSoldQuantity(post.getSoldQuantity());
             postDto.setPostDescription(post.getPostDescription());
@@ -99,27 +99,139 @@ public class PostService {
             productDto.setDiscount(product.getDiscount());
             productDto.setAvgRating(null);
             postDto.setProductDto(productDto);
+            if(post.getEnable()==false){
+                postDto.setStatus(-1);
+            }else if(product.getQuantity()<1){
+                postDto.setStatus(0);
+            }else{
+                postDto.setStatus(1);
+            }
             postDtos.add(postDto);
         }
         return postDtos;
     }
+    public  List<PostDto> findPostsActiveProductsByUserId(long userId){
+        List<Post> posts = postRepository.findAllEnableProductsByUserId(userId);
+        List<PostDto> postDtos = new ArrayList<>();
+        for(Post post : posts) {
+            Product product = productRepository.findById(post.getProduct().getId()).get();
+            if (product.getQuantity()>0){
+                PostDto postDto = new PostDto();
+                postDto.setId(post.getId());
+                postDto.setPostTitle(post.getPostTitle());
+                postDto.setSoldQuantity(post.getSoldQuantity());
+                postDto.setPostDescription(post.getPostDescription());
+                postDto.setCreateAt(post.getCreatedAt());
+                postDto.setCreateBy(post.getCreatedBy());
+
+                ProductDto productDto = new ProductDto();
+                productDto.setId(product.getId());
+                productDto.setProductName(product.getProductName());
+                productDto.setProductPrice(product.getProductPrice());
+                productDto.setQuantity(product.getQuantity());
+                productDto.setProductThumbnail(product.getProductThumbnail());
+                productDto.setDiscount(product.getDiscount());
+                productDto.setAvgRating(null);
+                postDto.setProductDto(productDto);
+                postDto.setStatus(1);
+                postDtos.add(postDto);
+            }
+        }
+        return postDtos;
+    }
+    public  List<PostDto> findPostsDisableProductsByUserId(long userId){
+        List<Post> posts = postRepository.findAllDisableProductsByUserId(userId);
+        List<PostDto> postDtos = new ArrayList<>();
+        for(Post post : posts) {
+            PostDto postDto = new PostDto();
+            postDto.setId(post.getId());
+            postDto.setPostTitle(post.getPostTitle());
+            postDto.setSoldQuantity(post.getSoldQuantity());
+            postDto.setPostDescription(post.getPostDescription());
+            postDto.setCreateAt(post.getCreatedAt());
+            postDto.setCreateBy(post.getCreatedBy());
+            Product product = productRepository.findById(post.getProduct().getId()).get();
+            ProductDto productDto = new ProductDto();
+            productDto.setId(product.getId());
+            productDto.setProductName(product.getProductName());
+            productDto.setProductPrice(product.getProductPrice());
+            productDto.setQuantity(product.getQuantity());
+            productDto.setProductThumbnail(product.getProductThumbnail());
+            productDto.setDiscount(product.getDiscount());
+            productDto.setAvgRating(null);
+            postDto.setProductDto(productDto);
+            postDto.setStatus(-1);
+            postDtos.add(postDto);
+        }
+        return postDtos;
+    }
+    public  List<PostDto> findPostEmptyProductsByUserId(long userId){
+        List<Post> posts = postRepository.findAllByUserId(userId);
+        List<PostDto> postDtos = new ArrayList<>();
+        for(Post post : posts) {
+            Product product = productRepository.findById(post.getProduct().getId()).get();
+            if (product.getQuantity()==0){
+                PostDto postDto = new PostDto();
+                postDto.setId(post.getId());
+                postDto.setPostTitle(post.getPostTitle());
+                postDto.setSoldQuantity(post.getSoldQuantity());
+                postDto.setPostDescription(post.getPostDescription());
+                postDto.setCreateAt(post.getCreatedAt());
+                postDto.setCreateBy(post.getCreatedBy());
+
+                ProductDto productDto = new ProductDto();
+                productDto.setId(product.getId());
+                productDto.setProductName(product.getProductName());
+                productDto.setProductPrice(product.getProductPrice());
+                productDto.setQuantity(product.getQuantity());
+                productDto.setProductThumbnail(product.getProductThumbnail());
+                productDto.setDiscount(product.getDiscount());
+                productDto.setAvgRating(null);
+                postDto.setProductDto(productDto);
+                postDto.setStatus(0);
+                postDtos.add(postDto);
+            }
+
+        }
+        return postDtos;
+    }
+
+
+
+
     public PostDto updatePost(PostDto postDto){
-           Post post = new Post();
-           ProductDto productDto = postDto.getProductDto();
-           post.setId(postDto.getId());
-           post.setPostTitle(postDto.getPostTitle());
-           post.setPostDescription(postDto.getPostDescription());
-           post.setCreatedBy(postDto.getCreateBy());
-           post.setCreatedAt(postDto.getCreateAt());
-           Post savePost = postRepository.save(post);
-           Product product = productRepository.findById(savePost.getProduct().getId()).get();
-           product.setProductPrice(productDto.getProductPrice());
-           product.setProductName(productDto.getProductName());
-           product.setDiscount(productDto.getDiscount());
-           product.setProductThumbnail(productDto.getProductThumbnail());
-           product.setQuantity(productDto.getQuantity());
-           productRepository.save(product);
-           return postDto;
+             Post dbPost = postRepository.findById(postDto.getId()).get();
+             if (dbPost == null) return null;
+             if (!postDto.getPostTitle().equals(dbPost.getPostTitle())){
+                 dbPost.setPostTitle(postDto.getPostTitle());
+             }
+             if (!postDto.getPostDescription().equals(dbPost.getPostDescription())){
+                 dbPost.setPostDescription(postDto.getPostDescription());
+             }
+             Product dbProduct = productRepository.findById(dbPost.getProduct().getId()).get();
+            ProductDto productDto = postDto.getProductDto();
+             if (!dbProduct.getProductPrice().equals(productDto.getProductPrice())){
+                 dbProduct.setProductPrice(productDto.getProductPrice());
+             }
+             if (!dbProduct.getProductName().equals(productDto.getProductName())){
+                 dbProduct.setProductName(productDto.getProductName());
+             }
+             if (dbProduct.getDiscount() != productDto.getDiscount()){
+                 dbProduct.setDiscount(productDto.getDiscount());
+             }
+             if (dbProduct.getProductThumbnail().equals(productDto.getProductThumbnail())){
+                 dbProduct.setProductThumbnail(productDto.getProductThumbnail());
+             }
+             if(dbProduct.getQuantity() != productDto.getQuantity()){
+                 dbProduct.setQuantity(productDto.getQuantity());
+             }
+             postRepository.save(dbPost);
+             productRepository.save(dbProduct);
+             postDto.getProductDto().setId(dbProduct.getId());
+             postDto.setCreateBy(dbPost.getCreatedBy());
+             postDto.setCreateAt(dbPost.getCreatedAt());
+             postDto.setSoldQuantity(dbPost.getSoldQuantity());
+             return postDto;
     }
     public List<Post> saveAll(List<Post> posts){
         return (List<Post>) postRepository.saveAll(posts);
@@ -149,6 +261,6 @@ public class PostService {
     }
 
     public void delete(Long id){
-        postRepository.deleteById(id);
+        postRepository.disablePost(id);
     }
 }

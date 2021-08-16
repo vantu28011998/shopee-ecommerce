@@ -26,6 +26,6 @@ public class Permission extends BaseEntity{
     private Action action;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "function_id")
+    @JoinColumn(name = "func_id")
     private Func func;
 }

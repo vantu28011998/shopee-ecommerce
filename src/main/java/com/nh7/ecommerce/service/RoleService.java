@@ -1,7 +1,7 @@
 package com.nh7.ecommerce.service;
 
 import com.nh7.ecommerce.dto.RoleDto;
-import com.nh7.ecommerce.dto.developer.PermissionDto;
+import com.nh7.ecommerce.dto.PermissionDto;
 import com.nh7.ecommerce.entity.Permission;
 import com.nh7.ecommerce.entity.Role;
 import com.nh7.ecommerce.repository.PermissionRepository;
@@ -75,6 +75,18 @@ public class RoleService {
             roleDtos.add(roleDto);
         }
         return roleDtos;
+    }
+    public boolean updatePermission(RoleDto role){
+       try{
+           Role dbRole = roleRepository.findById(role.getId()).get();
+           permissionRepository.deleteRelateRolePermission(role.getId());
+           for(PermissionDto permission : role.getPermissions()){
+               permissionRepository.addRelateRolePermission(role.getId(),permission.getId());
+           }
+           return true;
+       }catch (Exception e){
+           return false;
+       }
     }
     public void delete(Long id){
         Role role = roleRepository.findById(id).get();

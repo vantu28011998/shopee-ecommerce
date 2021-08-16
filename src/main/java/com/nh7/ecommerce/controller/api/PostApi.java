@@ -30,7 +30,7 @@ public class PostApi implements ICrudApi<PostDto, Post>{
         return new ResponseEntity<>(postService.findAll(),HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/{id}"})
+    @GetMapping(value = {"/products/{id}"})
     @Override
     public ResponseEntity<PostDto> get(@PathVariable Long id) {
         return new ResponseEntity<>(postService.findById(id),HttpStatus.OK);
@@ -38,6 +38,18 @@ public class PostApi implements ICrudApi<PostDto, Post>{
     @GetMapping(value = {"/products"})
     public ResponseEntity<List<PostDto>> getPostsByUserId(@RequestParam("userId") Long id) {
         return new ResponseEntity<>(postService.findPostsByUserId(id),HttpStatus.OK);
+    }
+    @GetMapping(value = {"/products/empty"})
+    public ResponseEntity<List<PostDto>> getPostsEmptyProductsByUserId(@RequestParam("userId") Long id) {
+        return new ResponseEntity<>(postService.findPostEmptyProductsByUserId(id),HttpStatus.OK);
+    }
+    @GetMapping(value = {"/products/disable"})
+    public ResponseEntity<List<PostDto>> getPostsDisableProductByUserId(@RequestParam("userId") Long id) {
+        return new ResponseEntity<>(postService.findPostsDisableProductsByUserId(id),HttpStatus.OK);
+    }
+    @GetMapping(value = {"/products/active"})
+    public ResponseEntity<List<PostDto>> getPostsActiveProductByUserId(@RequestParam("userId") Long id) {
+        return new ResponseEntity<>(postService.findPostsActiveProductsByUserId(id),HttpStatus.OK);
     }
 
     //----------POST METHOD---------//
@@ -69,7 +81,7 @@ public class PostApi implements ICrudApi<PostDto, Post>{
         item.setId(id);
         return new ResponseEntity<>(item,HttpStatus.OK);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/products/{id}")
     public ResponseEntity<Object> updatePost(@PathVariable Long id,@RequestBody PostDto item) {
         item.setId(id);
         return new ResponseEntity<>(postService.updatePost(item),HttpStatus.OK);
@@ -77,13 +89,12 @@ public class PostApi implements ICrudApi<PostDto, Post>{
 
     //----------DELETE METHOD---------//
 
-    @DeleteMapping("all")
     @Override
     public ResponseEntity<Object> deleteAll() {
         postService.deleteAll();
         return new ResponseEntity<>("Posts are deleted successfully",HttpStatus.OK);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         postService.delete(id);
