@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @ControllerAdvice
-@RequestMapping(value = "/api/developer/permissions/test")
+@RequestMapping(value = "/api/developer/permissions")
 public class PermissionApi {
 
     @Autowired
