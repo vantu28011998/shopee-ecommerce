@@ -45,8 +45,8 @@ public class RoleService {
             permissionDto.setPermissionName(permission.getPermissionName());
             permissionDto.setActionId(permission.getAction().getId());
             permissionDto.setActionName(permission.getAction().getName());
-//            permissionDto.setFunctionId(permission.getFunc().getId());
-//            permissionDto.setFunctionName(permission.getFunc().getName());
+            permissionDto.setFunctionId(permission.getFunc().getId());
+            permissionDto.setFunctionName(permission.getFunc().getName());
             pDtos.add(permissionDto);
         }
         roleDto.setPermissions(pDtos);
@@ -67,8 +67,8 @@ public class RoleService {
                 permissionDto.setDescription(permission.getDescription());
                 permissionDto.setActionId(permission.getAction().getId());
                 permissionDto.setActionName(permission.getAction().getName());
-//                permissionDto.setFunctionId(permission.getFunc().getId());
-//                permissionDto.setFunctionName(permission.getFunc().getName());
+                permissionDto.setFunctionId(permission.getFunc().getId());
+                permissionDto.setFunctionName(permission.getFunc().getName());
                 permissionDtos.add(permissionDto);
             }
             roleDto.setPermissions(permissionDtos);
