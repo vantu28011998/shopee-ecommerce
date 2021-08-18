@@ -242,6 +242,7 @@ public class PostService {
         Long id = userRepository.findIdByUsername(post.getCreatedBy());
         User user = userRepository.findById(id).get();
         savePost.setUser(user);
+        savePost.setEnable(true);
         postRepository.save(savePost);
     }
     public boolean update(Post post){
