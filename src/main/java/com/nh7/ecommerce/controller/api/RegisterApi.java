@@ -48,7 +48,7 @@ public class RegisterApi {
     public ResponseEntity<Otp> sendEmail(@RequestParam("email-address") String email){
         List<Long> idOfMail = userService.findIdsByEmailAddress(email);
         System.out.println(idOfMail.size());
-        if(idOfMail.size() == 0 ){
+        if(idOfMail.size() == 0){
             try {
                 Integer generatedNum = verifyNumberUtil.generate(5);
                 emailService.sendMail(email,"NH7 Ecommerce","MÃ XÁC MINH ĐĂNG KÝ TÀI KHOẢN CỦA BẠN LÀ "+generatedNum+" .Có hiệu lực trong 3 phút. Vui lòng KHÔNG chia sẻ mã này với người khác.");
@@ -56,6 +56,8 @@ public class RegisterApi {
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
+        }if(idOfMail.size()>0){
+            return new ResponseEntity<Otp>(new Otp(-1,"Email is existing","",""),HttpStatus.OK);
         }
         return new ResponseEntity<Otp>(new Otp(-1,"Create OTP fail","",""),HttpStatus.OK);
     }

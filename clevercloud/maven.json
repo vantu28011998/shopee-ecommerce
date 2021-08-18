@@ -4,7 +4,7 @@
     "goal": "package"
   },
   "deploy": {
-    "goal": "spring-boot:run",
+
     "jarName": "target/ecommerce-0.0.1-SNAPSHOT.jar"
   }
 }
