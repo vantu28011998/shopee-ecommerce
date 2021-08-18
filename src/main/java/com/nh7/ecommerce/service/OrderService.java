@@ -84,12 +84,13 @@ public class OrderService {
     }
 
     // (Vendor) for update orderPrice when set itemStatus = "Success"
-    public void updateItemStatus(long itemId, String newStatus) {
+    public boolean updateItemStatus(long itemId, String newStatus) {
         Item item = itemRepository.findById(itemId);
 
         // Update Sold Quantity
         String oldStatus = item.getItemStatus();
         String completed = ItemStatus.COMPLETED.toString();
+        if (oldStatus.equals(completed)) return false;
         if (!oldStatus.equals(completed) && newStatus.equals(completed)) {
             Product product = item.getProduct();
             int productQuantity = product.getQuantity();
@@ -116,6 +117,7 @@ public class OrderService {
         }
         order.setOrderPrice(orderPrice);
         orderRepository.save(order);
+        return true;
     }
 
     // (Admin) for get Recent Purchases in Week

@@ -32,8 +32,11 @@ public class OrderApi implements ICrudApi<OrderDto, UserOrder> {
     @GetMapping("/item/{itemId}/status/{itemStatus}")
     public ResponseEntity<Object> updateItem(@PathVariable(name = "itemId") long itemId,
                                              @PathVariable(name = "itemStatus") String itemStatus) {
-        orderService.updateItemStatus(itemId,itemStatus);
-        return new ResponseEntity<>("Update Item Success", HttpStatus.OK);
+        if (orderService.updateItemStatus(itemId,itemStatus)) {
+            return new ResponseEntity<>("Successed change status", HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("Failed change status, this item is COMPLETED", HttpStatus.OK);
+        }
     }
 
     // (Vendor) for get All Status
