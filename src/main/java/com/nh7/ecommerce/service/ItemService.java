@@ -49,16 +49,15 @@ public class ItemService {
     public ResponsePageable<VODto> getAllItemsByShopId(long id, Pageable pageable) {
         int offset = (int) pageable.getOffset();
         int limit= pageable.getPageSize();
+        System.out.println(offset + " " + limit);
         int page = pageable.getPageNumber();
         List<Item> itemList = itemRepository.getAllByShopId(id, limit, offset);
+        System.out.println(itemList.size());
         int totalRow = itemList.size();
         List<VODto> voDtoList = new ArrayList<>();
         for (Item item : itemList) {
             VODto voDto = new VODto();
             voDto.setItemId(item.getId());
-            System.out.println(item.getOrder().getId());
-            System.out.println(item.getOrder().getUser().getId());
-            System.out.println(item.getOrder().getUser().getUserDetails().getId());
             voDto.setCustomerName("null");
             voDto.setProductName(item.getProduct().getProductName());
             voDto.setPostTitle(item.getProduct().getPost().getPostTitle());
