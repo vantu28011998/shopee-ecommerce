@@ -35,7 +35,12 @@ public class RoleApi implements ICrudApi<RoleDto, Role> {
     @PostMapping("")
     @Override
     public ResponseEntity<Object> create(@RequestBody Role item) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        if (roleService.save(item)) {
+            return new ResponseEntity<>("Save role successfully", HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("Save role fail", HttpStatus.OK);
+        }
+
     }
     @Override
     public ResponseEntity<Object> update(@PathVariable("id") Long id, Role item) {

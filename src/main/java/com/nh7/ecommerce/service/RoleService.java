@@ -18,39 +18,43 @@ public class RoleService {
     private RoleRepository roleRepository;
     @Autowired
     private PermissionRepository permissionRepository;
-    public RoleDto save(Role item){
-        Long id = item.getId();
-        if(id==null){
-            Long have = roleRepository.findByRoleName(item.getRoleName());
-            if(have != null ){
-                return null;
-            }
-        }
-        System.out.println("OKLA");
-        List<Permission> permissions = item.getPermissions();
-        List<Permission> savePermission = new ArrayList<>();
-        for(Permission permission : permissions){
-            Permission p = permissionRepository.findById(permission.getId()).get();
-            savePermission.add(p);
-        }
-        item.setPermissions(savePermission);
-        Role role = roleRepository.save(item);
-        RoleDto roleDto = new RoleDto();
-        roleDto.setId(role.getId());
-        roleDto.setRoleName(role.getRoleName());
-        List<PermissionDto> pDtos = new ArrayList<>();
-        for(Permission permission : role.getPermissions()){
-            PermissionDto permissionDto = new PermissionDto();
-            permissionDto.setId(permission.getId());
-            permissionDto.setPermissionName(permission.getPermissionName());
-            permissionDto.setActionId(permission.getAction().getId());
-            permissionDto.setActionName(permission.getAction().getName());
-            permissionDto.setFunctionId(permission.getFunc().getId());
-            permissionDto.setFunctionName(permission.getFunc().getName());
-            pDtos.add(permissionDto);
-        }
-        roleDto.setPermissions(pDtos);
-        return roleDto;
+    public boolean save(Role item){
+          Role role = new Role();
+          role.setEnable(true);
+          role.setRoleName(item.getRoleName());
+          return true;
+//        Long id = item.getId();
+//        if(id==null){
+//            Long have = roleRepository.findByRoleName(item.getRoleName());
+//            if(have != null ){
+//                return null;
+//            }
+//        }
+//        System.out.println("OKLA");
+//        List<Permission> permissions = item.getPermissions();
+//        List<Permission> savePermission = new ArrayList<>();
+//        for(Permission permission : permissions){
+//            Permission p = permissionRepository.findById(permission.getId()).get();
+//            savePermission.add(p);
+//        }
+//        item.setPermissions(savePermission);
+//        Role role = roleRepository.save(item);
+//        RoleDto roleDto = new RoleDto();
+//        roleDto.setId(role.getId());
+//        roleDto.setRoleName(role.getRoleName());
+//        List<PermissionDto> pDtos = new ArrayList<>();
+//        for(Permission permission : role.getPermissions()){
+//            PermissionDto permissionDto = new PermissionDto();
+//            permissionDto.setId(permission.getId());
+//            permissionDto.setPermissionName(permission.getPermissionName());
+//            permissionDto.setActionId(permission.getAction().getId());
+//            permissionDto.setActionName(permission.getAction().getName());
+//            permissionDto.setFunctionId(permission.getFunc().getId());
+//            permissionDto.setFunctionName(permission.getFunc().getName());
+//            pDtos.add(permissionDto);
+//        }
+//        roleDto.setPermissions(pDtos);
+//        return roleDto;
     }
     public List<RoleDto> findAll(){
         List<Role> roles = (List<Role>) roleRepository.findAll();
