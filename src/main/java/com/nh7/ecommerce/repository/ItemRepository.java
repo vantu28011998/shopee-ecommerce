@@ -15,4 +15,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "select * from item where shop_id = :id order by created_at desc limit :limit offset :offset", nativeQuery = true)
     List<Item> getAllByShopId(@Param("id") long id, @Param("limit") int limit, @Param("offset") int offset);
+
+    @Query(value = "select * from item where shop_id = :id and item_status = :status order by created_at desc limit :limit offset :offset", nativeQuery = true)
+    List<Item> getItemOfShopByStatus(@Param("id") long id, @Param("limit") int limit, @Param("offset") int offset, @Param("status") String status);
 }

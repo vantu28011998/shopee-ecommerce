@@ -56,6 +56,13 @@ public class OrderApi implements ICrudApi<OrderDto, UserOrder> {
         return new ResponseEntity<>(itemService.getAllItemsByShopId(shopId, pageable), HttpStatus.OK);
     }
 
+    // (Vendor) for get Items Of Shop By Status
+    @GetMapping("/vendor/{shopId}/pageable-items/{status}")
+    public ResponseEntity<Object> getItemsOfShopByStatus(@PathVariable(name = "shopId") long shopId, @RequestParam int page, @RequestParam int limit, @PathVariable(name="status") String status) {
+        Pageable pageable = PageRequest.of(page,limit);
+        return new ResponseEntity<>(itemService.getItemsOfShopByStatus(shopId, pageable, status), HttpStatus.OK);
+    }
+
     @Override
     public ResponseEntity<List<OrderDto>> getAll() {
         return null;
