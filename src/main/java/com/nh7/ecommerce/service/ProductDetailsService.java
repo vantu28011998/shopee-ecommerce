@@ -46,8 +46,10 @@ public class ProductDetailsService {
             CommentCardDto commentCardDTO = new CommentCardDto();
             commentCardDTO.setContent(comment.getContent());
             commentCardDTO.setRating(comment.getRating());
+            if (comment.getUser() != null) {
                 commentCardDTO.setUserName(comment.getUser().getUsername());
-            commentCardDTO.setUserAvatar(comment.getUser().getAvatar());
+                commentCardDTO.setUserAvatar(comment.getUser().getAvatar());
+            }
             commentCardDtos.add(commentCardDTO);
         }
         productDetailsDTO.setCommentList(commentCardDtos);
