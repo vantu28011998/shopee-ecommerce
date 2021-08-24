@@ -22,7 +22,15 @@ public class RoleService {
           Role role = new Role();
           role.setEnable(true);
           role.setRoleName(item.getRoleName());
-          return true;
+          role.setPermissions(null);
+          role.setUsers(null);
+          try {
+              roleRepository.save(role);
+              return true;
+          } catch (Exception e) {
+              System.out.println(e);
+              return false;
+          }
 //        Long id = item.getId();
 //        if(id==null){
 //            Long have = roleRepository.findByRoleName(item.getRoleName());
@@ -63,20 +71,28 @@ public class RoleService {
             RoleDto roleDto = new RoleDto();
             roleDto.setId(role.getId());
             roleDto.setRoleName(role.getRoleName());
+            System.out.println(role.getRoleName());
+            System.out.println(role.getPermissions().size());
             List<PermissionDto> permissionDtos = new ArrayList<>();
-            for(Permission permission : role.getPermissions()){
-                PermissionDto permissionDto = new PermissionDto();
-                permissionDto.setId(permission.getId());
-                permissionDto.setPermissionName(permission.getPermissionName());
-                permissionDto.setDescription(permission.getDescription());
-                permissionDto.setActionId(permission.getAction().getId());
-                permissionDto.setActionName(permission.getAction().getName());
-                permissionDto.setFunctionId(permission.getFunc().getId());
-                permissionDto.setFunctionName(permission.getFunc().getName());
-                permissionDtos.add(permissionDto);
+            if (role.getPermissions().size() == 0 || role.getPermissions() == null) {
+                roleDtos.add(roleDto);
+            } else {
+                for(Permission permission : role.getPermissions()){
+                    PermissionDto permissionDto = new PermissionDto();
+                    permissionDto.setId(permission.getId());
+                    permissionDto.setPermissionName(permission.getPermissionName());
+                    permissionDto.setDescription(permission.getDescription());
+                    permissionDto.setActionId(permission.getAction().getId());
+                    permissionDto.setActionName(permission.getAction().getName());
+                    if (permission.getFunc() != null) {
+                        permissionDto.setFunctionId(permission.getFunc().getId());
+                        permissionDto.setFunctionName(permission.getFunc().getName());
+                    }
+                    permissionDtos.add(permissionDto);
+                }
+                roleDto.setPermissions(permissionDtos);
+                roleDtos.add(roleDto);
             }
-            roleDto.setPermissions(permissionDtos);
-            roleDtos.add(roleDto);
         }
         return roleDtos;
     }
