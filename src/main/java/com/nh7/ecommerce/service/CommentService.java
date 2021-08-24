@@ -32,6 +32,7 @@ public class CommentService {
     public void save(Comment comment){
         Comment saveComment = commentRepository.save(comment);
         Long userId = userRepository.findIdByUsername(saveComment.getCreatedBy());
+        if (userId == null) return;
         saveComment.setUser(userRepository.findById(userId).get());
         Rating rating = new Rating();
         rating.setRating(saveComment.getRating());
