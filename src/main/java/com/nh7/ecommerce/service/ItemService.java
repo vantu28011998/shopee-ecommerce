@@ -76,4 +76,35 @@ public class ItemService {
         return responsePageable;
     }
 
+    // (Vendor) for get All Items of User Shop By Status
+    public ResponsePageable<VODto> getItemsOfShopByStatus(long id, Pageable pageable, String status) {
+        int offset = (int) pageable.getOffset();
+        int limit= pageable.getPageSize();
+        System.out.println(offset + " " + limit);
+        int page = pageable.getPageNumber();
+        List<Item> itemList = itemRepository.getItemOfShopByStatus(id, limit, offset,status);
+        System.out.println(itemList.size());
+        int totalRow = itemList.size();
+        List<VODto> voDtoList = new ArrayList<>();
+        for (Item item : itemList) {
+            VODto voDto = new VODto();
+            voDto.setItemId(item.getId());
+            voDto.setCustomerName("null");
+            voDto.setProductName(item.getProduct().getProductName());
+            voDto.setPostTitle(item.getProduct().getPost().getPostTitle());
+            voDto.setProductQuantity(item.getProductQuantity());
+            voDto.setItemStatus(item.getItemStatus());
+            voDto.setCreatedAt(item.getCreatedAt());
+            voDtoList.add(voDto);
+        }
+        ResponsePageable<VODto> responsePageable = new ResponsePageable<>();
+        responsePageable.setItems(voDtoList);
+        Pagination pagination = new Pagination();
+        pagination.setLimit(limit);
+        pagination.setPage(page);
+        pagination.setTotalRow(totalRow);
+        responsePageable.setPagination(pagination);
+        return responsePageable;
+    }
+
 }
