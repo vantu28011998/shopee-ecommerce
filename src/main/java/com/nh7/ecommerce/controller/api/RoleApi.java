@@ -36,9 +36,9 @@ public class RoleApi implements ICrudApi<RoleDto, Role> {
     @Override
     public ResponseEntity<Object> create(@RequestBody Role item) {
         if (roleService.save(item)) {
-            return new ResponseEntity<>("Save role successfully", HttpStatus.OK);
+            return new ResponseEntity<>("Save new role success", HttpStatus.OK);
         }else {
-            return new ResponseEntity<>("Save role fail", HttpStatus.OK);
+            return new ResponseEntity<>("Save new role fail", HttpStatus.OK);
         }
 
     }
@@ -50,9 +50,9 @@ public class RoleApi implements ICrudApi<RoleDto, Role> {
     public ResponseEntity<Object> updatePermission(@PathVariable("id") Long id,@RequestBody RoleDto item) {
         item.setId(id);
         System.out.println("permission "+ item.getPermissions().size());
-        boolean check =roleService.updatePermission(item);
+        boolean check = roleService.updatePermission(item);
         if (check) {
-            return new ResponseEntity<>("Update role permission successfully", HttpStatus.OK);
+            return new ResponseEntity<>("Update role permission success", HttpStatus.OK);
         }else {
             return new ResponseEntity<>("Update role permission fail", HttpStatus.OK);
         }

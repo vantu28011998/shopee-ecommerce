@@ -29,7 +29,7 @@ public class OrderApi implements ICrudApi<OrderDto, UserOrder> {
     private ItemService itemService;
 
     // (Vendor) for set Status
-    @GetMapping("/item/{itemId}/status/{itemStatus}")
+    @PutMapping("/item/{itemId}/status/{itemStatus}")
     public ResponseEntity<Object> updateItem(@PathVariable(name = "itemId") long itemId,
                                              @PathVariable(name = "itemStatus") String itemStatus) {
         if (orderService.updateItemStatus(itemId,itemStatus)) {

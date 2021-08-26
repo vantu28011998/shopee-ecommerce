@@ -99,6 +99,8 @@ public class RoleService {
     public boolean updatePermission(RoleDto role){
        try{
            Role dbRole = roleRepository.findById(role.getId()).get();
+           dbRole.setRoleName(role.getRoleName());
+           roleRepository.save(dbRole);
            permissionRepository.deleteRelateRolePermission(role.getId());
            for(PermissionDto permission : role.getPermissions()){
                permissionRepository.addRelateRolePermission(role.getId(),permission.getId());
