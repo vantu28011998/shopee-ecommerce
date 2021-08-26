@@ -27,21 +27,6 @@ public class RegisterApi {
     private UserService userService;
     @Autowired
     private VerifyNumberUtil verifyNumberUtil;
-//    @GetMapping
-//    public ResponseEntity<Integer> sendEmail(@RequestParam(value="email-address") String emailAddress){
-//        List<Long> idOfMail = userService.findIdsByEmailAddress(emailAddress);
-//        System.out.println("SIZE EMAIL"+idOfMail.size());
-//        if(idOfMail.size() == 0 ){
-//            try {
-//                Integer generatedNum = verifyNumberUtil.generate(5);
-//                notificationService.sendEmail(emailAddress,generatedNum);
-//                return new ResponseEntity<>(generatedNum, HttpStatus.OK);
-//            } catch (MailException mailException) {
-//                System.out.println(mailException);
-//            }
-//        }
-//        return new ResponseEntity<>(-1, HttpStatus.OK);
-//    }
     @Autowired
     private EmailService emailService;
     @RequestMapping(value = "" , method = RequestMethod.GET)
@@ -51,8 +36,9 @@ public class RegisterApi {
         if(idOfMail.size() == 0){
             try {
                 Integer generatedNum = verifyNumberUtil.generate(5);
-                emailService.sendMail(email,"NH7 Ecommerce","MÃ XÁC MINH ĐĂNG KÝ TÀI KHOẢN CỦA BẠN LÀ "+generatedNum+" .Có hiệu lực trong 3 phút. Vui lòng KHÔNG chia sẻ mã này với người khác.");
-                return new ResponseEntity<Otp>(new Otp(0,"Create OTP succesfully",generatedNum.toString(),email),HttpStatus.OK);
+                emailService.sendMail(email,"NH7 Ecommerce","MÃ XÁC MINH ĐĂNG KÝ TÀI KHOẢN CỦA BẠN LÀ "+generatedNum+" .Có hiệu lực trong 1 phút. Vui lòng KHÔNG chia sẻ mã này với người khác.");
+                String otpNumber = generatedNum>9999?generatedNum.toString():("0"+generatedNum.toString());
+                return new ResponseEntity<Otp>(new Otp(0,"Create OTP succesfully",otpNumber,email),HttpStatus.OK);
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
