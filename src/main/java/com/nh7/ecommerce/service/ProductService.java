@@ -167,4 +167,23 @@ public class ProductService {
     public int countProduct() {
         return productRepository.countAll();
     }
+
+    //(User) for search Product at homepage
+    public ResponsePageable<ProductCardDto> searchProductAtHomePage(String searchArg, Pageable pageable) {
+        Sort sort = Sort.by("product_name").ascending();
+        int offset = (int) pageable.getOffset();
+        int limit= pageable.getPageSize();
+        int page = pageable.getPageNumber();
+        List<Product> products = productRepository.searchProductAtHomePage(searchArg,limit,offset);
+        int totalRow = products.size();
+        List<ProductCardDto> productCardDtos = convert(products);
+        ResponsePageable<ProductCardDto> responsePageable = new ResponsePageable<>();
+        responsePageable.setItems(productCardDtos);
+        Pagination pagination = new Pagination();
+        pagination.setLimit(limit);
+        pagination.setPage(page);
+        pagination.setTotalRow(totalRow);
+        responsePageable.setPagination(pagination);
+        return responsePageable;
+    }
 }

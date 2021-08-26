@@ -61,6 +61,11 @@ public class ProductApi implements ICrudApi<ProductCardDto,Product>{
     public ResponseEntity<Object> getProductDetails(@PathVariable(name = "id") long id){
         return new ResponseEntity<>(productDetailsService.getProductDetailByProductId(id), HttpStatus.OK);
     }
+    @GetMapping("/products/search")
+    public ResponseEntity<Object> searchProductAtHomePage(@RequestParam(name = "searchArg") String searchArg, @RequestParam(name = "limit") int limit, @RequestParam(name = "page") int page) {
+        Pageable pageable = PageRequest.of(page,limit);
+        return new ResponseEntity<>(productService.searchProductAtHomePage(searchArg, pageable), HttpStatus.OK);
+    }
     //----------POST METHOD---------//
 
     @PostMapping("/products/all")

@@ -92,12 +92,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Integer> getSumQuantityOfPrBestSell(@Param("currentMonth") int currentMonth, @Param("currentYear") int currentYear);
 
     // (User) for search product at home
-    @Query(value = "select * from product pr \n" +
+    @Query(value = "select pr.* from product pr \n" +
             "join post po on pr.id = po.product_id\n" +
             "join sub_category scg on pr.subcategory_id = scg.id\n" +
-            "where pr.product_name like '%:searchArg%'\n" +
-            "or po.post_title like '%:searchArg%'\n" +
-            "or scg.sub_category_name like '%:searchArg%'", nativeQuery = true)
-    List<Product> searchProductAtHomePage(@Param("searchArg") String searchArg);
+            "join category cg on scg.category_id = cg.id\n" +
+            "where pr.product_name like %:searchArg%\n" +
+            "or po.post_title like %:searchArg%\n" +
+            "or scg.sub_category_name like %:searchArg%\n" +
+            "or cg.category_name like %:searchArg% \n" +
+            "limit :limit offset :offset", nativeQuery = true)
+    List<Product> searchProductAtHomePage(@Param("searchArg") String searchArg, @Param("limit") int limit, @Param("offset") int offset);
 
 }
