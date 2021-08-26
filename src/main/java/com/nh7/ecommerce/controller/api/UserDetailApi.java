@@ -21,6 +21,11 @@ public class UserDetailApi implements ICrudApi<UserDetails,UserDetails> {
         return new ResponseEntity<>(userDetailsService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Object> getUserInfoById(@PathVariable(name = "id") long id) {
+        return new ResponseEntity<>(userDetailsService.getUserInfoByUserId(id), HttpStatus.OK);
+    }
+
     @Override
     public ResponseEntity<UserDetails> get(Long id) {
         return null;
