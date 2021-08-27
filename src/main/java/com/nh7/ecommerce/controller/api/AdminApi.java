@@ -103,7 +103,14 @@ public class AdminApi {
                 userDto.setShopName(user.getShop().getName());
             } else userDto.setShopName("");
             userDto.setAvatarUrl(user.getAvatar());
-            userDto.setRoles(user.getRoles());
+            if (user.getRoles() != null) {
+                for (Role role : user.getRoles()) {
+                    Map<String, Object> roleP = new HashMap<>();
+                    roleP.put("id", role.getId());
+                    roleP.put("roleName", role.getRoleName());
+                    userDto.getRoles().add(roleP);
+                }
+            }
             userDto.setStatus(user.getEnable());
             userDtos.add(userDto);
         }

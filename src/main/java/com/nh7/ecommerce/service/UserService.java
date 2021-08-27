@@ -188,6 +188,16 @@ public class UserService {
         return userRepository.countById();
     }
     // (Admin) set Role user by id
-
+    public boolean updateRolesForUser(long id, List<Role> listRoles) {
+        User user = userRepository.findById(id);
+        user.setRoles(listRoles);
+        try {
+             userRepository.save(user);
+             return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.nh7.ecommerce.controller.api;
 
 import com.nh7.ecommerce.dto.UserDto;
+import com.nh7.ecommerce.entity.Role;
 import com.nh7.ecommerce.entity.User;
 import com.nh7.ecommerce.service.UserService;
 import com.nh7.ecommerce.util.ModelMapperUtil;
@@ -67,6 +68,16 @@ public class UserApi implements ICrudApi<UserDto, User> {
             return new ResponseEntity<>("Username is updated successfully",HttpStatus.OK);
         }else {
             return new ResponseEntity<>("Username updated fail",HttpStatus.OK);
+        }
+    }
+    // (Admin) for update roles for user
+    @PutMapping(value = "/{id}/roles")
+    public ResponseEntity<Object> updateRoleForUser(@PathVariable(name = "id") long id, @RequestBody List<Role> listRoles) {
+        System.out.println(listRoles.size());
+        if (userService.updateRolesForUser(id, listRoles)) {
+            return new ResponseEntity<>("Update roles for user success", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Update roles for user fail", HttpStatus.OK);
         }
     }
     //----------DELETE METHOD---------//

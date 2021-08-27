@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -20,6 +23,6 @@ public class UserDto {
     private String avatarUrl;
     private String shopName;
     private String dayOfBirth;
-    private List<Role> roles;
+    private List<Map<String, Object>> roles = new ArrayList<>();
     private boolean status;
 }
