@@ -175,7 +175,6 @@ public class UserService {
         User user = userRepository.findById(userInfoDto.getId());
         user.setAvatar(userInfoDto.getAvatar());
         UserDetails userDetails = user.getUserDetails();
-        userDetails.setId(userInfoDto.getId());
         userDetails.setFullName(userInfoDto.getFullName());
         userDetails.setPhoneNumber(userInfoDto.getPhoneNumber());
         userDetails.setAddress(userInfoDto.getAddress());
