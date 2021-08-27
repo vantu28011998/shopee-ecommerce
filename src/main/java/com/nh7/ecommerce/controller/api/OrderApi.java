@@ -63,6 +63,12 @@ public class OrderApi implements ICrudApi<OrderDto, UserOrder> {
         return new ResponseEntity<>(itemService.getItemsOfShopByStatus(shopId, pageable, status), HttpStatus.OK);
     }
 
+    // (User) for get order by user id
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<Object> getOrdersByUserId(@PathVariable(name = "userId") long userId) {
+        return new ResponseEntity<>(orderService.getOrdersByUserId(userId), HttpStatus.OK);
+    }
+
     @Override
     public ResponseEntity<List<OrderDto>> getAll() {
         return null;

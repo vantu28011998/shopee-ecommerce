@@ -1,8 +1,7 @@
 package com.nh7.ecommerce.service;
 
-import com.nh7.ecommerce.dto.ItemDto;
+import com.nh7.ecommerce.dto.*;
 import com.nh7.ecommerce.enums.ItemStatus;
-import com.nh7.ecommerce.dto.OrderDto;
 import com.nh7.ecommerce.entity.BillingInfo;
 import com.nh7.ecommerce.entity.Item;
 import com.nh7.ecommerce.entity.Product;
@@ -135,5 +134,34 @@ public class OrderService {
 
     // (Admin) for get All for Admin
     public List<UserOrder> getAll() { return (List<UserOrder>) orderRepository.findAll();}
+
+    // (User) for get orders by userId
+    public List<OrderUDto> getOrdersByUserId(long userId) {
+        List<OrderUDto> orderUDtoList = new ArrayList<>();
+        List<UserOrder> orderList = userRepository.findById(userId).getUserOrderList();
+        if (orderList == null) return orderUDtoList;
+        for (UserOrder userOrder : orderList) {
+            OrderUDto orderUDto = new OrderUDto();
+            List<ItemUDto> itemDtoList = new ArrayList<>();
+            for (Item i : userOrder.getItemList()) {
+                ItemUDto itemUDto = new ItemUDto();
+                itemUDto.setPostTitle(i.getProduct().getPost().getPostTitle());
+                itemUDto.setItemPrice(i.getItemPrice());
+                itemUDto.setProduct(i.getProduct().getId());
+                itemUDto.setProductName(i.getProduct().getProductName());
+                itemUDto.setProductThumbnail(i.getProduct().getProductThumbnail());
+                itemUDto.setQty(i.getProductQuantity());
+                itemUDto.setItemStatus(i.getItemStatus());
+                itemDtoList.add(itemUDto);
+            }
+            orderUDto.setOrderPrice(userOrder.getOrderPrice());
+            orderUDto.setItemList(itemDtoList);
+            orderUDto.setReceiverName(userOrder.getBillingInfo().getFullName());
+            orderUDto.setPhoneNumber(userOrder.getBillingInfo().getPhoneNumber());
+            orderUDto.setShipAddress(userOrder.getBillingInfo().getShipAddress());
+            orderUDtoList.add(orderUDto);
+        }
+        return orderUDtoList;
+    }
 
 }
