@@ -11,6 +11,7 @@ import com.nh7.ecommerce.entity.UserDetails;
 import com.nh7.ecommerce.enums.AuthProviderEnum;
 import com.nh7.ecommerce.repository.*;
 import com.nh7.ecommerce.util.ModelMapperUtil;
+import com.nimbusds.openid.connect.sdk.claims.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -170,6 +171,26 @@ public class UserService {
         return userInfo;
     }
 
+    public boolean updateUserDetails(UserInfoDto userInfoDto) {
+        User user = userRepository.findById(userInfoDto.getId());
+        user.setAvatar(userInfoDto.getAvatar());
+        UserDetails userDetails = user.getUserDetails();
+        userDetails.setId(userInfoDto.getId());
+        userDetails.setFullName(userInfoDto.getFullName());
+        userDetails.setPhoneNumber(userInfoDto.getPhoneNumber());
+        userDetails.setAddress(userInfoDto.getAddress());
+        userDetails.setDayOfBird(userInfoDto.getDateofbirth());
+        userDetails.setGender(userInfoDto.getGender());
+        user.setUserDetails(userDetails);
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
     // (Admin) get All for Admin
     public List<User> getAllForAdmin(){
         return (List<User>) userRepository.findAll();
@@ -199,5 +220,4 @@ public class UserService {
             return false;
         }
     }
-
 }

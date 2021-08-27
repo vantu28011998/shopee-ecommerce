@@ -1,7 +1,9 @@
 package com.nh7.ecommerce.controller.api;
 
+import com.nh7.ecommerce.dto.UserInfoDto;
 import com.nh7.ecommerce.entity.UserDetails;
 import com.nh7.ecommerce.service.UserDetailsService;
+import com.nh7.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import java.util.List;
 public class UserDetailApi implements ICrudApi<UserDetails,UserDetails> {
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private UserService userService;
     @GetMapping(value = {"/","","/all"})
     @Override
     public ResponseEntity<List<UserDetails>> getAll() {
@@ -38,6 +42,16 @@ public class UserDetailApi implements ICrudApi<UserDetails,UserDetails> {
             return new ResponseEntity<>("Oke roi nha", HttpStatus.OK);
         }
         return new ResponseEntity<>("Chua Ok nha", HttpStatus.OK);
+    }
+
+    // (USER) for update user details
+    @PutMapping(value = "")
+    public ResponseEntity<Object> updateUserDetails(@RequestBody UserInfoDto userInfoDto) {
+        if (userService.updateUserDetails(userInfoDto)) {
+            return new ResponseEntity<>("Update user details success.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Update user details fail", HttpStatus.OK);
+        }
     }
 
     @Override
